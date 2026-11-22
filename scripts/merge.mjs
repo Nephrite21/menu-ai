@@ -203,7 +203,14 @@ export async function runMerge({ out = DEFAULT_OUT, useRaw = true, quiet = false
   // 2) 원시 데이터(느슨)
   let raw = { candidates: [], dropReasons: new Map(), total: 0, noInfo: 0, perFile: [] };
   if (useRaw) {
-    const files = (await listJson(RAW_DIR)).filter((f) => !basename(f).startsWith('_')); // "_" 접두 파일은 중간 산출물로 간주
+    // 크롤러 파이프라인: crawl → (menus.raw.json) → infer-cuisine → (menus.inferred.json) → merge.
+    // 가장 하류의 최종 산출물 하나만 읽는다(wikidata.json/wikipedia.json 은 중간 산출물이라 중복·구버전이 섞인다).
+    // 어느 것도 없으면 예전 방식대로 data/raw/*.json 전체를 읽는다.
+    const all = (await listJson(RAW_DIR)).filter((f) => !basename(f).startsWith('_')); // "_" 접두 파일은 중간 산출물로 간주
+    const pick = (name) => all.filter((f) => basename(f) === name);
+    const files = pick('menus.inferred.json').length ? pick('menus.inferred.json')
+      : pick('menus.raw.json').length ? pick('menus.raw.json') : all;
+    log.info(`[raw] 입력: ${files.map((f) => basename(f)).join(', ') || '(없음)'}`);
     raw = await loadRaw(files, log);
     candidates.push(...raw.candidates);
   }

@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>오늘 뭐 먹지</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%2711%27 fill=%27none%27 stroke=%27%23ff9a4d%27 stroke-width=%273%27/%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%274%27 fill=%27%238b98ff%27/%3E%3C/svg%3E">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/components.css">
 </head>
@@ -23,11 +24,6 @@
 <main class="stage">
   <div class="hero">
     <div class="hero-title">MENU AI</div>
-
-    <div class="progress-box" id="progress-box" hidden>
-      <div class="muted" id="progress-label">모델 로딩</div>
-      <div class="progress"><div id="progress-bar"></div></div>
-    </div>
 
     <form class="searchbar" role="search" onsubmit="return false">
       <input type="text" id="situation" placeholder="무엇이 드시고 싶으신가요?" autocomplete="off" aria-label="지금 상황">
@@ -62,12 +58,19 @@
   </section>
 </main>
 
+<!-- 모델 로딩 진행률: 전환 중에도 보이도록 히어로 밖, 화면 하단에 고정 -->
+<div class="progress-box" id="progress-box" hidden>
+  <div class="muted" id="progress-label">모델 로딩</div>
+  <div class="progress"><div id="progress-bar"></div></div>
+</div>
+
 <footer class="foot" id="footer">출처: (데이터 출처·라이선스 표기 자리) · 아이콘: <a href="https://lucide.dev" style="color:inherit">Lucide</a> (ISC)</footer>
 
 <script src="ui/icons.js"></script>
 <script src="ui/sphere.js"></script>
+<script src="config.js"></script>
 <script src="ui/ui.js"></script>
-<script src="ui/mock.js"></script>
+<script type="module" src="ui/app.js"></script>
 <script>
 (function(){
 const {$,el,emit,CUISINES}=window.MenuUI;

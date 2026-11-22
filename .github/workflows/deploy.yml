@@ -68,6 +68,9 @@ jobs:
       - name: Embed menus
         run: node scripts/embed.mjs
 
+      - name: Copy dictionaries for the browser
+        run: node scripts/build-web.mjs
+
       - name: Check build output
         run: |
           set -euo pipefail

@@ -45,7 +45,8 @@ export const LIMITS = Object.freeze({
   vecLength: 4096,
 });
 
-const BASE_FIELDS = ['id', 'name', 'cuisine', 'ingredients', 'tags', 'desc', 'source', 'brand', 'attribution'];
+// cuisineInferred/cuisineConfidence: 임베딩 kNN으로 종류를 추정한 항목 표시(scripts/infer-cuisine.mjs). UI에서 "추정" 배지로 쓴다.
+const BASE_FIELDS = ['id', 'name', 'cuisine', 'ingredients', 'tags', 'desc', 'source', 'brand', 'attribution', 'cuisineInferred', 'cuisineConfidence'];
 const VEC_FIELDS = ['vec', 'scale'];
 
 const ID_RE = /^[a-z]{2}-[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -180,6 +181,17 @@ export function validateMenu(menu, opts = {}) {
   const attribution = str('attribution', { max: LIMITS.attribution });
   if ((source === 'wikipedia' || source === 'wikidata') && !attribution) err('attribution: Wikipedia/Wikidata 유래 항목은 필수');
 
+  let cuisineInferred;
+  if (menu.cuisineInferred !== undefined && menu.cuisineInferred !== null) {
+    if (typeof menu.cuisineInferred !== 'boolean') err('cuisineInferred: true/false 여야 합니다');
+    else cuisineInferred = menu.cuisineInferred;
+  }
+  let cuisineConfidence;
+  if (menu.cuisineConfidence !== undefined && menu.cuisineConfidence !== null) {
+    if (typeof menu.cuisineConfidence !== 'number' || !(menu.cuisineConfidence >= 0 && menu.cuisineConfidence <= 1)) err('cuisineConfidence: 0~1 숫자여야 합니다');
+    else cuisineConfidence = Math.round(menu.cuisineConfidence * 1000) / 1000;
+  }
+
   // --- 배열 필드
   const arr = (key, { max, itemMax, minItems, label }) => {
     let raw = menu[key];
@@ -265,6 +277,7 @@ export function validateMenu(menu, opts = {}) {
   if (id === undefined) delete clean.id;
   if (brand) clean.brand = brand;
   if (attribution) clean.attribution = attribution;
+  if (cuisineInferred) { clean.cuisineInferred = true; if (cuisineConfidence !== undefined) clean.cuisineConfidence = cuisineConfidence; }
   Object.assign(clean, out);
   return { ok: true, errors: [], menu: clean };
 }

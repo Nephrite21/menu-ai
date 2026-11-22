@@ -6,3 +6,4 @@ data/raw/.cache/
 web/menus.json
 web/menus.meta.json
 .env
+web/dict/

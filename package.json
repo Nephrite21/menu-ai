@@ -6,9 +6,10 @@
     "validate": "node scripts/validate.mjs",
     "merge": "node scripts/merge.mjs",
     "embed": "node scripts/embed.mjs",
-    "build": "node scripts/validate.mjs --quiet && node scripts/merge.mjs --quiet && node scripts/embed.mjs",
+    "build": "node scripts/validate.mjs --quiet && node scripts/merge.mjs --quiet && node scripts/embed.mjs && node scripts/build-web.mjs",
     "test": "node --test \"tests/*.test.mjs\"",
-    "test:data": "node --test tests/store.test.mjs tests/issue-to-menu.test.mjs"
+    "test:data": "node --test tests/store.test.mjs tests/issue-to-menu.test.mjs",
+    "build:web": "node scripts/build-web.mjs"
   },
   "engines": {
     "node": ">=20"
