@@ -1,6 +1,7 @@
 /* 배경: 음식 SVG 아이콘이 달린 발광 네트워크 구. 순수 canvas, 외부 의존 없음.
    canvas#bg-sphere 가 있는 페이지에서만 동작. data-dim 이면 CSS로 흐리게 표시.
    window.MenuSphere:
+     load()  로딩 표시: settle() 전까지 계속 회전(최소 1초) → 감속 정지. 실패해도 이벤트 없이 정지(loadTimeoutMs 후)
      settle() 결과 준비됨(감속 시작) / fail(reason) 실패 알림 → 확대 없이 정지 + 'menu:search-failed' 이벤트, 프로미스는 'failed'로 끝남
      timeoutMs  결과가 이 시간(기본 15000ms) 안에 안 오면 자동으로 fail('timeout')
      dive()  → Promise. 구가 무작위로 회전 → 아이콘 하나가 정면에 와서 → 화면 전체로 확대(화면 전환). body.diving 토글.
@@ -66,14 +67,14 @@ const smooth=p=>p*p*(3-2*p);
 function start(opts){
   if(anim)return anim.promise;
   if(reduce||!NAMES.length)return Promise.resolve();
-  const zoom=opts.zoom!==false;
+  const zoom=opts.zoom!==false,loading=!!opts.loading;
   tx=ty=0;
-  const a={zoom,phase:'spin',t0:performance.now(),minSpin:zoom?1000:600,ready:false,
+  const a={zoom,loading,phase:'spin',t0:performance.now(),minSpin:loading?1000:zoom?1000:600,ready:false,
     dir:Math.random()<.5?1:-1,x0:extraX,D:1100,zoomDur:760,target:-1,hi:null};
   a.promise=new Promise(res=>{a.done=res});
-  a.failsafe=setTimeout(()=>fail('timeout',a),api.timeoutMs); // 결과가 영영 안 오면 포기하고 멈춘다
+  a.failsafe=setTimeout(()=>fail('timeout',a),loading?api.loadTimeoutMs:api.timeoutMs); // 결과가 영영 안 오면 포기하고 멈춘다
   anim=a;
-  document.body.classList.add(zoom?'diving':'spinning');
+  if(!loading)document.body.classList.add(zoom?'diving':'spinning'); // 로딩 모드의 화면 상태는 페이지(body.loading)가 관리
   return a.promise;
 }
 /* 결과가 준비됐음을 알린다. 최소 회전 시간이 지났으면 곧바로 감속을 시작한다. */
@@ -82,6 +83,7 @@ function settle(){if(anim)anim.ready=true}
 function fail(reason,a){
   a=a||anim;if(!a||a!==anim||a.ready||a.failed)return;
   a.failed=true;a.ready=true;
+  if(a.loading)return;                                // 로딩 모드의 실패는 알림 이벤트 없이 조용히 멈춘다(페이지가 안내)
   document.dispatchEvent(new CustomEvent('menu:search-failed',{detail:{reason:reason||'error'}}));
 }
 function beginDecel(a,t){
@@ -181,7 +183,9 @@ function draw(t){
 }
 addEventListener('resize',resize);
 addEventListener('pointermove',e=>{if(anim)return;tx=(e.clientX/innerWidth-.5)*2;ty=(e.clientY/innerHeight-.5)*2},{passive:true});
-const api={dive:()=>start({zoom:true}),spin:()=>start({zoom:false}),settle,fail:r=>fail(r||'error'),timeoutMs:15000};
+/* load(): 로딩 표시용. settle() 이 호출될 때까지(최소 1초) 계속 돌다가 감속해서 멈추고 프로미스가 끝난다. 확대·알림 없음. */
+const api={dive:()=>start({zoom:true}),spin:()=>start({zoom:false}),load:()=>start({zoom:false,loading:true}),
+  settle,fail:r=>fail(r||'error'),timeoutMs:15000,loadTimeoutMs:90000};
 window.MenuSphere=api;
 resize();requestAnimationFrame(draw);
 })();

@@ -6,6 +6,17 @@ body.has-results #bg-sphere:not([data-dim]){opacity:.28}
 body.spinning #bg-sphere:not([data-dim]){opacity:.7}
 body.diving #bg-sphere:not([data-dim]){opacity:1}
 
+/* ===== 로딩(모델 준비) 상태: 구는 계속 돌고, 검색창은 숨었다가 준비되면 나타난다 ===== */
+.sb-wrap{position:relative;width:min(640px,92vw)}
+.hero-status{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;
+  color:#c9cdf0;font-size:1rem;letter-spacing:.02em;text-shadow:0 0 14px rgba(139,152,255,.6)}
+body.loading .hero-status{display:flex}
+.hero .searchbar,.hero .detail-link,.hero .hint{transition:opacity .6s,transform .6s}
+body.loading .hero .searchbar,body.loading .hero .detail-link,body.loading .hero .hint{
+  opacity:0;transform:translateY(10px);pointer-events:none;visibility:hidden;transition:opacity .6s,transform .6s,visibility 0s .6s}
+/* 로딩 중에는 구가 선명하게 (결과 화면의 흐린 배경 규칙보다 우선) */
+body.loading #bg-sphere{opacity:1}
+
 /* ===== 홈: 히어로 + 검색바 ===== */
 .stage{position:relative;z-index:1}
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -13,7 +24,7 @@ body.diving #bg-sphere:not([data-dim]){opacity:1}
 body.has-results .hero{min-height:auto;padding-top:96px;padding-bottom:12px}
 .hero-title{margin:0 0 18px;font-size:clamp(1rem,2.2vw,1.35rem);letter-spacing:.35em;font-weight:700;color:#d9dcff;
   text-shadow:0 0 18px rgba(139,152,255,.7)}
-.searchbar{display:flex;align-items:stretch;width:min(640px,92vw);border-radius:36px;overflow:hidden;
+.searchbar{display:flex;align-items:stretch;width:100%;border-radius:36px;overflow:hidden;
   background:rgba(10,11,24,.8);
   border:1.5px solid rgba(190,180,255,.55);
   box-shadow:0 0 0 1px rgba(255,255,255,.04) inset,0 0 38px rgba(124,140,255,.32),0 14px 44px rgba(0,0,0,.55);

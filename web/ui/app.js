@@ -47,7 +47,7 @@ function ensureEmbedder() {
   if (!embedderP) {
     UI.setProgress(0, '검색 모델 준비 중…');
     embedderP = initEmbedder({
-      onProgress: (p) => UI.setProgress(p, p < 1 ? `검색 모델 내려받는 중 ${Math.round(p * 100)}% (처음 한 번만)` : '검색 모델 준비 완료'),
+      onProgress: (p) => UI.setProgress(p, p < 0.02 ? '검색 모델 준비 중…' : p < 1 ? `검색 모델 준비 중 ${Math.round(p * 100)}%` : '검색 모델 준비 완료'),
     }).then((info) => {
       setTimeout(() => UI.setProgress(null), 700);
       if (window.MenuSphere) window.MenuSphere.timeoutMs = 15000; // 이후부터는 15초 안에 못 찾으면 포기
@@ -56,10 +56,19 @@ function ensureEmbedder() {
   }
   return embedderP;
 }
-// 검색창에 처음 포커스가 가면 미리 받기 시작(사용자가 입력하는 동안 로드)
-document.addEventListener('focusin', (e) => {
-  if (e.target && e.target.id === 'situation') ensureEmbedder().catch(() => {});
-}, { once: true });
+// 사이트에 들어오면 곧바로 모델 준비를 시작한다(메뉴·사전을 먼저 받은 뒤).
+// 홈 화면(body.loading)에서는 준비되는 동안 구가 계속 돌고 검색창은 숨어 있다가,
+// 준비가 끝나면 구가 감속해서 멈춘 뒤 검색창이 나타난다. 첫 검색에서 기다릴 일이 없다.
+// 실패해도(오프라인 등) 구를 멈추고 검색창을 보여 주며, 검색할 때 다시 시도한다.
+const loadingSphere = document.body.classList.contains('loading') && window.MenuSphere ? window.MenuSphere.load() : null;
+loaded.then(() => ensureEmbedder()).then(() => true, (e) => {
+  console.warn('[app] 검색 모델을 미리 준비하지 못했어요(검색할 때 다시 시도합니다):', e);
+  UI.toast('검색 모델을 미리 불러오지 못했어요. 검색할 때 다시 시도할게요.', 4000);
+  return false;
+}).then(async () => {
+  if (loadingSphere) { window.MenuSphere.settle(); await loadingSphere; }
+  document.body.classList.remove('loading');
+});
 
 /* ---------- 검색 / 다시 추천 ---------- */
 let last = null; // { ranked, shown: id[] }
