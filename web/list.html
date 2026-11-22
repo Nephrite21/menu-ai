@@ -29,11 +29,13 @@
     <select id="f-cuisine"><option value="">모든 종류</option></select>
     <input type="search" id="f-ing" placeholder="재료 필터 (예: 닭고기)">
     <select id="f-source"><option value="">출처 전체</option><option value="base">기본</option><option value="user">내가 추가</option></select>
+    <select id="f-hidden"><option value="">숨김 여부 전체</option><option value="hidden">숨긴 메뉴만</option><option value="visible">숨기지 않은 메뉴</option></select>
   </section>
 
   <div class="row" style="margin-bottom:12px">
     <button class="btn" id="export" type="button">JSON 내보내기</button>
     <label class="btn" style="margin:0">JSON 가져오기<input type="file" id="import" accept="application/json" hidden></label>
+    <button class="btn" id="unban-all" type="button" hidden>숨김 모두 해제</button>
   </div>
 
   <div class="glass table-wrap">
@@ -71,22 +73,27 @@ CUISINES.forEach(([v,k])=>$('#f-cuisine').append(el('option',{value:v,textConten
 
 async function draw(){
   const menus=await window.MenuUI.menusReady;
-  const q=$('#q').value.trim(),c=$('#f-cuisine').value,i=$('#f-ing').value.trim(),s=$('#f-source').value;
+  const q=$('#q').value.trim(),c=$('#f-cuisine').value,i=$('#f-ing').value.trim(),s=$('#f-source').value,h=$('#f-hidden').value;
+  const isB=id=>!!(window.MenuUI.isBanned&&window.MenuUI.isBanned(id));
   const rows=menus.filter(m=>(!q||[m.name,m.desc].join(' ').includes(q))&&(!c||m.cuisine===c)
-    &&(!i||m.ingredients.some(x=>x.includes(i)))&&(!s||(s==='user')===(m.source==='user')));
+    &&(!i||m.ingredients.some(x=>x.includes(i)))&&(!s||(s==='user')===(m.source==='user'))&&(!h||(h==='hidden')===isB(m.id)));
   $('#count').textContent=rows.length+'개';
+  $('#unban-all').hidden=!(h==='hidden'&&rows.length);
   $('#rows').replaceChildren(...rows.map(m=>{
-    const user=m.source==='user';
-    return el('tr',{className:'clickable',title:'눌러서 자세히 보기',onclick:e=>{if(!e.target.closest('button'))window.MenuUI.openDetail(m)}},
+    const user=m.source==='user',b=isB(m.id);
+    return el('tr',{className:'clickable'+(b?' banned':''),title:'눌러서 자세히 보기',onclick:e=>{if(!e.target.closest('button'))window.MenuUI.openDetail(m)}},
       el('td',{textContent:m.name}),el('td',{textContent:CUISINE_KO[m.cuisine]||m.cuisine}),
       el('td',{textContent:m.ingredients.join(', ')}),el('td',{textContent:m.desc||''}),
-      el('td',{},el('span',{className:'badge'+(user?' user':''),textContent:user?'내가 추가':'기본'})),
-      el('td',{},user?el('span',{className:'row'},
-        el('button',{className:'btn small',textContent:'수정',onclick:()=>emit('menu:edit',{id:m.id})}),
-        el('button',{className:'btn small danger',textContent:'삭제',onclick:()=>emit('menu:remove',{id:m.id})})):''));
+      el('td',{},el('span',{className:'badge'+(user?' user':''),textContent:user?'내가 추가':'기본'}),b?el('span',{className:'badge',textContent:'숨김'}):''),
+      el('td',{},el('span',{className:'row'},
+        el('button',{className:'btn small',textContent:b?'해제':'숨기기',onclick:()=>emit(b?'menu:unban':'menu:ban',{id:m.id,name:m.name})}),
+        ...(user?[el('button',{className:'btn small',textContent:'수정',onclick:()=>emit('menu:edit',{id:m.id})}),
+          el('button',{className:'btn small danger',textContent:'삭제',onclick:()=>emit('menu:remove',{id:m.id})})]:[]))));
   }));
 }
-['q','f-cuisine','f-ing','f-source'].forEach(id=>$('#'+id).addEventListener('input',draw));
+['q','f-cuisine','f-ing','f-source','f-hidden'].forEach(id=>$('#'+id).addEventListener('input',draw));
+if(new URLSearchParams(location.search).get('filter')==='hidden')$('#f-hidden').value='hidden';   // 추천 화면의 '숨김 관리' 링크
+$('#unban-all').onclick=()=>emit('menu:unban-all');
 window.MenuUI.onMenusChanged=draw;           // 내 메뉴를 추가/수정/삭제/가져오면 app.js 가 setMenus 로 알려 준다
 $('#export').onclick=()=>emit('menu:export');
 $('#import').onchange=e=>{if(e.target.files[0])emit('menu:import',{file:e.target.files[0]})};

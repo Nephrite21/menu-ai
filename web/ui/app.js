@@ -25,8 +25,13 @@ const msgOf = (e) => String((e && e.message) || e).split('\n')[0].slice(0, 120);
 
 /* ---------- 데이터 ---------- */
 let menus = [];
+let banned = store.getBanned();           // 숨긴 메뉴 id(이 브라우저에만 저장)
+const active = () => menus.filter((m) => !banned.has(m.id));
+UI.isBanned = (id) => banned.has(id);
 async function reload() {
   menus = await store.getAll({ baseUrl: here('../menus.json') });
+  banned = store.getBanned();
+  UI.setHiddenCount(banned.size);
   UI.setMenus(menus);
   const st = await store.getStatus();
   if (st.baseError) UI.toast('기본 메뉴 데이터를 불러오지 못했어요: ' + st.baseError, 5000);
@@ -72,15 +77,17 @@ loaded.then(() => ensureEmbedder()).then(() => true, (e) => {
 });
 
 /* ---------- 검색 / 다시 추천 ---------- */
-let last = null; // { ranked, shown: id[] }
+let last = null; // { all: 순위 전체(숨김 제외 전), shown: id[], current: 지금 화면의 결과 }
 const newSeed = () => Math.random().toString(36).slice(2);
 
 const pickK = () => (UI.pickCount ? UI.pickCount() : CFG.pick);
+const rankedNow = () => last.all.filter((r) => !banned.has(r.menu.id));
 function showPicks() {
   const k = pickK();
   const pool = Math.max(12, last.shown.length + k * 2, k * 2);
-  const picks = rerollPick(last.ranked, { seed: newSeed(), k, temperature: 0.03, pool, history: last.shown });
+  const picks = rerollPick(rankedNow(), { seed: newSeed(), k, temperature: 0.03, pool, history: last.shown });
   last.shown.push(...picks.map((p) => p.menu.id));
+  last.current = picks;
   UI.renderResults(picks);
 }
 function fail(e, signal) {
@@ -103,8 +110,8 @@ document.addEventListener('menu:search', async (ev) => {
       queryVec = await abortable(embed(parsed.text, { kind: 'query' }), signal);
     }
     if (signal && signal.aborted) return;
-    const ranked = recommend({ queryVec, menus, cuisines: d.cuisines, weights, exclude, topN: CFG.topN, seed: newSeed(), weightScale: CFG.weightScale });
-    last = { ranked, shown: [] };
+    const ranked = recommend({ queryVec, menus: active(), cuisines: d.cuisines, weights, exclude, topN: CFG.topN, seed: newSeed(), weightScale: CFG.weightScale });
+    last = { all: ranked, shown: [], current: [] };
     showPicks();
   } catch (e) { fail(e, signal); }
 });
@@ -174,7 +181,8 @@ document.addEventListener('menu:import', async (ev) => {
   try {
     const r = await store.importJson(file, { mode: 'merge' });
     await reload();
-    UI.toast(`가져왔어요: 추가 ${r.added}, 갱신 ${r.updated}, 건너뜀 ${r.skipped}` + (r.errors && r.errors.length ? ` · 오류 ${r.errors.length}건` : ''), 5000);
+    banned = store.getBanned(); UI.setHiddenCount(banned.size); UI.setMenus(menus);
+    UI.toast(`가져왔어요: 추가 ${r.added}, 갱신 ${r.updated}, 건너뜀 ${r.skipped}` + (r.bannedAdded ? ` · 숨김 ${r.bannedAdded}개` : '') + (r.errors && r.errors.length ? ` · 오류 ${r.errors.length}건` : ''), 5000);
     backfill();
   } catch (e) { UI.toast('가져오지 못했어요: ' + msgOf(e), 5000); }
   const inp = document.getElementById('import'); if (inp) inp.value = '';
@@ -198,7 +206,7 @@ UI.similarProvider = (m) => {
   try {
     const v = menuVector(m);
     if (!v) return [];
-    return recommend({ queryVec: v, menus, topN: 7, weightScale: CFG.weightScale })
+    return recommend({ queryVec: v, menus: active(), topN: 7, weightScale: CFG.weightScale })
       .filter((r) => r.menu.id !== m.id).slice(0, 5).map((r) => ({ menu: r.menu, score: r.score }));
   } catch (e) { console.warn('[app] 비슷한 메뉴 계산 실패', e); return []; }
 };
@@ -243,3 +251,36 @@ UI.openMap = async (service, query, radiusM, { onStatus = () => {} } = {}) => {
     }
   } catch (e) { UI.toast('지도를 열지 못했어요: ' + msgOf(e), 5000); }
 };
+
+/* ---------- 숨기기(밴): 먹고 싶지 않은 메뉴는 추천·다시 추천·비슷한 메뉴에서 빠진다 ---------- */
+function syncBanned() {
+  banned = store.getBanned();
+  UI.setHiddenCount(banned.size);
+  if (menus.length) UI.setMenus(menus);          // 전체 메뉴 목록의 '숨김' 표시 갱신
+}
+function replaceOne(id) {                         // 화면에서 숨긴 카드만 다음 후보로 바꾼다(스크롤 이동 없음)
+  if (!last || !last.current) return;
+  const idx = last.current.findIndex((x) => x.menu.id === id);
+  if (idx < 0) return;
+  last.current.splice(idx, 1);
+  const rest = rankedNow().filter((r) => !last.current.some((c) => c.menu.id === r.menu.id));
+  const more = rerollPick(rest, { seed: newSeed(), k: 1, temperature: 0.03, pool: 12, history: last.shown });
+  last.current.push(...more);
+  last.shown.push(...more.map((p) => p.menu.id));
+  UI.renderResults(last.current, { noScroll: true });
+}
+document.addEventListener('menu:ban', (ev) => {
+  const { id, name } = ev.detail || {};
+  try { store.ban(id); } catch (e) { UI.toast('숨기지 못했어요: ' + msgOf(e), 4000); return; }
+  syncBanned();
+  replaceOne(id);
+  UI.toast(`"${name || '메뉴'}" 메뉴를 숨겼어요. 더 이상 추천하지 않아요.`, 7000,
+    { label: '되돌리기', onClick: () => { store.unban(id); syncBanned(); } });
+});
+document.addEventListener('menu:unban', (ev) => {
+  store.unban(ev.detail && ev.detail.id); syncBanned(); UI.toast('숨김을 해제했어요');
+});
+document.addEventListener('menu:unban-all', () => {
+  if (!banned.size || !confirm(`숨긴 메뉴 ${banned.size}개를 모두 해제할까요?`)) return;
+  store.clearBanned(); syncBanned(); UI.toast('숨긴 메뉴를 모두 해제했어요');
+});

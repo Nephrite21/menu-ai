@@ -101,7 +101,7 @@ body.has-results .results-zone{display:block;animation:pop .3s ease}
 .page-title{margin:0 0 14px;font-size:1.4rem;letter-spacing:.02em}
 .panel{padding:16px 18px;margin-bottom:14px}
 .filters{display:grid;gap:8px;grid-template-columns:1fr}
-@media(min-width:640px){.filters{grid-template-columns:2fr 1fr 1fr 1fr}}
+@media(min-width:640px){.filters{grid-template-columns:2fr 1fr 1fr 1fr 1fr}}
 .table-wrap{overflow-x:auto;padding:4px 6px}
 table{border-collapse:collapse;width:100%;font-size:.9rem}
 th,td{padding:10px 10px;text-align:left;border-bottom:1px solid rgba(150,160,255,.12);vertical-align:top}
@@ -189,3 +189,19 @@ footer.foot{padding:26px clamp(16px,4vw,40px) 26px}
 .map-status[data-kind=ok]{color:var(--pos)}
 .map-status[data-kind=warn]{color:var(--neg)}
 .map-loc .btn{flex:none;white-space:nowrap}
+
+/* ===== 숨기기(밴) ===== */
+.card-foot{display:flex;justify-content:flex-end;margin-top:8px}
+.card-ban{display:inline-flex;gap:6px;align-items:center;padding:4px 10px;border-radius:99px;border:1px solid transparent;background:none;
+  color:var(--muted);font-size:.8rem;cursor:pointer;transition:color .15s,border-color .15s,background .15s}
+.card-ban:hover,.card-ban:focus-visible{color:var(--ex);border-color:rgba(255,107,122,.5);background:rgba(255,107,122,.08)}
+.dm-actions{display:flex;justify-content:flex-end;margin-top:20px}
+.toast{display:flex;align-items:center;gap:14px}
+.toast-act{border:0;border-radius:99px;padding:4px 12px;background:#10122a;color:#eef0ff;font:inherit;font-weight:700;cursor:pointer}
+.toast-act:hover{background:#2a2e5a}
+tr.banned{opacity:.55}
+tr.banned td:first-child{text-decoration:line-through}
+.hidden-note{margin:14px 0 0;text-align:center;font-size:.85rem}
+.hidden-note a{color:var(--muted);text-decoration:underline;text-decoration-color:rgba(160,170,255,.35);text-underline-offset:3px}
+.hidden-note a:hover{color:var(--text)}
+.hidden-note b{color:var(--accent)}

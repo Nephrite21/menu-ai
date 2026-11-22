@@ -6,7 +6,10 @@ const $=(s,r=document)=>r.querySelector(s);
 const el=(tag,props={},...kids)=>{const e=Object.assign(document.createElement(tag),props);kids.flat().forEach(k=>e.append(k));return e};
 const emit=(name,detail)=>document.dispatchEvent(new CustomEvent(name,{detail}));
 
-function toast(msg,ms=2200){const t=el('div',{className:'toast',textContent:msg});document.body.append(t);setTimeout(()=>t.remove(),ms)}
+function toast(msg,ms=2200,action){
+  const t=el('div',{className:'toast'},msg);
+  if(action)t.append(el('button',{type:'button',className:'toast-act',textContent:action.label,onclick:()=>{t.remove();action.onClick()}}));
+  document.body.append(t);setTimeout(()=>t.remove(),ms)}
 
 /* 검색 실패(타임아웃/오류) 알림. 취소(AbortSignal)는 검색을 시작한 페이지가 처리한다. */
 document.addEventListener('menu:search-failed',e=>{
@@ -24,26 +27,26 @@ function setMenus(list){
 
 /* ---- 결과 ---- */
 /* 화면 전환(구 회전→확대)이 진행 중이면 끝난 뒤에 그린다 */
-function renderResults(items){
+function renderResults(items,opts={}){
   const d=UI.diving;
   if(d&&window.MenuSphere)window.MenuSphere.settle();   // 결과가 준비됨 → 구가 감속하며 멈추기 시작
   const s=UI.search;                                     // 이 검색이 취소됐다면 늦게 온 결과는 버린다
   (d||Promise.resolve()).then(r=>{
     if(r==='failed'||(s&&s.ac.signal.aborted))return;
-    renderNow(items);
+    renderNow(items,opts);
   });
 }
-function renderNow(items){
+function renderNow(items,opts={}){
   const box=$('#results');if(!box)return;
   box.replaceChildren();
   document.body.classList.add('has-results');
-  requestAnimationFrame(()=>box.closest('.results-zone')?.scrollIntoView({behavior:'smooth',block:'start'}));
+  if(!opts.noScroll)requestAnimationFrame(()=>box.closest('.results-zone')?.scrollIntoView({behavior:'smooth',block:'start'}));
   if(!items||!items.length){box.append(el('div',{className:'empty',textContent:'조건에 맞는 메뉴가 없어요. 조건을 바꿔보세요.'}));return}
   /* 카드: 이름·배지·점수(우상단 한 곳)·재료·설명. 누르면 상세 창이 열린다(추천 이유 등은 거기서). */
   for(const {menu:m,score,reasons=[]} of items){
     const open=()=>openDetail(m,{score,reasons});
     box.append(el('article',{className:'card',tabIndex:0,role:'button',title:'눌러서 자세히 보기',onclick:open,
-        onkeydown:e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}}},
+        onkeydown:e=>{if(e.target!==e.currentTarget)return;if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}}},
       el('h3',{},m.name,
         el('span',{className:'badge',textContent:CUISINE_KO[m.cuisine]||m.cuisine}),
         m.brand?el('span',{className:'badge',textContent:m.brand}):'',
@@ -51,8 +54,26 @@ function renderNow(items){
         m.source==='user'?el('span',{className:'badge user',textContent:'내가 추가'}):'',
         el('span',{className:'score',textContent:score!=null?'점수 '+Number(score).toFixed(2):''})),
       (m.ingredients||[]).length?el('div',{className:'ings',textContent:'재료: '+m.ingredients.join(', ')}):'',
-      m.desc?el('div',{className:'card-desc',textContent:m.desc}):''));
+      m.desc?el('div',{className:'card-desc',textContent:m.desc}):'',
+      el('div',{className:'card-foot'},banButton(m))));
   }
+}
+
+/* ---- 숨기기(밴): 먹고 싶지 않은 메뉴는 더 이상 추천하지 않는다. 저장·필터링은 app.js ---- */
+const BAN_SVG='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg>';
+function banButton(m){
+  const b=el('button',{type:'button',className:'card-ban',title:'이 메뉴는 더 이상 추천하지 않아요',
+    onclick:e=>{e.stopPropagation();emit('menu:ban',{id:m.id,name:m.name})}});
+  b.innerHTML=BAN_SVG+'<span>숨기기</span>';return b;
+}
+function banToggle(m){
+  const banned=UI.isBanned(m.id);
+  return el('button',{type:'button',className:'btn small'+(banned?'':' danger'),textContent:banned?'숨김 해제':'이 메뉴 숨기기',
+    onclick:()=>{emit(banned?'menu:unban':'menu:ban',{id:m.id,name:m.name});detailDlg.close()}});
+}
+function setHiddenCount(n){
+  const note=$('#hidden-note');if(!note)return;
+  note.hidden=!n;const c=$('#hidden-count');if(c)c.textContent=String(n);
 }
 
 /* ---- 메뉴 상세 창 (카드·목록 행을 누르면 열림) ---- */
@@ -136,6 +157,7 @@ function openDetail(m,extra={}){
     ...sec('출처',el('p',{className:'dm-src'},sourceNode(m))),
     ...(m.cuisineInferred?[el('p',{className:'dm-note',textContent:'음식 종류는 비슷한 메뉴들과의 유사도로 추정한 값이에요'+(m.cuisineConfidence?' (신뢰도 '+Math.round(m.cuisineConfidence*100)+'%)':'')+'. 틀렸다면 알려 주세요.'})]:[]),
   ];
+  if(UI.isBanned)kids.push(el('div',{className:'dm-actions'},banToggle(m)));
   detailDlg.replaceChildren(el('div',{className:'dm'},...kids));
   if(!detailDlg.open)detailDlg.showModal();
   detailDlg.querySelector('.dm').scrollTop=0;
@@ -244,7 +266,8 @@ function initAddModal(){
   document.querySelectorAll('[data-open-add]').forEach(b=>b.addEventListener('click',()=>openModal()));
 }
 
-const UI={CUISINES,CUISINE_KO,$,el,emit,toast,renderResults,setProgress,initAddModal,setMenus,openDetail,
+const UI={CUISINES,CUISINE_KO,$,el,emit,toast,renderResults,setProgress,initAddModal,setMenus,openDetail,setHiddenCount,
+  isBanned:null, // isBanned(id) 는 app.js 가 채운다
   pickCount:()=>pickCount,similarProvider:null, // similarProvider(menu) → [{menu,score}] 는 app.js 가 채운다
   get menusReady(){return menusP},openAddModal:(p)=>openModal(p)};
 window.MenuUI=UI;
