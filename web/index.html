@@ -30,14 +30,10 @@
     </div>
 
     <form class="searchbar" role="search" onsubmit="return false">
+      <input type="text" id="situation" placeholder="무엇이 드시고 싶으신가요?" autocomplete="off" aria-label="지금 상황">
       <button type="button" id="search" class="sb-search" aria-label="검색">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
         <span>검색</span>
-      </button>
-      <input type="text" id="situation" placeholder="무엇이 드시고 싶으신가요?" autocomplete="off" aria-label="지금 상황">
-      <button type="button" class="sb-detail" id="toggle-detail" aria-expanded="false" aria-controls="detail">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>
-        <span>상세 설정</span>
       </button>
     </form>
 
@@ -97,13 +93,13 @@ INGS.forEach(n=>{
   $('#ingredients').append(b);
 });
 
-/* 상세 설정 열기/닫기 (검색바 버튼과 하단 링크가 같은 패널을 토글) */
+/* 상세 설정 열기/닫기 */
 function toggleDetail(){
   const open=$('#detail').hidden;$('#detail').hidden=!open;
-  ['#toggle-detail','#detail-link'].forEach(s=>$(s).setAttribute('aria-expanded',String(open)));
+  $('#detail-link').setAttribute('aria-expanded',String(open));
   $('#detail-link-text').textContent=open?'상세 설정 닫기':'또는 상세 설정 열기';
 }
-$('#toggle-detail').onclick=toggleDetail;$('#detail-link').onclick=toggleDetail;
+$('#detail-link').onclick=toggleDetail;
 
 function collect(){
   const weights={},exclude=[];
@@ -114,14 +110,29 @@ function collect(){
   return{text:sit.value.trim(),cuisines:[...document.querySelectorAll('#cuisines [aria-pressed=true]')].map(b=>b.dataset.v),weights,exclude};
 }
 /* 검색: 구가 돌다가 아이콘 하나로 확대되며 결과 화면으로 전환 (결과는 전환이 끝난 뒤 표시) */
+/* 검색마다 AbortController를 만든다. 로직은 detail.signal 을 보고 진행 중인 계산을 중단해야 한다.
+   이전 검색이 아직 진행 중이면 먼저 취소하고, 실패(타임아웃/오류) 때도 취소한다. */
+function newSearch(){
+  const prev=window.MenuUI.search;if(prev)prev.ac.abort();
+  const ac=new AbortController();window.MenuUI.search={ac};return ac;
+}
+document.addEventListener('menu:search-failed',()=>{const s=window.MenuUI.search;if(s)s.ac.abort()});
 $('#search').onclick=()=>{
+  const ac=newSearch();
   if(window.MenuSphere){
     const d=window.MenuSphere.dive();window.MenuUI.diving=d;
     d.then(()=>{if(window.MenuUI.diving===d)window.MenuUI.diving=null});
   }
-  emit('menu:search',collect());
+  emit('menu:search',{...collect(),signal:ac.signal});
 };
-$('#reroll').onclick=()=>{window.MenuSphere&&window.MenuSphere.spin();emit('menu:reroll')};
+$('#reroll').onclick=()=>{
+  const ac=newSearch();
+  if(window.MenuSphere){
+    const d=window.MenuSphere.spin();window.MenuUI.diving=d;
+    d.then(()=>{if(window.MenuUI.diving===d)window.MenuUI.diving=null});
+  }
+  emit('menu:reroll',{signal:ac.signal});
+};
 sit.addEventListener('keydown',e=>{if(e.key==='Enter')$('#search').click()});
 })();
 </script>

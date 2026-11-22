@@ -1,0 +1,1424 @@
+{
+  "date": "2026-11-22T08:22:19.382Z",
+  "menus": "scripts\\bench\\menus.sample.json",
+  "results": [
+    {
+      "key": "e5-small-q8",
+      "id": "Xenova/multilingual-e5-small",
+      "dtype": "q8",
+      "qp": "query: ",
+      "pp": "passage: ",
+      "pooling": "mean",
+      "dim": 384,
+      "note": "현재 SPEC 모델",
+      "loadMs": 1010.3433,
+      "rssMB": 442.7421875,
+      "passMs": 13.626345762711866,
+      "queryMsMedian": 6.350299999999834,
+      "diskBytes": 135392016,
+      "metrics": {
+        "r5": 0.4458333333333333,
+        "ndcg10": 0.5403928880833411,
+        "mrr": 0.8545454545454547,
+        "p1": 0.8
+      },
+      "perQuery": [
+        {
+          "q": "비 오는 날 따뜻한 거",
+          "r5": 0,
+          "top3": [
+            "kr-mul-naengmyeon",
+            "cf-patbingsu",
+            "kr-haejangguk"
+          ]
+        },
+        {
+          "q": "술 마신 다음 날 해장",
+          "r5": 0.2,
+          "top3": [
+            "kr-haejangguk",
+            "ws-steak",
+            "kr-haemul-pajeon"
+          ]
+        },
+        {
+          "q": "혼자 간단하게 먹을 혼밥 메뉴",
+          "r5": 0.6,
+          "top3": [
+            "jp-gyudon",
+            "kr-bibimbap",
+            "ws-steak"
+          ]
+        },
+        {
+          "q": "다이어트 중이라 가벼운 거",
+          "r5": 0.25,
+          "top3": [
+            "jp-gyudon",
+            "kr-bibimbap",
+            "fs-salmon-poke"
+          ]
+        },
+        {
+          "q": "늦은 밤 야식",
+          "r5": 0,
+          "top3": [
+            "kr-haejangguk",
+            "kr-gamjatang",
+            "ws-steak"
+          ]
+        },
+        {
+          "q": "매운 거 먹고 스트레스 풀고 싶어",
+          "r5": 0.6,
+          "top3": [
+            "th-tom-yum-goong",
+            "kr-jeonbokjuk",
+            "kr-kimchi-jjigae"
+          ]
+        },
+        {
+          "q": "더운 여름날 시원한 음식",
+          "r5": 0.333,
+          "top3": [
+            "kr-mul-naengmyeon",
+            "kr-kongnamul-gukbap",
+            "kr-yukgaejang"
+          ]
+        },
+        {
+          "q": "감기 걸려서 몸이 안 좋을 때",
+          "r5": 0.2,
+          "top3": [
+            "kr-jeonbokjuk",
+            "kr-gamjatang",
+            "ws-oatmeal-bowl"
+          ]
+        },
+        {
+          "q": "회식 자리 여럿이 먹기 좋은 메뉴",
+          "r5": 0.4,
+          "top3": [
+            "kr-samgyeopsal",
+            "ws-pepperoni-pizza",
+            "jp-sushi"
+          ]
+        },
+        {
+          "q": "기념일 데이트 분위기 있는 저녁",
+          "r5": 0.25,
+          "top3": [
+            "ws-steak",
+            "kr-haejangguk",
+            "ws-oatmeal-bowl"
+          ]
+        },
+        {
+          "q": "추운 겨울 길거리 간식",
+          "r5": 0.75,
+          "top3": [
+            "kr-hotteok",
+            "kr-bungeoppang",
+            "kr-tteokbokki"
+          ]
+        },
+        {
+          "q": "기운 없을 때 먹는 보양식",
+          "r5": 0.333,
+          "top3": [
+            "kr-kongnamul-gukbap",
+            "kr-samgyetang",
+            "kr-kimchi-jjigae"
+          ]
+        },
+        {
+          "q": "아침에 빨리 먹을 수 있는 거",
+          "r5": 0.2,
+          "top3": [
+            "ws-oatmeal-bowl",
+            "fs-salmon-poke",
+            "kr-mul-naengmyeon"
+          ]
+        },
+        {
+          "q": "맥주랑 같이 먹을 안주",
+          "r5": 0.4,
+          "top3": [
+            "kr-fried-chicken",
+            "kr-haemul-pajeon",
+            "kr-gamjatang"
+          ]
+        },
+        {
+          "q": "밥 말고 면 요리 먹고 싶어",
+          "r5": 0.8,
+          "top3": [
+            "cn-jjajangmyeon",
+            "kr-mul-naengmyeon",
+            "cn-jjamppong"
+          ]
+        },
+        {
+          "q": "국물 있는 뜨끈한 국밥",
+          "r5": 0.8,
+          "top3": [
+            "kr-dwaeji-gukbap",
+            "kr-sundae-gukbap",
+            "kr-kongnamul-gukbap"
+          ]
+        },
+        {
+          "q": "느끼한 거 말고 깔끔하고 담백한 음식",
+          "r5": 0.6,
+          "top3": [
+            "kr-galbitang",
+            "kr-mul-naengmyeon",
+            "fs-salmon-poke"
+          ]
+        },
+        {
+          "q": "고기 배 터지게 먹고 싶다",
+          "r5": 0.6,
+          "top3": [
+            "kr-bulgogi",
+            "kr-sundae-gukbap",
+            "kr-samgyeopsal"
+          ]
+        },
+        {
+          "q": "이국적인 동남아 음식",
+          "r5": 1,
+          "top3": [
+            "th-tom-yum-goong",
+            "kr-kongnamul-gukbap",
+            "vn-pho"
+          ]
+        },
+        {
+          "q": "달달한 디저트로 당 충전",
+          "r5": 0.6,
+          "top3": [
+            "cf-hot-chocolate",
+            "cf-patbingsu",
+            "cf-tiramisu"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "e5-small-fp32",
+      "id": "Xenova/multilingual-e5-small",
+      "dtype": "fp32",
+      "qp": "query: ",
+      "pp": "passage: ",
+      "pooling": "mean",
+      "dim": 384,
+      "note": "q8 품질 손실 확인용 기준",
+      "loadMs": 1645.3543,
+      "rssMB": 789.375,
+      "passMs": 17.889364406779663,
+      "queryMsMedian": 7.730200000000423,
+      "diskBytes": 487352364,
+      "metrics": {
+        "r5": 0.47000000000000003,
+        "ndcg10": 0.5392498762266301,
+        "mrr": 0.8197916666666668,
+        "p1": 0.75
+      },
+      "perQuery": [
+        {
+          "q": "비 오는 날 따뜻한 거",
+          "r5": 0,
+          "top3": [
+            "kr-mul-naengmyeon",
+            "jp-zaru-soba",
+            "cf-patbingsu"
+          ]
+        },
+        {
+          "q": "술 마신 다음 날 해장",
+          "r5": 0.2,
+          "top3": [
+            "kr-haejangguk",
+            "ws-steak",
+            "mx-taco"
+          ]
+        },
+        {
+          "q": "혼자 간단하게 먹을 혼밥 메뉴",
+          "r5": 0.8,
+          "top3": [
+            "jp-gyudon",
+            "kr-bibimbap",
+            "kr-kimchi-jjigae"
+          ]
+        },
+        {
+          "q": "다이어트 중이라 가벼운 거",
+          "r5": 0,
+          "top3": [
+            "jp-gyudon",
+            "kr-bibimbap",
+            "cn-jjamppong"
+          ]
+        },
+        {
+          "q": "늦은 밤 야식",
+          "r5": 0,
+          "top3": [
+            "kr-gamjatang",
+            "ws-steak",
+            "kr-haejangguk"
+          ]
+        },
+        {
+          "q": "매운 거 먹고 스트레스 풀고 싶어",
+          "r5": 0.6,
+          "top3": [
+            "kr-yukgaejang",
+            "kr-mul-naengmyeon",
+            "kr-kimchi-jjigae"
+          ]
+        },
+        {
+          "q": "더운 여름날 시원한 음식",
+          "r5": 0.333,
+          "top3": [
+            "kr-mul-naengmyeon",
+            "kr-yukgaejang",
+            "kr-kimchi-jjigae"
+          ]
+        },
+        {
+          "q": "감기 걸려서 몸이 안 좋을 때",
+          "r5": 0.4,
+          "top3": [
+            "kr-jeonbokjuk",
+            "kr-gamjatang",
+            "ws-oatmeal-bowl"
+          ]
+        },
+        {
+          "q": "회식 자리 여럿이 먹기 좋은 메뉴",
+          "r5": 0.4,
+          "top3": [
+            "kr-samgyeopsal",
+            "jp-sushi",
+            "kr-kimchi-jjigae"
+          ]
+        },
+        {
+          "q": "기념일 데이트 분위기 있는 저녁",
+          "r5": 0.25,
+          "top3": [
+            "ws-steak",
+            "kr-haejangguk",
+            "kr-galbitang"
+          ]
+        },
+        {
+          "q": "추운 겨울 길거리 간식",
+          "r5": 0.75,
+          "top3": [
+            "kr-hotteok",
+            "kr-bungeoppang",
+            "kr-tteokbokki"
+          ]
+        },
+        {
+          "q": "기운 없을 때 먹는 보양식",
+          "r5": 0.667,
+          "top3": [
+            "kr-kongnamul-gukbap",
+            "kr-samgyetang",
+            "kr-jeonbokjuk"
+          ]
+        },
+        {
+          "q": "아침에 빨리 먹을 수 있는 거",
+          "r5": 0.2,
+          "top3": [
+            "fs-salmon-poke",
+            "ws-oatmeal-bowl",
+            "kr-haejangguk"
+          ]
+        },
+        {
+          "q": "맥주랑 같이 먹을 안주",
+          "r5": 0.4,
+          "top3": [
+            "kr-fried-chicken",
+            "kr-haemul-pajeon",
+            "kr-gamjatang"
+          ]
+        },
+        {
+          "q": "밥 말고 면 요리 먹고 싶어",
+          "r5": 0.8,
+          "top3": [
+            "cn-jjajangmyeon",
+            "cn-jjamppong",
+            "kr-mul-naengmyeon"
+          ]
+        },
+        {
+          "q": "국물 있는 뜨끈한 국밥",
+          "r5": 0.8,
+          "top3": [
+            "kr-dwaeji-gukbap",
+            "kr-sundae-gukbap",
+            "kr-kimchi-jjigae"
+          ]
+        },
+        {
+          "q": "느끼한 거 말고 깔끔하고 담백한 음식",
+          "r5": 0.6,
+          "top3": [
+            "kr-galbitang",
+            "kr-mul-naengmyeon",
+            "jp-sushi"
+          ]
+        },
+        {
+          "q": "고기 배 터지게 먹고 싶다",
+          "r5": 0.6,
+          "top3": [
+            "kr-bulgogi",
+            "kr-yukgaejang",
+            "kr-sundae-gukbap"
+          ]
+        },
+        {
+          "q": "이국적인 동남아 음식",
+          "r5": 1,
+          "top3": [
+            "th-tom-yum-goong",
+            "vn-pho",
+            "kr-sundae-gukbap"
+          ]
+        },
+        {
+          "q": "달달한 디저트로 당 충전",
+          "r5": 0.6,
+          "top3": [
+            "cf-hot-chocolate",
+            "cf-patbingsu",
+            "cf-tiramisu"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "e5-base-q8",
+      "id": "Xenova/multilingual-e5-base",
+      "dtype": "q8",
+      "qp": "query: ",
+      "pp": "passage: ",
+      "pooling": "mean",
+      "dim": 768,
+      "loadMs": 1261.1634999999999,
+      "rssMB": 596.4453125,
+      "passMs": 32.61364745762712,
+      "queryMsMedian": 11.26469999999972,
+      "diskBytes": 295731426,
+      "metrics": {
+        "r5": 0.27749999999999997,
+        "ndcg10": 0.3180091353979417,
+        "mrr": 0.5404166666666667,
+        "p1": 0.35
+      },
+      "perQuery": [
+        {
+          "q": "비 오는 날 따뜻한 거",
+          "r5": 0.2,
+          "top3": [
+            "kr-hotteok",
+            "kr-kalguksu",
+            "cf-patbingsu"
+          ]
+        },
+        {
+          "q": "술 마신 다음 날 해장",
+          "r5": 0.2,
+          "top3": [
+            "kr-haejangguk",
+            "kr-fried-chicken",
+            "kr-haemul-pajeon"
+          ]
+        },
+        {
+          "q": "혼자 간단하게 먹을 혼밥 메뉴",
+          "r5": 0.4,
+          "top3": [
+            "kr-hotteok",
+            "kr-bossam",
+            "jp-gyudon"
+          ]
+        },
+        {
+          "q": "다이어트 중이라 가벼운 거",
+          "r5": 0,
+          "top3": [
+            "cn-jjamppong",
+            "ws-hamburger",
+            "kr-ramyeon"
+          ]
+        },
+        {
+          "q": "늦은 밤 야식",
+          "r5": 0.2,
+          "top3": [
+            "kr-gamjatang",
+            "kr-hotteok",
+            "kr-bibimbap"
+          ]
+        },
+        {
+          "q": "매운 거 먹고 스트레스 풀고 싶어",
+          "r5": 0.2,
+          "top3": [
+            "kr-ramyeon",
+            "kr-hotteok",
+            "kr-mul-naengmyeon"
+          ]
+        },
+        {
+          "q": "더운 여름날 시원한 음식",
+          "r5": 0,
+          "top3": [
+            "kr-kalguksu",
+            "ws-steak",
+            "kr-samgyetang"
+          ]
+        },
+        {
+          "q": "감기 걸려서 몸이 안 좋을 때",
+          "r5": 0.2,
+          "top3": [
+            "kr-gamjatang",
+            "kr-jeonbokjuk",
+            "kr-kalguksu"
+          ]
+        },
+        {
+          "q": "회식 자리 여럿이 먹기 좋은 메뉴",
+          "r5": 0.4,
+          "top3": [
+            "kr-samgyeopsal",
+            "kr-hotteok",
+            "kr-gopchang"
+          ]
+        },
+        {
+          "q": "기념일 데이트 분위기 있는 저녁",
+          "r5": 0.5,
+          "top3": [
+            "ws-steak",
+            "kr-haejangguk",
+            "kr-haemul-pajeon"
+          ]
+        },
+        {
+          "q": "추운 겨울 길거리 간식",
+          "r5": 0.25,
+          "top3": [
+            "kr-hotteok",
+            "kr-bossam",
+            "kr-kalguksu"
+          ]
+        },
+        {
+          "q": "기운 없을 때 먹는 보양식",
+          "r5": 0.667,
+          "top3": [
+            "kr-samgyetang",
+            "kr-bossam",
+            "kr-hotteok"
+          ]
+        },
+        {
+          "q": "아침에 빨리 먹을 수 있는 거",
+          "r5": 0.2,
+          "top3": [
+            "kr-ramyeon",
+            "ws-hamburger",
+            "kr-hotteok"
+          ]
+        },
+        {
+          "q": "맥주랑 같이 먹을 안주",
+          "r5": 0.2,
+          "top3": [
+            "kr-fried-chicken",
+            "kr-haemul-pajeon",
+            "kr-kalguksu"
+          ]
+        },
+        {
+          "q": "밥 말고 면 요리 먹고 싶어",
+          "r5": 0.6,
+          "top3": [
+            "kr-bossam",
+            "kr-ramyeon",
+            "kr-kalguksu"
+          ]
+        },
+        {
+          "q": "국물 있는 뜨끈한 국밥",
+          "r5": 0.8,
+          "top3": [
+            "kr-dwaeji-gukbap",
+            "kr-sundae-gukbap",
+            "kr-kalguksu"
+          ]
+        },
+        {
+          "q": "느끼한 거 말고 깔끔하고 담백한 음식",
+          "r5": 0,
+          "top3": [
+            "kr-kalguksu",
+            "kr-hotteok",
+            "kr-sundae-gukbap"
+          ]
+        },
+        {
+          "q": "고기 배 터지게 먹고 싶다",
+          "r5": 0.2,
+          "top3": [
+            "mx-taco",
+            "kr-haejangguk",
+            "kr-bulgogi"
+          ]
+        },
+        {
+          "q": "이국적인 동남아 음식",
+          "r5": 0.333,
+          "top3": [
+            "kr-sundae-gukbap",
+            "th-tom-yum-goong",
+            "kr-haejangguk"
+          ]
+        },
+        {
+          "q": "달달한 디저트로 당 충전",
+          "r5": 0,
+          "top3": [
+            "jp-donkatsu",
+            "kr-ramyeon",
+            "jp-tonkotsu-ramen"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "minilm-l12-q8",
+      "id": "Xenova/paraphrase-multilingual-MiniLM-L12-v2",
+      "dtype": "q8",
+      "qp": "",
+      "pp": "",
+      "pooling": "mean",
+      "dim": 384,
+      "loadMs": 1014.1882,
+      "rssMB": 441.6171875,
+      "passMs": 13.96751186440678,
+      "queryMsMedian": 5.608099999999922,
+      "diskBytes": 135392208,
+      "metrics": {
+        "r5": 0.20083333333333334,
+        "ndcg10": 0.2606551631626142,
+        "mrr": 0.4656249999999999,
+        "p1": 0.3
+      },
+      "perQuery": [
+        {
+          "q": "비 오는 날 따뜻한 거",
+          "r5": 0.2,
+          "top3": [
+            "kr-gopchang",
+            "kr-kalguksu",
+            "kr-tteokbokki"
+          ]
+        },
+        {
+          "q": "술 마신 다음 날 해장",
+          "r5": 0,
+          "top3": [
+            "kr-gopchang",
+            "kr-kalguksu",
+            "kr-tteokbokki"
+          ]
+        },
+        {
+          "q": "혼자 간단하게 먹을 혼밥 메뉴",
+          "r5": 0.2,
+          "top3": [
+            "kr-kalguksu",
+            "cn-tangsuyuk",
+            "jp-zaru-soba"
+          ]
+        },
+        {
+          "q": "다이어트 중이라 가벼운 거",
+          "r5": 0,
+          "top3": [
+            "kr-gopchang",
+            "kr-kalguksu",
+            "kr-tteokbokki"
+          ]
+        },
+        {
+          "q": "늦은 밤 야식",
+          "r5": 0.4,
+          "top3": [
+            "kr-gopchang",
+            "jp-zaru-soba",
+            "kr-kalguksu"
+          ]
+        },
+        {
+          "q": "매운 거 먹고 스트레스 풀고 싶어",
+          "r5": 0.2,
+          "top3": [
+            "kr-gopchang",
+            "kr-tteokbokki",
+            "kr-kalguksu"
+          ]
+        },
+        {
+          "q": "더운 여름날 시원한 음식",
+          "r5": 0.333,
+          "top3": [
+            "kr-kalguksu",
+            "cn-tangsuyuk",
+            "kr-eomuktang"
+          ]
+        },
+        {
+          "q": "감기 걸려서 몸이 안 좋을 때",
+          "r5": 0,
+          "top3": [
+            "kr-gopchang",
+            "jp-zaru-soba",
+            "kr-kalguksu"
+          ]
+        },
+        {
+          "q": "회식 자리 여럿이 먹기 좋은 메뉴",
+          "r5": 0.2,
+          "top3": [
+            "cn-tangsuyuk",
+            "kr-kimchi-bokkeumbap",
+            "kr-fried-chicken"
+          ]
+        },
+        {
+          "q": "기념일 데이트 분위기 있는 저녁",
+          "r5": 0.25,
+          "top3": [
+            "ws-steak",
+            "kr-gopchang",
+            "cn-tangsuyuk"
+          ]
+        },
+        {
+          "q": "추운 겨울 길거리 간식",
+          "r5": 0.5,
+          "top3": [
+            "cf-patbingsu",
+            "kr-bungeoppang",
+            "kr-hotteok"
+          ]
+        },
+        {
+          "q": "기운 없을 때 먹는 보양식",
+          "r5": 0,
+          "top3": [
+            "kr-bossam",
+            "mx-taco",
+            "cn-mapo-tofu"
+          ]
+        },
+        {
+          "q": "아침에 빨리 먹을 수 있는 거",
+          "r5": 0,
+          "top3": [
+            "kr-gopchang",
+            "kr-kalguksu",
+            "kr-tteokbokki"
+          ]
+        },
+        {
+          "q": "맥주랑 같이 먹을 안주",
+          "r5": 0.6,
+          "top3": [
+            "kr-gopchang",
+            "kr-tteokbokki",
+            "kr-kalguksu"
+          ]
+        },
+        {
+          "q": "밥 말고 면 요리 먹고 싶어",
+          "r5": 0.2,
+          "top3": [
+            "kr-kalguksu",
+            "cn-tangsuyuk",
+            "kr-bossam"
+          ]
+        },
+        {
+          "q": "국물 있는 뜨끈한 국밥",
+          "r5": 0,
+          "top3": [
+            "th-pad-thai",
+            "kr-kalguksu",
+            "th-tom-yum-goong"
+          ]
+        },
+        {
+          "q": "느끼한 거 말고 깔끔하고 담백한 음식",
+          "r5": 0.2,
+          "top3": [
+            "cn-tangsuyuk",
+            "kr-kalguksu",
+            "jp-zaru-soba"
+          ]
+        },
+        {
+          "q": "고기 배 터지게 먹고 싶다",
+          "r5": 0.4,
+          "top3": [
+            "kr-bossam",
+            "kr-gopchang",
+            "cn-tangsuyuk"
+          ]
+        },
+        {
+          "q": "이국적인 동남아 음식",
+          "r5": 0.333,
+          "top3": [
+            "th-pad-thai",
+            "cn-mapo-tofu",
+            "jp-sushi"
+          ]
+        },
+        {
+          "q": "달달한 디저트로 당 충전",
+          "r5": 0,
+          "top3": [
+            "kr-gopchang",
+            "kr-kalguksu",
+            "jp-zaru-soba"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "ko-sroberta-int8",
+      "id": "jhgan/ko-sroberta-multitask",
+      "dtype": "fp32",
+      "model_file_name": "model_qint8_avx512_vnni",
+      "qp": "",
+      "pp": "",
+      "pooling": "mean",
+      "dim": 768,
+      "note": "저장소 제공 int8 ONNX",
+      "loadMs": 564.8845,
+      "rssMB": 229.703125,
+      "passMs": 24.026208474576276,
+      "queryMsMedian": 9.146200000000135,
+      "diskBytes": 111823207,
+      "metrics": {
+        "r5": 0.5425,
+        "ndcg10": 0.6017522394728699,
+        "mrr": 0.8614583333333332,
+        "p1": 0.8
+      },
+      "perQuery": [
+        {
+          "q": "비 오는 날 따뜻한 거",
+          "r5": 0,
+          "top3": [
+            "kr-haejangguk",
+            "cf-hot-chocolate",
+            "kr-mul-naengmyeon"
+          ]
+        },
+        {
+          "q": "술 마신 다음 날 해장",
+          "r5": 0.4,
+          "top3": [
+            "kr-haejangguk",
+            "kr-kimchi-jjigae",
+            "kr-kongnamul-gukbap"
+          ]
+        },
+        {
+          "q": "혼자 간단하게 먹을 혼밥 메뉴",
+          "r5": 0.8,
+          "top3": [
+            "kr-gimbap",
+            "kr-kongnamul-gukbap",
+            "kr-kimchi-bokkeumbap"
+          ]
+        },
+        {
+          "q": "다이어트 중이라 가벼운 거",
+          "r5": 0.25,
+          "top3": [
+            "ws-chicken-breast-salad",
+            "kr-gimbap",
+            "kr-hotteok"
+          ]
+        },
+        {
+          "q": "늦은 밤 야식",
+          "r5": 0.2,
+          "top3": [
+            "kr-fried-chicken",
+            "kr-haejangguk",
+            "jp-gyudon"
+          ]
+        },
+        {
+          "q": "매운 거 먹고 스트레스 풀고 싶어",
+          "r5": 0.4,
+          "top3": [
+            "kr-haejangguk",
+            "kr-samgyetang",
+            "kr-dakbokkeumtang"
+          ]
+        },
+        {
+          "q": "더운 여름날 시원한 음식",
+          "r5": 0.333,
+          "top3": [
+            "kr-mul-naengmyeon",
+            "kr-gopchang",
+            "kr-fried-chicken"
+          ]
+        },
+        {
+          "q": "감기 걸려서 몸이 안 좋을 때",
+          "r5": 0.4,
+          "top3": [
+            "kr-jeonbokjuk",
+            "kr-samgyetang",
+            "kr-haejangguk"
+          ]
+        },
+        {
+          "q": "회식 자리 여럿이 먹기 좋은 메뉴",
+          "r5": 0.8,
+          "top3": [
+            "kr-samgyeopsal",
+            "kr-fried-chicken",
+            "ws-hamburger"
+          ]
+        },
+        {
+          "q": "기념일 데이트 분위기 있는 저녁",
+          "r5": 0.5,
+          "top3": [
+            "kr-samgyeopsal",
+            "kr-fried-chicken",
+            "ws-steak"
+          ]
+        },
+        {
+          "q": "추운 겨울 길거리 간식",
+          "r5": 0.5,
+          "top3": [
+            "kr-bungeoppang",
+            "kr-hotteok",
+            "cf-patbingsu"
+          ]
+        },
+        {
+          "q": "기운 없을 때 먹는 보양식",
+          "r5": 1,
+          "top3": [
+            "kr-samgyetang",
+            "kr-jeonbokjuk",
+            "kr-haejangguk"
+          ]
+        },
+        {
+          "q": "아침에 빨리 먹을 수 있는 거",
+          "r5": 0.4,
+          "top3": [
+            "kr-haejangguk",
+            "kr-gimbap",
+            "kr-bibimbap"
+          ]
+        },
+        {
+          "q": "맥주랑 같이 먹을 안주",
+          "r5": 0.4,
+          "top3": [
+            "kr-fried-chicken",
+            "kr-samgyeopsal",
+            "kr-kongnamul-gukbap"
+          ]
+        },
+        {
+          "q": "밥 말고 면 요리 먹고 싶어",
+          "r5": 0.8,
+          "top3": [
+            "kr-mul-naengmyeon",
+            "kr-ramyeon",
+            "kr-kalguksu"
+          ]
+        },
+        {
+          "q": "국물 있는 뜨끈한 국밥",
+          "r5": 0.8,
+          "top3": [
+            "kr-dwaeji-gukbap",
+            "kr-sundae-gukbap",
+            "kr-haejangguk"
+          ]
+        },
+        {
+          "q": "느끼한 거 말고 깔끔하고 담백한 음식",
+          "r5": 0.6,
+          "top3": [
+            "kr-kongnamul-gukbap",
+            "jp-sushi",
+            "cn-tangsuyuk"
+          ]
+        },
+        {
+          "q": "고기 배 터지게 먹고 싶다",
+          "r5": 0.6,
+          "top3": [
+            "kr-samgyeopsal",
+            "kr-gopchang",
+            "mx-taco"
+          ]
+        },
+        {
+          "q": "이국적인 동남아 음식",
+          "r5": 0.667,
+          "top3": [
+            "th-tom-yum-goong",
+            "th-pad-thai",
+            "mx-taco"
+          ]
+        },
+        {
+          "q": "달달한 디저트로 당 충전",
+          "r5": 1,
+          "top3": [
+            "cf-hot-chocolate",
+            "cf-tiramisu",
+            "cf-patbingsu"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "embgemma-300m-q4",
+      "id": "onnx-community/embeddinggemma-300m-ONNX",
+      "dtype": "q4",
+      "qp": "task: search result | query: ",
+      "pp": "title: none | text: ",
+      "pooling": "sentence_embedding",
+      "dim": 768,
+      "loadMs": 1955.0696000000003,
+      "rssMB": 496.6796875,
+      "passMs": 75.11787627118645,
+      "queryMsMedian": 28.27180000000044,
+      "diskBytes": 218726989,
+      "metrics": {
+        "r5": 0.6658333333333333,
+        "ndcg10": 0.7500720685607829,
+        "mrr": 0.9225,
+        "p1": 0.9
+      },
+      "perQuery": [
+        {
+          "q": "비 오는 날 따뜻한 거",
+          "r5": 0.2,
+          "top3": [
+            "cf-hot-chocolate",
+            "jp-zaru-soba",
+            "kr-jeonbokjuk"
+          ]
+        },
+        {
+          "q": "술 마신 다음 날 해장",
+          "r5": 0.2,
+          "top3": [
+            "kr-haejangguk",
+            "kr-jeonbokjuk",
+            "kr-haemul-pajeon"
+          ]
+        },
+        {
+          "q": "혼자 간단하게 먹을 혼밥 메뉴",
+          "r5": 0.8,
+          "top3": [
+            "kr-gimbap",
+            "kr-kimchi-bokkeumbap",
+            "jp-gyudon"
+          ]
+        },
+        {
+          "q": "다이어트 중이라 가벼운 거",
+          "r5": 0.5,
+          "top3": [
+            "ws-chicken-breast-salad",
+            "ws-oatmeal-bowl",
+            "kr-jeonbokjuk"
+          ]
+        },
+        {
+          "q": "늦은 밤 야식",
+          "r5": 0.2,
+          "top3": [
+            "kr-samgyeopsal",
+            "ws-steak",
+            "kr-haejangguk"
+          ]
+        },
+        {
+          "q": "매운 거 먹고 스트레스 풀고 싶어",
+          "r5": 0.8,
+          "top3": [
+            "kr-tteokbokki",
+            "kr-dakgalbi",
+            "cn-mapo-tofu"
+          ]
+        },
+        {
+          "q": "더운 여름날 시원한 음식",
+          "r5": 1,
+          "top3": [
+            "kr-mul-naengmyeon",
+            "jp-zaru-soba",
+            "kr-jeonbokjuk"
+          ]
+        },
+        {
+          "q": "감기 걸려서 몸이 안 좋을 때",
+          "r5": 0.6,
+          "top3": [
+            "kr-jeonbokjuk",
+            "kr-samgyetang",
+            "jp-zaru-soba"
+          ]
+        },
+        {
+          "q": "회식 자리 여럿이 먹기 좋은 메뉴",
+          "r5": 0.6,
+          "top3": [
+            "kr-samgyeopsal",
+            "kr-haemul-pajeon",
+            "kr-bossam"
+          ]
+        },
+        {
+          "q": "기념일 데이트 분위기 있는 저녁",
+          "r5": 0.75,
+          "top3": [
+            "ws-steak",
+            "cf-tiramisu",
+            "kr-samgyeopsal"
+          ]
+        },
+        {
+          "q": "추운 겨울 길거리 간식",
+          "r5": 1,
+          "top3": [
+            "kr-hotteok",
+            "kr-bungeoppang",
+            "kr-tteokbokki"
+          ]
+        },
+        {
+          "q": "기운 없을 때 먹는 보양식",
+          "r5": 1,
+          "top3": [
+            "kr-jeonbokjuk",
+            "kr-samgyetang",
+            "kr-haejangguk"
+          ]
+        },
+        {
+          "q": "아침에 빨리 먹을 수 있는 거",
+          "r5": 0.6,
+          "top3": [
+            "ws-oatmeal-bowl",
+            "kr-gimbap",
+            "ws-sandwich"
+          ]
+        },
+        {
+          "q": "맥주랑 같이 먹을 안주",
+          "r5": 0.6,
+          "top3": [
+            "kr-fried-chicken",
+            "kr-bossam",
+            "kr-samgyeopsal"
+          ]
+        },
+        {
+          "q": "밥 말고 면 요리 먹고 싶어",
+          "r5": 0.8,
+          "top3": [
+            "jp-zaru-soba",
+            "kr-ramyeon",
+            "kr-kalguksu"
+          ]
+        },
+        {
+          "q": "국물 있는 뜨끈한 국밥",
+          "r5": 0.8,
+          "top3": [
+            "kr-sundae-gukbap",
+            "kr-kongnamul-gukbap",
+            "kr-dwaeji-gukbap"
+          ]
+        },
+        {
+          "q": "느끼한 거 말고 깔끔하고 담백한 음식",
+          "r5": 0.6,
+          "top3": [
+            "jp-zaru-soba",
+            "kr-galbitang",
+            "kr-jeonbokjuk"
+          ]
+        },
+        {
+          "q": "고기 배 터지게 먹고 싶다",
+          "r5": 0.6,
+          "top3": [
+            "kr-samgyeopsal",
+            "kr-bulgogi",
+            "kr-yukgaejang"
+          ]
+        },
+        {
+          "q": "이국적인 동남아 음식",
+          "r5": 0.667,
+          "top3": [
+            "th-tom-yum-goong",
+            "th-pad-thai",
+            "in-chicken-curry"
+          ]
+        },
+        {
+          "q": "달달한 디저트로 당 충전",
+          "r5": 1,
+          "top3": [
+            "cf-tiramisu",
+            "cf-patbingsu",
+            "kr-hotteok"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "bge-m3-q8",
+      "id": "Xenova/bge-m3",
+      "dtype": "q8",
+      "qp": "",
+      "pp": "",
+      "pooling": "cls",
+      "dim": 1024,
+      "loadMs": 1920.4,
+      "rssMB": 890.97265625,
+      "passMs": 98.51623559322033,
+      "queryMsMedian": 25.828300000000127,
+      "diskBytes": 586779294,
+      "metrics": {
+        "r5": 0.4683333333333334,
+        "ndcg10": 0.5825942534751996,
+        "mrr": 0.8885714285714286,
+        "p1": 0.85
+      },
+      "perQuery": [
+        {
+          "q": "비 오는 날 따뜻한 거",
+          "r5": 0,
+          "top3": [
+            "cf-patbingsu",
+            "kr-mul-naengmyeon",
+            "ws-steak"
+          ]
+        },
+        {
+          "q": "술 마신 다음 날 해장",
+          "r5": 0.2,
+          "top3": [
+            "kr-haejangguk",
+            "kr-haemul-pajeon",
+            "kr-jokbal"
+          ]
+        },
+        {
+          "q": "혼자 간단하게 먹을 혼밥 메뉴",
+          "r5": 0.6,
+          "top3": [
+            "kr-gimbap",
+            "jp-sushi",
+            "kr-kongnamul-gukbap"
+          ]
+        },
+        {
+          "q": "다이어트 중이라 가벼운 거",
+          "r5": 0.25,
+          "top3": [
+            "ws-oatmeal-bowl",
+            "kr-gimbap",
+            "ws-hamburger"
+          ]
+        },
+        {
+          "q": "늦은 밤 야식",
+          "r5": 0.2,
+          "top3": [
+            "ws-steak",
+            "jp-gyudon",
+            "kr-samgyeopsal"
+          ]
+        },
+        {
+          "q": "매운 거 먹고 스트레스 풀고 싶어",
+          "r5": 0.4,
+          "top3": [
+            "th-tom-yum-goong",
+            "kr-fried-chicken",
+            "cn-malatang"
+          ]
+        },
+        {
+          "q": "더운 여름날 시원한 음식",
+          "r5": 0.333,
+          "top3": [
+            "kr-mul-naengmyeon",
+            "kr-fried-chicken",
+            "cn-malatang"
+          ]
+        },
+        {
+          "q": "감기 걸려서 몸이 안 좋을 때",
+          "r5": 0.2,
+          "top3": [
+            "kr-gamjatang",
+            "kr-jeonbokjuk",
+            "kr-bossam"
+          ]
+        },
+        {
+          "q": "회식 자리 여럿이 먹기 좋은 메뉴",
+          "r5": 0.6,
+          "top3": [
+            "kr-samgyeopsal",
+            "kr-fried-chicken",
+            "kr-bossam"
+          ]
+        },
+        {
+          "q": "기념일 데이트 분위기 있는 저녁",
+          "r5": 0.5,
+          "top3": [
+            "ws-steak",
+            "jp-gyudon",
+            "kr-fried-chicken"
+          ]
+        },
+        {
+          "q": "추운 겨울 길거리 간식",
+          "r5": 0.75,
+          "top3": [
+            "kr-hotteok",
+            "kr-bungeoppang",
+            "kr-tteokbokki"
+          ]
+        },
+        {
+          "q": "기운 없을 때 먹는 보양식",
+          "r5": 0.667,
+          "top3": [
+            "kr-samgyetang",
+            "ws-oatmeal-bowl",
+            "in-chicken-curry"
+          ]
+        },
+        {
+          "q": "아침에 빨리 먹을 수 있는 거",
+          "r5": 0.4,
+          "top3": [
+            "ws-oatmeal-bowl",
+            "kr-gimbap",
+            "kr-ramyeon"
+          ]
+        },
+        {
+          "q": "맥주랑 같이 먹을 안주",
+          "r5": 0.4,
+          "top3": [
+            "kr-fried-chicken",
+            "cf-tiramisu",
+            "kr-bossam"
+          ]
+        },
+        {
+          "q": "밥 말고 면 요리 먹고 싶어",
+          "r5": 0.6,
+          "top3": [
+            "kr-ramyeon",
+            "kr-kalguksu",
+            "cn-jjajangmyeon"
+          ]
+        },
+        {
+          "q": "국물 있는 뜨끈한 국밥",
+          "r5": 0.6,
+          "top3": [
+            "kr-kongnamul-gukbap",
+            "kr-dwaeji-gukbap",
+            "kr-sundae-gukbap"
+          ]
+        },
+        {
+          "q": "느끼한 거 말고 깔끔하고 담백한 음식",
+          "r5": 0.4,
+          "top3": [
+            "kr-galbitang",
+            "kr-kongnamul-gukbap",
+            "kr-gimbap"
+          ]
+        },
+        {
+          "q": "고기 배 터지게 먹고 싶다",
+          "r5": 0.8,
+          "top3": [
+            "kr-bulgogi",
+            "kr-bossam",
+            "ws-steak"
+          ]
+        },
+        {
+          "q": "이국적인 동남아 음식",
+          "r5": 0.667,
+          "top3": [
+            "th-tom-yum-goong",
+            "fs-salmon-poke",
+            "cn-malatang"
+          ]
+        },
+        {
+          "q": "달달한 디저트로 당 충전",
+          "r5": 0.8,
+          "top3": [
+            "cf-tiramisu",
+            "cf-patbingsu",
+            "kr-bungeoppang"
+          ]
+        }
+      ]
+    }
+  ]
+}

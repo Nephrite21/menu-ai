@@ -13,24 +13,22 @@ body.diving #bg-sphere:not([data-dim]){opacity:1}
 body.has-results .hero{min-height:auto;padding-top:96px;padding-bottom:12px}
 .hero-title{margin:0 0 18px;font-size:clamp(1rem,2.2vw,1.35rem);letter-spacing:.35em;font-weight:700;color:#d9dcff;
   text-shadow:0 0 18px rgba(139,152,255,.7)}
-.searchbar{display:flex;align-items:stretch;width:min(640px,92vw);border-radius:20px;overflow:hidden;
-  background:rgba(10,11,24,.8);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+.searchbar{display:flex;align-items:stretch;width:min(640px,92vw);border-radius:36px;overflow:hidden;
+  background:rgba(10,11,24,.8);
   border:1.5px solid rgba(190,180,255,.55);
   box-shadow:0 0 0 1px rgba(255,255,255,.04) inset,0 0 38px rgba(124,140,255,.32),0 14px 44px rgba(0,0,0,.55);
   transition:box-shadow .2s,border-color .2s}
 .searchbar:focus-within{border-color:rgba(255,190,140,.85);
   box-shadow:0 0 0 1px rgba(255,255,255,.06) inset,0 0 52px rgba(255,154,77,.38),0 14px 44px rgba(0,0,0,.55)}
-.sb-search,.sb-detail{display:flex;align-items:center;gap:8px;border:0;background:rgba(255,255,255,.04);cursor:pointer;color:var(--text);white-space:nowrap}
-.sb-search{padding:0 20px;border-right:1px solid var(--border);font-size:.95rem}
-.sb-detail{flex-direction:column;justify-content:center;gap:2px;padding:0 18px;border-left:1px solid var(--border);font-size:.72rem;color:var(--muted)}
-.sb-search:hover,.sb-detail:hover{background:rgba(139,152,255,.14)}
-.sb-detail[aria-expanded=true]{color:var(--accent);background:rgba(255,154,77,.1)}
+.sb-search{display:flex;align-items:center;gap:8px;border:0;background:rgba(255,255,255,.04);cursor:pointer;color:var(--text);white-space:nowrap}
+.sb-search{padding:0 28px 0 22px;border-left:1px solid var(--border);font-size:.95rem}
+.sb-search:hover{background:rgba(139,152,255,.14)}
 .searchbar input[type=text]{flex:1;min-width:0;width:auto;border:0;border-radius:0;background:transparent;
-  font-size:clamp(1.05rem,2.6vw,1.55rem);padding:22px 18px;outline:none;color:var(--text)}
+  font-size:clamp(1.05rem,2.6vw,1.55rem);padding:20px 18px 20px 36px;outline:none;color:var(--text)}
 .searchbar svg,.detail-link svg{flex:none}
 .detail-link{margin-top:14px;display:inline-flex;gap:6px;align-items:center;padding:6px 14px;border-radius:99px;
   border:1px solid var(--border);background:rgba(10,11,24,.6);color:var(--muted);cursor:pointer;font-size:.85rem;
-  backdrop-filter:blur(8px)}
+  }
 .detail-link:hover{color:var(--text);border-color:var(--accent2)}
 .detail-link svg{transition:transform .2s}
 .detail-link[aria-expanded=true] svg{transform:rotate(180deg)}
@@ -69,7 +67,7 @@ body.has-results .results-zone{display:block;animation:pop .3s ease}
 .results-bar h2{margin:0}
 .results{display:grid;gap:var(--gap)}
 .card{padding:16px 18px;border-radius:calc(var(--radius) + 4px);background:var(--surface);border:1px solid var(--border);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 8px 30px rgba(0,0,0,.35);
+  box-shadow:0 8px 30px rgba(0,0,0,.35);
   transition:border-color .2s,box-shadow .2s,transform .2s}
 .card:hover{border-color:rgba(255,154,77,.55);box-shadow:0 0 28px rgba(255,154,77,.18),0 8px 30px rgba(0,0,0,.35);transform:translateY(-1px)}
 .card h3{margin:0;font-size:1.15rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
@@ -95,8 +93,8 @@ tbody tr:last-child td{border-bottom:0}
 
 /* ===== 모달 ===== */
 dialog{width:min(520px,calc(100vw - 24px));border:1px solid var(--border);border-radius:calc(var(--radius) + 4px);
-  background:rgba(16,18,36,.92);backdrop-filter:blur(18px);color:var(--text);padding:20px;box-shadow:0 0 50px rgba(124,140,255,.25)}
-dialog::backdrop{background:rgba(2,3,8,.65);backdrop-filter:blur(3px)}
+  background:rgba(16,18,36,.92);color:var(--text);padding:20px;box-shadow:0 0 50px rgba(124,140,255,.25)}
+dialog::backdrop{background:rgba(2,3,8,.65);}
 dialog label{display:block;margin:12px 0 4px;font-size:.88rem;color:var(--muted)}
 dialog .actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;margin-top:18px}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:20;background:rgba(238,240,255,.95);color:#10122a;
@@ -104,9 +102,10 @@ dialog .actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;mar
 
 /* ===== 모바일 ===== */
 @media(max-width:560px){
-  .sb-search span,.sb-detail span{display:none}
-  .sb-search,.sb-detail{padding:0 14px}
-  .searchbar input[type=text]{padding:18px 12px}
+  .sb-search span{display:none}
+  .sb-search{padding:0 20px 0 14px}
+  .searchbar{border-radius:30px}
+  .searchbar input[type=text]{padding:16px 10px 16px 24px}
   .topbar nav a,.topbar nav button{padding:6px 8px;font-size:.85rem}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}

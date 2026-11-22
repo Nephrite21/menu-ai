@@ -69,8 +69,11 @@ export function exportJson() / importJson(file)
 
 ## UI 이벤트 (A) — 로직과의 접점
 UI는 `document`에 CustomEvent만 발행, 로직은 구독 측이 구현. 목업 모드에서는 `web/mock/menus.mock.json`로 동작.
-- `menu:search` detail `{ text, cuisines: string[], weights: {}, exclude: string[] }`
-- `menu:reroll`
+- `menu:search` detail `{ text, cuisines: string[], weights: {}, exclude: string[], signal: AbortSignal }`
+- `menu:reroll` detail `{ signal: AbortSignal }`
+- **취소 계약**: 검색·리롤마다 새 `signal`이 온다. 로직은 모델 로딩/임베딩/추천 각 단계 사이에 `signal.aborted`를 확인해 중단하고, 취소된 검색은 `renderResults`를 호출하지 않는다(호출해도 UI가 버린다).
+- `menu:search-failed` detail `{ reason: 'timeout'|'error' }` — UI가 발행(타임아웃 15초, `MenuSphere.timeoutMs`) 또는 로직이 `MenuSphere.fail('error')`로 발행. 발행되면 UI가 알림을 띄우고 해당 검색의 signal을 abort한다.
+- 로직은 결과가 준비되면 `MenuUI.renderResults(...)`를 호출한다(내부에서 구 회전을 감속·정지시키고 확대 전환 후 결과를 그린다). 결과 없이 실패한 경우 `MenuSphere.fail('error')`를 호출한다.
 - `menu:add` detail `{ name, cuisine, ingredients[], desc }`
 - `menu:suggest-public` detail `{ menu }`  (GitHub 이슈 제안)
 - 결과 렌더링은 `window.MenuUI.renderResults([{menu, score, reasons}])` 형태로 노출

@@ -5,8 +5,11 @@ const ready=fetch('mock/menus.mock.json').then(r=>r.json()).then(d=>{UI.mockMenu
 UI.menusReady=ready;
 let last=[],shown=0;
 const strip=t=>t.replace(/(^|\s)[+\-!✕]+\S+/g,' ').trim(); // 목업용: 접두어 토큰 제거 (실제 파싱은 B의 parseQuery)
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 document.addEventListener('menu:search',async e=>{
-  const {text,cuisines,weights,exclude}=e.detail,menus=await ready;
+  const {text,cuisines,weights,exclude,signal}=e.detail,menus=await ready;
+  if(UI.mockDelayMs)await sleep(UI.mockDelayMs);       // 테스트용: 느린 검색 흉내
+  if(signal&&signal.aborted)return;                    // 취소된 검색은 결과를 내지 않는다(실제 로직도 같은 규칙)
   const q=strip(text||'');
   last=menus.filter(m=>(!cuisines.length||cuisines.includes(m.cuisine))
     &&!(m.ingredients||[]).some(i=>exclude.includes(i)||weights[i]===-1)

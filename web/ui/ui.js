@@ -6,11 +6,23 @@ const $=(s,r=document)=>r.querySelector(s);
 const el=(tag,props={},...kids)=>{const e=Object.assign(document.createElement(tag),props);kids.flat().forEach(k=>e.append(k));return e};
 const emit=(name,detail)=>document.dispatchEvent(new CustomEvent(name,{detail}));
 
-function toast(msg){const t=el('div',{className:'toast',textContent:msg});document.body.append(t);setTimeout(()=>t.remove(),2200)}
+function toast(msg,ms=2200){const t=el('div',{className:'toast',textContent:msg});document.body.append(t);setTimeout(()=>t.remove(),ms)}
+
+/* 검색 실패(타임아웃/오류) 알림. 취소(AbortSignal)는 검색을 시작한 페이지가 처리한다. */
+document.addEventListener('menu:search-failed',e=>{
+  const r=e.detail&&e.detail.reason;
+  toast(r==='timeout'?'찾는 데 너무 오래 걸려서 취소했어요. 다시 시도해 주세요.':'찾는 중에 문제가 생겨 취소했어요. 다시 시도해 주세요.',4000);
+});
 
 /* 화면 전환(구 회전→확대)이 진행 중이면 끝난 뒤에 그린다 */
 function renderResults(items){
-  (window.MenuUI&&window.MenuUI.diving||Promise.resolve()).then(()=>renderNow(items));
+  const d=window.MenuUI&&window.MenuUI.diving;
+  if(d&&window.MenuSphere)window.MenuSphere.settle();   // 결과가 준비됨 → 구가 감속하며 멈추기 시작
+  const s=window.MenuUI&&window.MenuUI.search;           // 이 검색이 취소됐다면 늦게 온 결과는 버린다
+  (d||Promise.resolve()).then(r=>{
+    if(r==='failed'||(s&&s.ac.signal.aborted))return;
+    renderNow(items);
+  });
 }
 function renderNow(items){
   const box=$('#results');if(!box)return;

@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-22T08:23:38.088Z",
+  "ortWeb": "1.31.0-dev.20260914-8d85527a0",
+  "threads": 1,
+  "results": [
+    {
+      "key": "e5-small-q8",
+      "sessionLoadMs": 609.7969,
+      "queryMsMedian": 18.592399999999998,
+      "queryMsP90": 21.19580000000019
+    },
+    {
+      "key": "ko-sroberta-int8",
+      "sessionLoadMs": 365.64200000000005,
+      "queryMsMedian": 50.7820999999999,
+      "queryMsP90": 60.02330000000029
+    },
+    {
+      "key": "embgemma-300m-q4",
+      "sessionLoadMs": 424.95900000000074,
+      "queryMsMedian": 413.22559999999976,
+      "queryMsP90": 454.1107999999995
+    },
+    {
+      "key": "bge-m3-q8",
+      "sessionLoadMs": 1232.3266999999996,
+      "queryMsMedian": 219.51889999999912,
+      "queryMsP90": 233.99579999999878
+    }
+  ]
+}

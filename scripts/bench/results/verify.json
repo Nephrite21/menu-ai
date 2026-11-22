@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-22T08:19:54.525Z",
+  "date": "2026-11-22T08:39:15.257Z",
   "menus": "web\\menus.json",
   "menusBuildBackend": "onnxruntime-web wasm (node, 1 thread)",
   "nQueries": 20,
@@ -12,8 +12,8 @@
         "device": "cpu",
         "dim": 384
       },
-      "avgMs": 15.898314654377879,
-      "queryAvgMs": 6.885395000000005
+      "avgMs": 13.657075115207382,
+      "queryAvgMs": 6.5038799999999695
     },
     "node-wasm": {
       "info": {
@@ -22,8 +22,8 @@
         "device": "wasm",
         "dim": 384
       },
-      "avgMs": 79.07600479262673,
-      "queryAvgMs": 22.413464999999974
+      "avgMs": 71.79680967741946,
+      "queryAvgMs": 19.200579999999956
     },
     "edge-wasm": {
       "info": {
@@ -35,9 +35,9 @@
         "hwc": 16,
         "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0"
       },
-      "avgMs": 79.63225806440626,
-      "queryAvgMs": 26.469999998807907,
-      "loadMs": 30069.600000023842
+      "avgMs": 68.11207373296061,
+      "queryAvgMs": 23.339999997615813,
+      "loadMs": 15587.899999976158
     },
     "edge-webgpu": {
       "info": {
@@ -49,9 +49,9 @@
         "hwc": 16,
         "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0"
       },
-      "avgMs": 293.69594470070257,
-      "queryAvgMs": 263.7949999988079,
-      "loadMs": 3154.8000000715256
+      "avgMs": 270.35824884797023,
+      "queryAvgMs": 223.08999999761582,
+      "loadMs": 3243
     }
   },
   "consistency": {

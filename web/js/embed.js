@@ -133,7 +133,7 @@ const IS_BROWSER = typeof window !== 'undefined' || typeof self !== 'undefined' 
  * 참고(docs/tech-notes.md): 이 모델(q8)은 WebGPU 에서 정수 연산이 CPU 로 폴백돼 WASM 보다 느리고
  * 빌드 벡터와의 오차도 약간 크다. ['wasm'] 으로 바꾸면 WASM 전용이 된다.
  */
-export const BROWSER_DEVICE_ORDER = Object.freeze(['webgpu', 'wasm']);
+export const BROWSER_DEVICE_ORDER = Object.freeze(['wasm']); // 실측: q8 모델은 WASM이 WebGPU보다 약 10배 빠르고 빌드 벡터와 정확히 일치(docs/tech-notes.md)
 
 let state = null; // { extractor, device, dtype, transformers }
 
@@ -156,7 +156,7 @@ async function createNodeWasmExtractor(T, options) {
   const pathMod = await import('node:path');
   // Transformers.js 파일 캐시 배치: <cacheDir>/<repo>[/<revision>]/<file> (revision 이 'main' 이 아닐 때만 하위 폴더)
   const revDir = MODEL_REVISION === 'main' ? '' : MODEL_REVISION;
-  const modelPath = pathMod.join(T.env.cacheDir, MODEL_ID, revDir, 'onnx',`model_${MODEL_DTYPE === 'q8' ? 'quantized' : MODEL_DTYPE}.onnx`);
+  const modelPath = pathMod.join(T.env.cacheDir, MODEL_ID, revDir, 'onnx', `model_${MODEL_DTYPE === 'q8' ? 'quantized' : MODEL_DTYPE}.onnx`);
   const session = await ort.InferenceSession.create(new Uint8Array(await fs.readFile(modelPath)), { executionProviders: ['wasm'] });
   const one = async (text) => {
     const enc = tok(text, { padding: true, truncation: true });
@@ -190,6 +190,7 @@ async function createNodeWasmExtractor(T, options) {
     return { data: out, dims: [arr.length, DIM] };
   };
 }
+
 let initPromise = null;
 
 async function loadTransformers(injected) {

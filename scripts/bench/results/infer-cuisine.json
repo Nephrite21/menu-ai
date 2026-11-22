@@ -1,0 +1,747 @@
+{
+  "date": "2026-11-22T08:29:40.495Z",
+  "model": "Xenova/multilingual-e5-small@761b726dd34fb83930e26aab4e9ac3899aa1fa78",
+  "device": "cpu",
+  "goldCounts": {
+    "total": 1237,
+    "byKind": {
+      "curated": 546,
+      "wiki-origin": 450,
+      "wiki-origin-other": 241
+    },
+    "byLabel": {
+      "korean": 240,
+      "western": 329,
+      "chinese": 80,
+      "japanese": 78,
+      "vietnamese": 21,
+      "mexican": 20,
+      "thai": 20,
+      "indian": 27,
+      "fusion": 38,
+      "snack": 45,
+      "cafe": 82,
+      "other": 257
+    }
+  },
+  "params": {
+    "k": 20,
+    "tau": 0.02
+  },
+  "grid": [
+    {
+      "k": 20,
+      "tau": 0.02,
+      "accWiki": 0.743849493487699,
+      "accAll": 0.7720291026677445
+    },
+    {
+      "k": 10,
+      "tau": 0.05,
+      "accWiki": 0.7409551374819102,
+      "accAll": 0.7736459175424414
+    },
+    {
+      "k": 10,
+      "tau": 1,
+      "accWiki": 0.7409551374819102,
+      "accAll": 0.7704122877930477
+    },
+    {
+      "k": 30,
+      "tau": 0.02,
+      "accWiki": 0.7380607814761215,
+      "accAll": 0.7687954729183508
+    },
+    {
+      "k": 20,
+      "tau": 1,
+      "accWiki": 0.7366136034732272,
+      "accAll": 0.7477768795472919
+    },
+    {
+      "k": 10,
+      "tau": 0.02,
+      "accWiki": 0.7337192474674384,
+      "accAll": 0.7696038803556993
+    },
+    {
+      "k": 20,
+      "tau": 0.05,
+      "accWiki": 0.7337192474674384,
+      "accAll": 0.7590945836701698
+    },
+    {
+      "k": 30,
+      "tau": 0.05,
+      "accWiki": 0.7337192474674384,
+      "accAll": 0.7469684721099434
+    },
+    {
+      "k": 30,
+      "tau": 1,
+      "accWiki": 0.723589001447178,
+      "accAll": 0.7299919159256265
+    },
+    {
+      "k": 20,
+      "tau": 0.01,
+      "accWiki": 0.7206946454413893,
+      "accAll": 0.7493936944219887
+    },
+    {
+      "k": 30,
+      "tau": 0.01,
+      "accWiki": 0.7163531114327062,
+      "accAll": 0.7493936944219887
+    },
+    {
+      "k": 5,
+      "tau": 0.02,
+      "accWiki": 0.7062228654124457,
+      "accAll": 0.7485852869846402
+    },
+    {
+      "k": 10,
+      "tau": 0.01,
+      "accWiki": 0.7047756874095513,
+      "accAll": 0.7413096200485044
+    },
+    {
+      "k": 5,
+      "tau": 1,
+      "accWiki": 0.7018813314037626,
+      "accAll": 0.7502021018593371
+    },
+    {
+      "k": 5,
+      "tau": 0.05,
+      "accWiki": 0.7018813314037626,
+      "accAll": 0.7485852869846402
+    },
+    {
+      "k": 5,
+      "tau": 0.01,
+      "accWiki": 0.6917510853835022,
+      "accAll": 0.7316087308003234
+    }
+  ],
+  "loo": {
+    "wiki": {
+      "n": 691,
+      "top1Acc": 0.743849493487699,
+      "confusion": {
+        "labels": [
+          "korean",
+          "western",
+          "chinese",
+          "japanese",
+          "vietnamese",
+          "mexican",
+          "thai",
+          "indian",
+          "snack",
+          "cafe",
+          "other"
+        ],
+        "matrix": {
+          "korean": {
+            "korean": 58,
+            "western": 4,
+            "chinese": 3,
+            "japanese": 1,
+            "vietnamese": 0,
+            "mexican": 0,
+            "thai": 0,
+            "indian": 0,
+            "snack": 2,
+            "cafe": 1,
+            "other": 4
+          },
+          "western": {
+            "korean": 6,
+            "western": 183,
+            "chinese": 0,
+            "japanese": 2,
+            "vietnamese": 0,
+            "mexican": 2,
+            "thai": 0,
+            "indian": 0,
+            "snack": 0,
+            "cafe": 6,
+            "other": 34
+          },
+          "chinese": {
+            "korean": 6,
+            "western": 7,
+            "chinese": 23,
+            "japanese": 4,
+            "vietnamese": 0,
+            "mexican": 0,
+            "thai": 0,
+            "indian": 0,
+            "snack": 0,
+            "cafe": 0,
+            "other": 9
+          },
+          "japanese": {
+            "korean": 1,
+            "western": 6,
+            "chinese": 0,
+            "japanese": 32,
+            "vietnamese": 0,
+            "mexican": 0,
+            "thai": 0,
+            "indian": 0,
+            "snack": 0,
+            "cafe": 1,
+            "other": 2
+          },
+          "vietnamese": {
+            "korean": 0,
+            "western": 1,
+            "chinese": 1,
+            "japanese": 0,
+            "vietnamese": 11,
+            "mexican": 0,
+            "thai": 0,
+            "indian": 0,
+            "snack": 0,
+            "cafe": 0,
+            "other": 0
+          },
+          "mexican": {
+            "korean": 0,
+            "western": 0,
+            "chinese": 0,
+            "japanese": 0,
+            "vietnamese": 0,
+            "mexican": 8,
+            "thai": 0,
+            "indian": 0,
+            "snack": 0,
+            "cafe": 0,
+            "other": 4
+          },
+          "thai": {
+            "korean": 0,
+            "western": 0,
+            "chinese": 0,
+            "japanese": 0,
+            "vietnamese": 0,
+            "mexican": 0,
+            "thai": 9,
+            "indian": 0,
+            "snack": 0,
+            "cafe": 0,
+            "other": 1
+          },
+          "indian": {
+            "korean": 3,
+            "western": 1,
+            "chinese": 0,
+            "japanese": 0,
+            "vietnamese": 0,
+            "mexican": 0,
+            "thai": 1,
+            "indian": 1,
+            "snack": 0,
+            "cafe": 1,
+            "other": 11
+          },
+          "snack": {
+            "korean": 0,
+            "western": 0,
+            "chinese": 0,
+            "japanese": 0,
+            "vietnamese": 0,
+            "mexican": 0,
+            "thai": 0,
+            "indian": 0,
+            "snack": 0,
+            "cafe": 0,
+            "other": 0
+          },
+          "cafe": {
+            "korean": 0,
+            "western": 0,
+            "chinese": 0,
+            "japanese": 0,
+            "vietnamese": 0,
+            "mexican": 0,
+            "thai": 0,
+            "indian": 0,
+            "snack": 0,
+            "cafe": 0,
+            "other": 0
+          },
+          "other": {
+            "korean": 3,
+            "western": 42,
+            "chinese": 3,
+            "japanese": 1,
+            "vietnamese": 0,
+            "mexican": 1,
+            "thai": 0,
+            "indian": 0,
+            "snack": 0,
+            "cafe": 2,
+            "other": 189
+          }
+        },
+        "per": {
+          "korean": {
+            "n": 73,
+            "precision": 0.7532467532467533,
+            "recall": 0.7945205479452054
+          },
+          "western": {
+            "n": 233,
+            "precision": 0.75,
+            "recall": 0.7854077253218884
+          },
+          "chinese": {
+            "n": 49,
+            "precision": 0.7666666666666667,
+            "recall": 0.46938775510204084
+          },
+          "japanese": {
+            "n": 42,
+            "precision": 0.8,
+            "recall": 0.7619047619047619
+          },
+          "vietnamese": {
+            "n": 13,
+            "precision": 1,
+            "recall": 0.8461538461538461
+          },
+          "mexican": {
+            "n": 12,
+            "precision": 0.7272727272727273,
+            "recall": 0.6666666666666666
+          },
+          "thai": {
+            "n": 10,
+            "precision": 0.9,
+            "recall": 0.9
+          },
+          "indian": {
+            "n": 18,
+            "precision": 1,
+            "recall": 0.05555555555555555
+          },
+          "snack": {
+            "n": 0,
+            "precision": 0,
+            "recall": null
+          },
+          "cafe": {
+            "n": 0,
+            "precision": 0,
+            "recall": null
+          },
+          "other": {
+            "n": 241,
+            "precision": 0.7440944881889764,
+            "recall": 0.7842323651452282
+          }
+        }
+      },
+      "thresholds": {
+        "share": 0.5,
+        "margin": 0.3,
+        "maxSim": 0.8
+      },
+      "atThr": {
+        "accepted": 219,
+        "correct": 199,
+        "precision": 0.908675799086758,
+        "coverage": 0.44222222222222224,
+        "acceptRate": 0.31693198263386396
+      },
+      "perClassAtThr": {
+        "korean": {
+          "n": 73,
+          "predicted": 39,
+          "precision": 0.9230769230769231,
+          "recall": 0.4931506849315068
+        },
+        "western": {
+          "n": 233,
+          "predicted": 132,
+          "precision": 0.9015151515151515,
+          "recall": 0.5107296137339056
+        },
+        "chinese": {
+          "n": 49,
+          "predicted": 12,
+          "precision": 0.9166666666666666,
+          "recall": 0.22448979591836735
+        },
+        "japanese": {
+          "n": 42,
+          "predicted": 18,
+          "precision": 0.9444444444444444,
+          "recall": 0.40476190476190477
+        },
+        "vietnamese": {
+          "n": 13,
+          "predicted": 3,
+          "precision": 1,
+          "recall": 0.23076923076923078
+        },
+        "mexican": {
+          "n": 12,
+          "predicted": 5,
+          "precision": 1,
+          "recall": 0.4166666666666667
+        },
+        "thai": {
+          "n": 10,
+          "predicted": 8,
+          "precision": 1,
+          "recall": 0.8
+        },
+        "indian": {
+          "n": 18,
+          "predicted": 0,
+          "precision": null,
+          "recall": 0
+        },
+        "snack": {
+          "n": 0,
+          "predicted": 1,
+          "precision": 0,
+          "recall": null
+        },
+        "cafe": {
+          "n": 0,
+          "predicted": 1,
+          "precision": 0,
+          "recall": null
+        }
+      }
+    },
+    "wikiNoDesc": {
+      "n": 691,
+      "top1Acc": 0.4196816208393632,
+      "perClassAtThr": null,
+      "atNormalThr": {
+        "accepted": 108,
+        "correct": 82,
+        "precision": 0.7592592592592593,
+        "coverage": 0.18222222222222223,
+        "acceptRate": 0.15629522431259044
+      }
+    },
+    "all": {
+      "n": 1237,
+      "top1Acc": 0.7720291026677445,
+      "atThr": {
+        "accepted": 594,
+        "correct": 540,
+        "precision": 0.9090909090909091,
+        "coverage": 0.5510204081632653,
+        "acceptRate": 0.4801940177849636
+      }
+    }
+  },
+  "targets": {
+    "total": 144,
+    "applied": 47,
+    "withDesc": {
+      "targets": 127,
+      "applied": 47,
+      "to": {
+        "korean": 24,
+        "western": 13,
+        "chinese": 2,
+        "japanese": 2,
+        "snack": 1,
+        "cafe": 5
+      }
+    },
+    "noDesc": {
+      "targets": 17,
+      "applied": 0,
+      "to": {}
+    }
+  },
+  "silverCheck": {
+    "n": 63,
+    "accepted": 16,
+    "precision": 0.875,
+    "recallNonOther": 0.45161290322580644,
+    "silverOtherWronglyMoved": 1,
+    "silverOther": 32,
+    "bestGuessTop1": 0.6984126984126984
+  },
+  "distribution": {
+    "rawBefore": {
+      "korean": 84,
+      "western": 251,
+      "chinese": 52,
+      "japanese": 47,
+      "vietnamese": 13,
+      "mexican": 13,
+      "thai": 14,
+      "indian": 21,
+      "other": 385
+    },
+    "rawAfter": {
+      "korean": 108,
+      "western": 264,
+      "chinese": 54,
+      "japanese": 49,
+      "vietnamese": 13,
+      "mexican": 13,
+      "thai": 14,
+      "indian": 21,
+      "snack": 1,
+      "cafe": 5,
+      "other": 338
+    }
+  },
+  "review": [
+    {
+      "id": "we-pan-de-jamon",
+      "name": "판 데 하몬",
+      "pred": "western",
+      "conf": 0.87,
+      "margin": 0.83,
+      "maxSim": 0.864,
+      "noDesc": false,
+      "why": "설명 키워드는 other",
+      "desc": "판 데 하몬은 하몬, 건포도, 그린 올리브로 속을 채운 전형적인 베네수엘라 크리스마스 빵이다. 칠면조고기나 크림치즈 등 기타 ",
+      "nn": "햄버거(western,0.864) 하판로흐코(western,0.863) 까르보나라(western,0.857)"
+    },
+    {
+      "id": "cf-black-raspberry-ice-cream",
+      "name": "블랙 라즈베리 아이스크림",
+      "pred": "cafe",
+      "conf": 0.6,
+      "margin": 0.31,
+      "maxSim": 0.877,
+      "noDesc": false,
+      "why": "설명 키워드는 western",
+      "desc": "블랙 라즈베리 아이스크림은 블랙 라즈베리와 일반적인 아이스크림 재료로 만든 아이스크림 맛의 한 종류이다. 초콜릿 칩과 함께 제",
+      "nn": "배스킨라빈스 엄마는 외계인(cafe,0.877) 호키 포키(western,0.871) 배스킨라빈스 민트 초콜릿 칩(cafe,0.869)"
+    },
+    {
+      "id": "kr-oxtail",
+      "name": "쇠꼬리",
+      "pred": "korean",
+      "conf": 0.52,
+      "margin": 0.31,
+      "maxSim": 0.856,
+      "noDesc": false,
+      "why": "적용 중 신뢰도 하위",
+      "desc": "쇠꼬리 또는 소꼬리는 소의 꼬리이다. 결합조직이 많아 육수를 내거나 곰탕을 끓이는 등 오랜 시간 조리해 이용한다.",
+      "nn": "소를 넣은 고추(western,0.859) 소고기전골(korean,0.856) 너비아니(korean,0.856)"
+    },
+    {
+      "id": "kr-cup-bop",
+      "name": "컵밥",
+      "pred": "korean",
+      "conf": 0.52,
+      "margin": 0.34,
+      "maxSim": 0.871,
+      "noDesc": false,
+      "why": "적용 중 신뢰도 하위",
+      "desc": "컵밥은 종이나 플라스틱 컵에 밥을 담고 다양한 토핑을 얹은 푸드트럭이다. 2000년대 한국 길거리 음식을 위해 탄생한 컵밥은 ",
+      "nn": "컵밥(snack,0.882) 껌승(vietnamese,0.873) 감자밥(korean,0.871)"
+    },
+    {
+      "id": "kr-kkakdugi",
+      "name": "깍두기",
+      "pred": "korean",
+      "conf": 0.53,
+      "margin": 0.34,
+      "maxSim": 0.876,
+      "noDesc": false,
+      "why": "적용 중 신뢰도 하위",
+      "desc": "깍두기는 한국인에게 배추김치와 더불어 널리 먹는 김치이자 반찬으로, ‘깍둑썰다’라는 말에서 이름이 유래했다. 젓무·홍저라고도 ",
+      "nn": "보쌈김치(korean,0.875) 보쌈(korean,0.863) 잡채(korean,0.861)"
+    },
+    {
+      "id": "kr-funchoza",
+      "name": "푼초자",
+      "pred": "korean",
+      "conf": 0.53,
+      "margin": 0.33,
+      "maxSim": 0.879,
+      "noDesc": false,
+      "why": "적용 중 신뢰도 하위",
+      "desc": "푼초자 또는 살라트 푼초자는 잡채가 변형된 고려인 음식이다.",
+      "nn": "잡채(korean,0.879) 평양 온반(korean,0.871) 도미면(korean,0.864)"
+    },
+    {
+      "id": "we-sfenj",
+      "name": "스픈즈",
+      "pred": "western",
+      "conf": 0.55,
+      "margin": 0.34,
+      "maxSim": 0.839,
+      "noDesc": false,
+      "why": "적용 중 신뢰도 하위",
+      "desc": "스픈즈는 마그레브 지역의 도넛이다. \"스펀지\"라는 뜻이며, 스펀지처럼 폭신폭신하다.",
+      "nn": "맥앤치즈(western,0.839) 브라우니(cafe,0.837) 프리칸델(other,0.836)"
+    },
+    {
+      "id": "kr-cooked-rice",
+      "name": "쌀밥",
+      "pred": "korean",
+      "conf": 0.56,
+      "margin": 0.34,
+      "maxSim": 0.903,
+      "noDesc": false,
+      "why": "적용 중 신뢰도 하위",
+      "desc": "쌀밥은 쌀로 지은 밥이다. 열량은 1인분 기준으로 300킬로칼로리이다.",
+      "nn": "볶음밥(chinese,0.905) 콩밥(korean,0.902) 쌈밥(korean,0.897)"
+    },
+    {
+      "id": "we-poutine",
+      "name": "푸틴",
+      "pred": "western",
+      "conf": 0.57,
+      "margin": 0.43,
+      "maxSim": 0.879,
+      "noDesc": false,
+      "why": "적용 중 신뢰도 하위",
+      "desc": "치즈 커드와 그레이비를 얹은 프렌치 프라이의 퀘벡 요리",
+      "nn": "치즈닭갈비(korean,0.885) 퀘사디아(mexican,0.884) 치즈떡볶이(korean,0.883)"
+    },
+    {
+      "id": "cf-chocolate-covered-fruit",
+      "name": "초콜릿을 입힌 과일",
+      "pred": "cafe",
+      "conf": 0.59,
+      "margin": 0.32,
+      "maxSim": 0.876,
+      "noDesc": false,
+      "why": "적용 중 신뢰도 하위",
+      "desc": "초콜릿을 입힌 과일에는 블루베리, 석류, 딸기, 오렌지, 말린 살구, 그리고 기타 당절임 과일과 감귤류 껍질 등이 포함된다. ",
+      "nn": "투썸플레이스 스트로베리 초콜릿 생크림 케이크(cafe,0.876) 맥도날드 맥플러리(western,0.872) 쿠키(cafe,0.870)"
+    },
+    {
+      "id": "cf-raw-chocolate",
+      "name": "생초콜릿",
+      "pred": "cafe",
+      "conf": 0.59,
+      "margin": 0.45,
+      "maxSim": 0.871,
+      "noDesc": false,
+      "why": "적용 중 신뢰도 하위",
+      "desc": "생초콜릿은 볶지 않은 카카오콩으로 만든 초콜릿이다. 유제품을 넣지 않아, 비건채식 제품인 경우가 많다.",
+      "nn": "초코라떼(cafe,0.871) 초코케이크(cafe,0.870) 투썸플레이스 스트로베리 초콜릿 생크림 케이크(cafe,0.864)"
+    },
+    {
+      "id": "we-klenat",
+      "name": "클레네트",
+      "pred": "western",
+      "conf": 0.6,
+      "margin": 0.37,
+      "maxSim": 0.893,
+      "noDesc": false,
+      "why": "적용 중 신뢰도 하위",
+      "desc": "클레네트, 클라이네, 클레이나, 또는 파티그만은 북유럽의 크리스마스 음식이다. 달걀 노른자, 설탕, 마가린 또는 버터를 넣어 ",
+      "nn": "젤튼(western,0.893) 포르카날라티코(western,0.872) 마들렌(cafe,0.870)"
+    },
+    {
+      "id": "cn-monkey-brains",
+      "name": "원숭이골",
+      "pred": "chinese",
+      "conf": 0.6,
+      "margin": 0.41,
+      "maxSim": 0.84,
+      "noDesc": false,
+      "why": "적용 중 신뢰도 하위",
+      "desc": "원숭이골은 중국 청나라 시대의 궁중요리책인 만한전석에 언급되는 요리이다. 지금도 중국 남부와 동남아, 중동 및 아프리카 지역에",
+      "nn": "차오간(chinese,0.840) 원앙볶음밥(chinese,0.838) 샤오룽바오(chinese,0.838)"
+    },
+    {
+      "id": "kr-pork-skin",
+      "name": "돼지 껍데기",
+      "pred": "korean",
+      "conf": 0.61,
+      "margin": 0.47,
+      "maxSim": 0.89,
+      "noDesc": false,
+      "why": "적용 중 신뢰도 하위",
+      "desc": "돼지 껍데기는 돼지의 껍질 부분으로, 식용할 땐 깨끗이 씻어 삶아 양념해서 먹는다. 숯불로 구워서 먹기도 한다.",
+      "nn": "돼지갈비(korean,0.890) 돼지고기 김치찜(korean,0.877) 파이구판(chinese,0.874)"
+    },
+    {
+      "id": "jp-hakata-ramen",
+      "name": "하카타 라멘",
+      "pred": "japanese",
+      "conf": 0.61,
+      "margin": 0.41,
+      "maxSim": 0.899,
+      "noDesc": false,
+      "why": "적용 중 신뢰도 하위",
+      "desc": "하카타 라멘은 라멘의 종류 중 하나이다. 후쿠오카현 후쿠오카시에서 유래한 라멘으로, 돼지뼈 를 우려낸 국물과 가는 면으로 만든",
+      "nn": "이에케 라멘(japanese,0.899) 돈코츠라멘(japanese,0.895) 라멘(chinese,0.893)"
+    },
+    {
+      "id": "kr-ojingeo-sundae",
+      "name": "오징어순대",
+      "pred": "korean",
+      "conf": 0.62,
+      "margin": 0.47,
+      "maxSim": 0.908,
+      "noDesc": false,
+      "why": "적용 중 신뢰도 하위",
+      "desc": "돼지의 곱창 대신 오징어의 속에 소를 넣어 찐 음식",
+      "nn": "순댓국(korean,0.908) 파이구판(chinese,0.899) 오징어덮밥(korean,0.898)"
+    },
+    {
+      "id": "jp-q11264794",
+      "name": "유키우사기",
+      "pred": "japanese",
+      "conf": 0.62,
+      "margin": 0.48,
+      "maxSim": 0.828,
+      "noDesc": false,
+      "why": "적용 중 신뢰도 하위",
+      "desc": "유키우사기는 일본 후쿠오카현 후쿠오카시 미나미구에 위치한 풍월 식품 회사가 제조하는 미야게가시이다.",
+      "nn": "로바타야키(japanese,0.828) 우동(japanese,0.827) 나가사끼 짬뽕(korean,0.823)"
+    },
+    {
+      "id": "we-croquette",
+      "name": "크로켓",
+      "pred": "western",
+      "conf": 0.63,
+      "margin": 0.43,
+      "maxSim": 0.863,
+      "noDesc": false,
+      "why": "적용 중 신뢰도 하위",
+      "desc": "크로켓은 다진 고기나 채소를 짓이긴 감자로 싼 뒤, 원통이나 원반 모양으로 만든 후 튀긴 음식의 한 종류이다. 크로켓이란 단어",
+      "nn": "볼리뉴 드 바칼랴우(western,0.863) 피테팔트(western,0.860) 나시 바카르(other,0.860)"
+    },
+    {
+      "id": "kr-daetong-bap",
+      "name": "대통밥",
+      "pred": "korean",
+      "conf": 0.63,
+      "margin": 0.41,
+      "maxSim": 0.875,
+      "noDesc": false,
+      "why": "적용 중 신뢰도 하위",
+      "desc": "대통밥은 대나무를 한 토막씩 잘라 만든 통에 쌀과 잡곡 등을 넣고 지은 밥이다. 죽통밥이라고도 하며, 담양군의 향토 음식으로 ",
+      "nn": "볶음밥(chinese,0.880) 굴밥(korean,0.875) 회덮밥(korean,0.875)"
+    },
+    {
+      "id": "kr-gui",
+      "name": "구이",
+      "pred": "korean",
+      "conf": 0.63,
+      "margin": 0.47,
+      "maxSim": 0.906,
+      "noDesc": false,
+      "why": "적용 중 신뢰도 하위",
+      "desc": "구이란 불에 구워 조리한 음식을 뜻하는 용어이다. 보통 쇠고기나 돼지고기를 구운 것을 뜻하지만 넓게는 장어구이, 더덕구이 등의",
+      "nn": "너비아니(korean,0.906) 장어구이(korean,0.894) 불고기(korean,0.892)"
+    }
+  ]
+}
