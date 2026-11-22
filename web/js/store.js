@@ -604,6 +604,45 @@ export async function clearUser() {
   await backend.putMany([], { replace: true });
 }
 
+// ---------------------------------------------------------------------------
+// 숨긴(밴) 메뉴: "이 메뉴는 먹고 싶지 않아요". id 만 이 브라우저(localStorage, 불가하면 메모리)에 저장한다.
+// 기본 메뉴·내 메뉴 모두 대상이며, 서버로 보내지 않는다. 추천/비슷한 메뉴에서는 app.js 가 걸러 낸다.
+// ---------------------------------------------------------------------------
+const BAN_KEY = 'menuai.banned.v1';
+export const BAN_MAX = 5000;
+const validBanId = (id) => typeof id === 'string' && id.length <= LIMITS.id && ID_RE.test(id);
+let banSet = null;
+
+function loadBanned() {
+  if (banSet) return banSet;
+  banSet = new Set();
+  try {
+    const v = JSON.parse(localStorage.getItem(BAN_KEY) || '[]');
+    if (Array.isArray(v)) for (const id of v) if (validBanId(id) && banSet.size < BAN_MAX) banSet.add(id);
+  } catch { /* 저장소를 못 읽으면 빈 목록으로 시작(이번 세션 메모리) */ }
+  return banSet;
+}
+function saveBanned() {
+  try { localStorage.setItem(BAN_KEY, JSON.stringify([...banSet])); } catch { /* 저장 불가: 이번 세션에만 유지 */ }
+}
+
+/** 숨긴 메뉴 id 집합(복사본). */
+export function getBanned() { return new Set(loadBanned()); }
+export function isBanned(id) { return loadBanned().has(id); }
+/** 메뉴를 숨긴다. @returns {number} 숨긴 메뉴 수 */
+export function ban(id) {
+  if (!validBanId(id)) throw Object.assign(new Error('올바른 메뉴 id 가 아닙니다'), { code: 'INVALID_ID' });
+  const set = loadBanned();
+  if (!set.has(id) && set.size >= BAN_MAX) throw Object.assign(new Error(`숨길 수 있는 메뉴는 최대 ${BAN_MAX}개입니다`), { code: 'TOO_MANY' });
+  set.add(id); saveBanned();
+  return set.size;
+}
+/** 숨김을 해제한다. @returns {number} 남은 숨긴 메뉴 수 */
+export function unban(id) { const set = loadBanned(); if (set.delete(id)) saveBanned(); return set.size; }
+export function clearBanned() { loadBanned().clear(); saveBanned(); }
+/** 테스트용: 메모리 캐시를 버리고 저장소에서 다시 읽게 한다. */
+export function _resetBanCache() { banSet = null; }
+
 export const EXPORT_FORMAT = 'menusuggestion-user-menus';
 export const EXPORT_VERSION = 1;
 const IMPORT_MAX_BYTES = 5 * 1024 * 1024;
@@ -612,7 +651,7 @@ const IMPORT_MAX_ITEMS = 1000;
 /** 내 메뉴를 JSON 문자열로 내보낸다(vec 제외). */
 export async function exportJson() {
   const menus = (await listUser()).map(({ vec: _v, scale: _s, ...m }) => m);
-  return JSON.stringify({ format: EXPORT_FORMAT, version: EXPORT_VERSION, exportedAt: new Date().toISOString(), menus }, null, 2);
+  return JSON.stringify({ format: EXPORT_FORMAT, version: EXPORT_VERSION, exportedAt: new Date().toISOString(), menus, banned: [...loadBanned()] }, null, 2);
 }
 
 /** 브라우저에서 내보내기 파일 다운로드를 시작한다(document 가 없으면 문자열만 반환). */
@@ -649,7 +688,8 @@ export async function importJson(file, { mode = 'merge' } = {}) {
     throw Object.assign(new Error('가져올 수 없는 입력입니다'), { code: 'INVALID_FILE' });
   }
 
-  const list = Array.isArray(data) ? data : (isPlainObject(data) && Array.isArray(data.menus) ? data.menus : null);
+  const hasBanned = isPlainObject(data) && Array.isArray(data.banned);
+  const list = Array.isArray(data) ? data : (isPlainObject(data) && Array.isArray(data.menus) ? data.menus : (hasBanned ? [] : null));
   if (!list) throw Object.assign(new Error('형식 오류: 메뉴 배열 또는 { menus: [...] } 이어야 합니다'), { code: 'INVALID_FILE' });
   if (list.length > IMPORT_MAX_ITEMS) throw Object.assign(new Error(`항목이 너무 많습니다(최대 ${IMPORT_MAX_ITEMS}개)`), { code: 'TOO_LARGE' });
 
@@ -674,7 +714,18 @@ export async function importJson(file, { mode = 'merge' } = {}) {
 
   const menus = [...accepted.values()];
   if (menus.length || mode === 'replace') await backend.putMany(menus, { replace: mode === 'replace' });
-  return { total: list.length, added, updated, skipped: errors.length, errors, needsEmbedding: menus.map((m) => m.id) };
+
+  // 숨긴 메뉴: 올바른 id 만 받는다(최대 BAN_MAX). merge 는 합집합, replace 는 파일 내용으로 대체.
+  let bannedAdded = 0;
+  if (hasBanned) {
+    const set = loadBanned();
+    if (mode === 'replace') set.clear();
+    for (const id of data.banned) {
+      if (validBanId(id) && !set.has(id) && set.size < BAN_MAX) { set.add(id); bannedAdded++; }
+    }
+    saveBanned();
+  }
+  return { total: list.length, added, updated, skipped: errors.length, errors, needsEmbedding: menus.map((m) => m.id), bannedAdded };
 }
 
 function parseJson(text) {
