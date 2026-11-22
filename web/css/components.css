@@ -9,7 +9,13 @@ body.diving #bg-sphere:not([data-dim]){opacity:1}
 /* ===== 로딩(모델 준비) 상태: 구는 계속 돌고, 검색창은 숨었다가 준비되면 나타난다 ===== */
 .sb-wrap{position:relative;width:min(640px,92vw)}
 .hero-status{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;
-  color:#c9cdf0;font-size:1rem;letter-spacing:.02em;text-shadow:0 0 14px rgba(139,152,255,.6)}
+  color:#c9cdf0;font-size:.92rem;letter-spacing:.02em}
+.jelly{width:min(320px,80vw);transition:transform .12s}
+.jelly svg{display:block;width:100%;height:auto;overflow:visible;filter:drop-shadow(0 0 10px rgba(255,154,77,.45))}
+.jelly-label{margin-top:2px;text-shadow:0 0 14px rgba(139,152,255,.6)}
+.jelly-label b{color:var(--accent);font-weight:700;margin-left:4px;font-variant-numeric:tabular-nums}
+/* 홈 로딩 중에는 젤리바가 진행을 보여 주므로 하단 알약은 숨긴다 */
+body.loading .progress-box{display:none}
 body.loading .hero-status{display:flex}
 .hero .searchbar,.hero .detail-link,.hero .hint{transition:opacity .6s,transform .6s}
 body.loading .hero .searchbar,body.loading .hero .detail-link,body.loading .hero .hint{

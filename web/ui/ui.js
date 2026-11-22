@@ -57,7 +57,8 @@ function setProgress(p,label){ // p: 0~1, null이면 숨김
   $('#progress-bar').style.width=Math.round(p*100)+'%';
   const text=label||('모델 로딩 '+Math.round(p*100)+'%');
   $('#progress-label').textContent=text;
-  const hs=$('#hero-status');if(hs)hs.textContent=text;     // 홈 화면: 검색창 자리의 상태 문구
+  if(window.MenuJelly)window.MenuJelly.set(p,text);           // 홈 화면: 검색창 자리의 젤리 로딩바(jelly.js)
+  else{const hs=$('#hero-status');if(hs)hs.textContent=text}
 }
 
 /* ---- '이게 없다고?' 모달 (추가 / 수정 겸용) ---- */
