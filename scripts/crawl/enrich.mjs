@@ -18,7 +18,8 @@ import { readJson, writeJson, RAW_DIR, CUISINE_ABBR, extractIngredients, extract
 
 // 원산지 정보가 없어 'other' 로 남은 항목을 설명 첫 문장("~는 일본의 ...")으로 보정. 확신 높은 패턴만 사용.
 const DESC_COUNTRIES = {
-  korean: '한국|조선|북한|대한민국',
+  northkorean: '북한',
+  korean: '한국|조선|대한민국',
   japanese: '일본|오키나와',
   chinese: '중국|대만|타이완|홍콩|마카오|광둥|쓰촨|상하이',
   vietnamese: '베트남', mexican: '멕시코', thai: '태국', indian: '인도|파키스탄|방글라데시|네팔',

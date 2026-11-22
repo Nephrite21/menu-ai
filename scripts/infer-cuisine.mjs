@@ -53,10 +53,12 @@ const hasDesc = (m) => !!(m.desc && m.desc.trim());
 const isWiki = (m) => m.source === 'wikipedia' || m.source === 'wikidata';
 
 const gold = [];
-for (const m of curated) gold.push({ m, label: m.cuisine, kind: 'curated' });
+// 북한 음식은 한식과 매우 가까워서 새 종류로 추정되면 한식이 오분류된다 → 투표에는 '한식' 라벨로만 쓰고 결과 후보에서는 제외
+const goldLabel = (c) => (c === 'northkorean' ? 'korean' : c);
+for (const m of curated) gold.push({ m, label: goldLabel(m.cuisine), kind: 'curated' });
 for (const m of raw) {
   const by = m._wd?.cuisineBy;
-  if (m.cuisine !== 'other' && GOLD_BY.has(by)) gold.push({ m, label: m.cuisine, kind: 'wiki-origin' });
+  if (m.cuisine !== 'other' && GOLD_BY.has(by)) gold.push({ m, label: goldLabel(m.cuisine), kind: 'wiki-origin' });
   else if (m.cuisine === 'other' && m._wd?.origins?.length) gold.push({ m, label: 'other', kind: 'wiki-origin-other' });
 }
 const targets = raw.map((m, idx) => ({ m, idx })).filter(({ m }) => m.cuisine === 'other' && !m._wd?.origins?.length);

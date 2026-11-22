@@ -86,7 +86,7 @@ export function slugify(s) {
 }
 
 export const CUISINE_ABBR = {
-  korean: 'kr', western: 'we', chinese: 'cn', japanese: 'jp', vietnamese: 'vn', mexican: 'mx',
+  korean: 'kr', northkorean: 'nk', western: 'we', chinese: 'cn', japanese: 'jp', vietnamese: 'vn', mexican: 'mx',
   thai: 'th', indian: 'in', fusion: 'fu', snack: 'sn', cafe: 'cf', other: 'ot',
 };
 

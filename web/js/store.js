@@ -19,13 +19,13 @@
 // 스키마 상수
 // ---------------------------------------------------------------------------
 export const CUISINES = Object.freeze([
-  'korean', 'western', 'chinese', 'japanese', 'vietnamese', 'mexican',
+  'korean', 'northkorean', 'western', 'chinese', 'japanese', 'vietnamese', 'mexican',
   'thai', 'indian', 'fusion', 'snack', 'cafe', 'other',
 ]);
 
 /** id 접두어(cuisine 약자). E 크롤러(scripts/crawl/lib.mjs)와 동일. */
 export const CUISINE_ABBR = Object.freeze({
-  korean: 'kr', western: 'we', chinese: 'cn', japanese: 'jp', vietnamese: 'vn', mexican: 'mx',
+  korean: 'kr', northkorean: 'nk', western: 'we', chinese: 'cn', japanese: 'jp', vietnamese: 'vn', mexican: 'mx',
   thai: 'th', indian: 'in', fusion: 'fu', snack: 'sn', cafe: 'cf', other: 'ot',
 });
 

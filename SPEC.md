@@ -33,7 +33,7 @@ scripts/crawl/*, data/raw/*     E(크롤러)
   "vec": "빌드 산출물(web/menus.json)에서만 존재. int8 양자화 배열 + scale"
 }
 ```
-- `cuisine` 허용값: korean, western, chinese, japanese, vietnamese, mexican, thai, indian, fusion, snack, cafe, other
+- `cuisine` 허용값: korean, northkorean(북한 음식; id 접두어 nk), western, chinese, japanese, vietnamese, mexican, thai, indian, fusion, snack, cafe, other
 - `id`: `<cuisine 약자>-<romanized-slug>`, 소문자/숫자/하이픈, 전체에서 유일
 - 재료는 한국어 표준 명칭(예: "닭고기", "소고기", "돼지고기", "해산물"). 정규화 사전은 B의 `data/dict/ingredients.json`.
 

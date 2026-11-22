@@ -32,6 +32,7 @@ export const PASSAGE_RULE_VERSION = 1; // menuToPassage 규칙이 바뀌면 올�
 /** cuisine 코드 → passage 문장에 들어갈 한국어 라벨 (SPEC 'cuisineKo') */
 export const CUISINE_KO = Object.freeze({
   korean: '한식',
+  northkorean: '북한 음식',
   western: '양식',
   chinese: '중식',
   japanese: '일식',

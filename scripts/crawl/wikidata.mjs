@@ -37,7 +37,8 @@ const EXCLUDE_QIDS = [
 // ---- 원산지 국가 → cuisine ------------------------------------------------
 const COUNTRY_CUISINE = {};
 const put = (cuisine, ...qids) => qids.forEach((q) => (COUNTRY_CUISINE[q] = cuisine));
-put('korean', 'Q884', 'Q423', 'Q18097', 'Q28233');          // 한국, 북한, 한반도(Korea), 대한제국
+put('korean', 'Q884', 'Q18097', 'Q28233');                  // 한국, 한반도(Korea), 대한제국
+put('northkorean', 'Q423');                                  // 북한(한식과 구분)
 put('japanese', 'Q17', 'Q1752937');                          // 일본
 put('chinese', 'Q148', 'Q865', 'Q8646', 'Q14773', 'Q29520', 'Q13426199'); // 중국, 대만, 홍콩, 마카오, 중국(구분 다양)
 put('vietnamese', 'Q881');
@@ -51,7 +52,7 @@ put('western',                                                // 서양권(미�
 
 // P2012(요리 계통) 영문 라벨 정규식 폴백
 const CUISINE_LABEL_RULES = [
-  [/korean/i, 'korean'], [/japanese/i, 'japanese'], [/chinese|cantonese|sichuan|hong kong|taiwanese|shanghai|hunan/i, 'chinese'],
+  [/north korea/i, 'northkorean'], [/korean/i, 'korean'], [/japanese/i, 'japanese'], [/chinese|cantonese|sichuan|hong kong|taiwanese|shanghai|hunan/i, 'chinese'],
   [/vietnam/i, 'vietnamese'], [/mexic|tex-mex/i, 'mexican'], [/thai/i, 'thai'], [/indian|pakistani|bangladesh|nepal|sri lank/i, 'indian'],
   [/american|british|english|french|italian|spanish|german|austrian|swiss|dutch|belgian|portuguese|greek|russian|polish|irish|scandinavian|swedish|danish|norwegian|finnish|hungarian|czech|european|australian|canadian|argentin|scottish|welsh/i, 'western'],
 ];

@@ -3,11 +3,12 @@
 import * as store from '../js/store.js';
 import { initEmbedder, embed, embedMenu, menuVector } from '../js/embed.js';
 import { recommend, rerollPick, parseQuery, loadDictionaries } from '../js/recommend.js';
+import { openMapSearch, SERVICES } from '../js/maps.js';
 
 const UI = window.MenuUI;
 const CFG = Object.assign({ repo: '', weightScale: 0.1, topN: 40, pick: 3 }, window.MENU_CONFIG || {});
 const here = (p) => new URL(p, import.meta.url).href;
-const CUISINE_LABEL = { korean: '한식 (korean)', western: '양식 (western)', chinese: '중식 (chinese)', japanese: '일식 (japanese)',
+const CUISINE_LABEL = { korean: '한식 (korean)', northkorean: '북한 (northkorean)', western: '양식 (western)', chinese: '중식 (chinese)', japanese: '일식 (japanese)',
   vietnamese: '베트남 (vietnamese)', mexican: '멕시코 (mexican)', thai: '태국 (thai)', indian: '인도 (indian)',
   fusion: '퓨전 (fusion)', snack: '분식 (snack)', cafe: '카페·디저트 (cafe)', other: '기타 (other)' };
 
@@ -200,4 +201,15 @@ UI.similarProvider = (m) => {
     return recommend({ queryVec: v, menus, topN: 7, weightScale: CFG.weightScale })
       .filter((r) => r.menu.id !== m.id).slice(0, 5).map((r) => ({ menu: r.menu, score: r.score }));
   } catch (e) { console.warn('[app] 비슷한 메뉴 계산 실패', e); return []; }
+};
+
+/* ---------- 내 주변에서 찾기: 카카오맵/네이버지도/구글지도 (위치 요청 → 지도 검색 주소를 새 창으로 연다) ---------- */
+const WHY = { denied: '위치 권한을 허용하지 않아서', unavailable: '위치를 알 수 없어서', timeout: '위치 확인이 너무 오래 걸려서', unsupported: '이 브라우저에서는 위치를 쓸 수 없어서' };
+UI.openMap = async (service, query, radiusM) => {
+  try {
+    const r = await openMapSearch(service, { query, radiusM });
+    const name = (SERVICES[service] || {}).label || '지도';
+    if (r.blocked) UI.toast('팝업이 차단됐어요. 이 사이트의 팝업을 허용하고 다시 눌러 주세요.', 5000);
+    else if (!r.located) UI.toast(`${WHY[r.reason] || '위치 없이'} ${name}을(를) 위치 없이 열었어요. 지도에서 내 위치 버튼을 눌러 주세요.`, 6000);
+  } catch (e) { UI.toast('지도를 열지 못했어요: ' + msgOf(e), 5000); }
 };

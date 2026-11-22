@@ -257,3 +257,21 @@ node --use-system-ca scripts/infer-cuisine.mjs       # cuisine 재분류
 python -m http.server 8000 -d web                    # → http://localhost:8000/demo-embed.html (?device=wasm|webgpu)
 ```
 다운로드한 모델은 `.cache/hf`, 임베딩 캐시는 `.cache/embeddings`, Edge 프로필은 `.cache/edge-profile`에 쌓인다. 모두 `.gitignore` 대상으로 하기를 권한다.
+
+
+## 지도 서비스 "내 주변 찾기" 링크 검증 (2026-11-22)
+
+API 키 없이 각 서비스의 공개 검색 주소에 검색어와 위치를 담아 새 창으로 여는 방식이다(`web/js/maps.js`).
+브라우저 위치를 **부산(35.1796, 129.0756)**으로 주고 URL로는 **제주(33.4996, 126.5312)**를 지정해 열어서, 결과가 어느 지역으로 나오는지 확인했다.
+
+| 서비스 | 형식 | 결과 | 비고 |
+|---|---|---|---|
+| 구글 | `/maps/search/<검색어>/@위도,경도,줌z?hl=ko` | 제주 결과 → **중심 지정 동작** | 문서화되지 않은 형식. 공식 문서는 Search 액션에 center/zoom 을 정의하지 않고, 위치는 검색어 글자(`pizza+seattle+wa`)로만 지정하라고 한다 |
+| 구글 | `?api=1&query=<검색어>` (공식) | 서울 결과 → 위치 무시 | 위치가 없을 때만 사용 |
+| 카카오 | `m.map.kakao.com/scheme/search?q=<검색어>&p=<위도>,<경도>` | `map.kakao.com/?q=…&urlX=…&urlY=…&currentBound=true` 로 넘어가며 제주 결과 → **동작** | 좌표 변환은 카카오가 한다. 공식 문서에서는 확인하지 못했고(서드파티 문서의 `kakaomap://search?q=&p=` 와 같은 파라미터) 실측으로만 확인. 반경 지정 불가 |
+| 카카오 | `map.kakao.com/link/search/<검색어>` | `?q=` 로 리다이렉트, 위치 무시(서울) | |
+| 네이버 | `map.naver.com/p/search/<검색어>?c=<x>,<y>,<줌>,0,0,0,dh` | **미확인** | 공식 문서(Ncloud)는 앱 스킴(`nmap://`)만 정의하고 `/search` 에는 위치 파라미터가 없다. 이 PC 에서의 자동 접근이 "과도한 접근 요청"으로 차단돼 더 시도하지 않았다. 웹 메르카토르 미터 좌표로 추정(기본 주소 `c=15.00,0,0,0,dh` 에서 첫 값이 줌). 틀려도 키워드 검색은 열리고 위치만 기본값이 된다 |
+
+- 반경은 거리 필터가 아니라 처음 보여 줄 지도 범위(줌)를 맞추는 값이다(`zoomForRadius`).
+- 위치는 `navigator.geolocation` 으로 클릭 때마다 1회 읽어 주소 문자열에만 쓰고 저장·전송하지 않는다. HTTPS(또는 localhost)에서만 동작한다.
+- 확인 방법: `tests/maps.test.mjs`(주소 생성), E2E 에서 외부 지도 주소를 가짜 응답으로 대체해 새 창이 열리는 주소를 검증.

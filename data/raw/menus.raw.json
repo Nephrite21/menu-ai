@@ -1301,9 +1301,9 @@
     }
   },
   {
-    "id": "kr-q109459856",
+    "id": "nk-q109459856",
     "name": "두부밥",
-    "cuisine": "korean",
+    "cuisine": "northkorean",
     "ingredients": [
       "두부"
     ],
@@ -4451,9 +4451,9 @@
     }
   },
   {
-    "id": "kr-pyeonsu",
+    "id": "nk-pyeonsu",
     "name": "편수",
-    "cuisine": "korean",
+    "cuisine": "northkorean",
     "ingredients": [
       "밀가루",
       "도우",
@@ -4850,9 +4850,9 @@
     }
   },
   {
-    "id": "kr-pyongyang-onban",
+    "id": "nk-pyongyang-onban",
     "name": "평양 온반",
-    "cuisine": "korean",
+    "cuisine": "northkorean",
     "ingredients": [],
     "tags": [],
     "desc": "평양의 향토 요리",
@@ -5935,9 +5935,9 @@
     }
   },
   {
-    "id": "kr-dakgom",
+    "id": "nk-dakgom",
     "name": "닭곰",
-    "cuisine": "korean",
+    "cuisine": "northkorean",
     "ingredients": [
       "닭고기",
       "쌀",
@@ -10884,8 +10884,7 @@
     "cuisine": "other",
     "ingredients": [
       "토마토",
-      "고추",
-      "칠면조"
+      "고추"
     ],
     "tags": [],
     "desc": "터키 토마토 소스",
@@ -14905,9 +14904,9 @@
     }
   },
   {
-    "id": "kr-injo-gogi-bap",
+    "id": "nk-injo-gogi-bap",
     "name": "인조고기밥",
-    "cuisine": "korean",
+    "cuisine": "northkorean",
     "ingredients": [
       "고춧가루"
     ],
@@ -15060,9 +15059,9 @@
     }
   },
   {
-    "id": "kr-injo-gogi",
+    "id": "nk-injo-gogi",
     "name": "인조고기",
-    "cuisine": "korean",
+    "cuisine": "northkorean",
     "ingredients": [
       "콩"
     ],
@@ -17106,9 +17105,9 @@
     }
   },
   {
-    "id": "kr-paensae",
+    "id": "nk-paensae",
     "name": "밴새",
-    "cuisine": "korean",
+    "cuisine": "northkorean",
     "ingredients": [
       "쌀",
       "감자",
@@ -17160,9 +17159,9 @@
     }
   },
   {
-    "id": "kr-q55736051",
+    "id": "nk-q55736051",
     "name": "혼돈 (음식)",
-    "cuisine": "korean",
+    "cuisine": "northkorean",
     "ingredients": [
       "쌀",
       "밀가루",
@@ -18457,9 +18456,7 @@
     "id": "ot-bici-bici",
     "name": "비지 비지",
     "cuisine": "other",
-    "ingredients": [
-      "칠면조"
-    ],
+    "ingredients": [],
     "tags": [],
     "desc": "터키 빙수",
     "source": "wikidata",
@@ -21928,9 +21925,9 @@
     }
   },
   {
-    "id": "kr-bossam-kimchi",
+    "id": "nk-bossam-kimchi",
     "name": "보쌈김치",
-    "cuisine": "korean",
+    "cuisine": "northkorean",
     "ingredients": [
       "김치",
       "배추"

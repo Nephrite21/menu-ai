@@ -27,6 +27,7 @@ body:
       label: 분류
       options:
         - 한식 (korean)
+        - 북한 (northkorean)
         - 양식 (western)
         - 중식 (chinese)
         - 일식 (japanese)

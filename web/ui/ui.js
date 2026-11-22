@@ -1,6 +1,6 @@
 /* 공용 UI 헬퍼 (두 페이지 공용). 로직 없음: CustomEvent 발행 + 렌더링만. 로직은 app.js 가 이벤트를 구독해서 처리한다. */
 (function(){
-const CUISINES=[["korean","한식"],["western","양식"],["chinese","중식"],["japanese","일식"],["vietnamese","베트남"],["mexican","멕시코"],["thai","태국"],["indian","인도"],["fusion","퓨전"],["snack","분식"],["cafe","카페"],["other","기타"]];
+const CUISINES=[["korean","한식"],["northkorean","북한"],["western","양식"],["chinese","중식"],["japanese","일식"],["vietnamese","베트남"],["mexican","멕시코"],["thai","태국"],["indian","인도"],["fusion","퓨전"],["snack","분식"],["cafe","카페"],["other","기타"]];
 const CUISINE_KO=Object.fromEntries(CUISINES);
 const $=(s,r=document)=>r.querySelector(s);
 const el=(tag,props={},...kids)=>{const e=Object.assign(document.createElement(tag),props);kids.flat().forEach(k=>e.append(k));return e};
@@ -50,7 +50,7 @@ function renderNow(items){
         m.cuisineInferred?el('span',{className:'badge',title:'임베딩 유사도로 종류를 추정했어요'+(m.cuisineConfidence?' (신뢰도 '+Math.round(m.cuisineConfidence*100)+'%)':''),textContent:'추정'}):'',
         m.source==='user'?el('span',{className:'badge user',textContent:'내가 추가'}):'',
         el('span',{className:'score',textContent:score!=null?'점수 '+Number(score).toFixed(2):''})),
-      el('div',{className:'ings',textContent:'재료: '+(m.ingredients||[]).join(', ')}),
+      (m.ingredients||[]).length?el('div',{className:'ings',textContent:'재료: '+m.ingredients.join(', ')}):'',
       m.desc?el('div',{className:'card-desc',textContent:m.desc}):''));
   }
 }
@@ -76,6 +76,30 @@ function sourceNode(m){
     default:return m.attribution?linkify(m.attribution):'위키 데이터';
   }
 }
+/* ---- 내 주변에서 찾기: 카카오맵/네이버지도/구글지도 검색을 위치와 함께 연다 (app.js 가 UI.openMap 을 채운다) ---- */
+const MAP_SERVICES=[['kakao','카카오맵','#fee500'],['naver','네이버지도','#03c75a'],['google','구글지도','#4285f4']];
+const RADII=[500,1000,2000,3000,5000];
+const radiusLabel=r=>r<1000?r+'m':(r/1000)+'km';
+function mapSection(m){
+  if(!UI.openMap)return [];
+  let radius=(()=>{try{const n=Number(localStorage.getItem('menuai.radius'));return RADII.includes(n)?n:1000}catch{return 1000}})();
+  const franchise=m.source==='franchise'&&m.brand;
+  const input=el('input',{type:'text',value:franchise?m.brand:m.name,maxLength:40,'aria-label':'지도에서 찾을 검색어'});
+  const sel=el('select',{'aria-label':'검색 반경',onchange:()=>{radius=Number(sel.value);try{localStorage.setItem('menuai.radius',String(radius))}catch{}}},
+    RADII.map(r=>el('option',{value:String(r),textContent:'반경 '+radiusLabel(r),selected:r===radius})));
+  const btns=MAP_SERVICES.map(([id,label,color])=>el('button',{type:'button',className:'btn map-btn',onclick:()=>{
+      const q=input.value.trim();if(!q){toast('찾을 검색어를 입력해 주세요');input.focus();return}
+      UI.openMap(id,q,radius)},},
+    el('i',{className:'map-dot',style:'background:'+color}),label));
+  return [el('h3',{textContent:'내 주변에서 찾기'}),
+    el('div',{className:'map-box'},
+      el('div',{className:'map-row'},input,sel),
+      el('div',{className:'map-row map-btns'},btns),
+      el('p',{className:'map-note',textContent:(franchise?'프랜차이즈 메뉴라 브랜드 이름으로 매장을 찾아요. ':'')
+        +'누르면 브라우저가 위치 권한을 물어봐요. 위치는 지도 링크에만 쓰고 이 사이트는 저장하거나 보내지 않아요. '
+        +'반경은 지도가 처음 보여 줄 범위를 맞추는 값이라 정확한 거리 제한은 아니고, 카카오맵은 반경을 지정할 수 없어 기본 범위로 열려요. 허용하지 않으면 위치 없이 검색해요.'}))];
+}
+
 function openDetail(m,extra={}){
   const {score,reasons=[]}=extra;
   if(!detailDlg){
@@ -98,11 +122,12 @@ function openDetail(m,extra={}){
       m.source==='user'?el('span',{className:'badge user',textContent:'내가 추가'}):'',
       score!=null?el('span',{className:'score',textContent:'점수 '+Number(score).toFixed(2)}):''),
     m.desc?el('p',{className:'dm-desc',textContent:m.desc}):'',
-    ...sec('재료',tags(m.ingredients)),
+    ...((m.ingredients||[]).length?sec('재료',tags(m.ingredients)):[]),
     ...((m.tags||[]).length?sec('태그',tags(m.tags)):[]),
     ...(why.length?sec('추천 이유',el('ul',{className:'reasons'},why.map(r=>el('li',{textContent:r})))):[]),
     ...(sims.length?sec('비슷한 메뉴',el('div',{className:'chips'},sims.map(s=>
         el('button',{type:'button',className:'chip',textContent:s.menu.name,title:'점수 '+Number(s.score).toFixed(2),onclick:()=>openDetail(s.menu)})))):[]),
+    ...mapSection(m),
     ...sec('출처',el('p',{className:'dm-src'},sourceNode(m))),
     ...(m.cuisineInferred?[el('p',{className:'dm-note',textContent:'음식 종류는 비슷한 메뉴들과의 유사도로 추정한 값이에요'+(m.cuisineConfidence?' (신뢰도 '+Math.round(m.cuisineConfidence*100)+'%)':'')+'. 틀렸다면 알려 주세요.'})]:[]),
   ];

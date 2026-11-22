@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-22T08:29:40.495Z",
+  "date": "2026-11-22T09:33:31.775Z",
   "model": "Xenova/multilingual-e5-small@761b726dd34fb83930e26aab4e9ac3899aa1fa78",
   "device": "cpu",
   "goldCounts": {
@@ -38,50 +38,50 @@
     {
       "k": 10,
       "tau": 0.05,
-      "accWiki": 0.7409551374819102,
-      "accAll": 0.7736459175424414
+      "accWiki": 0.7395079594790159,
+      "accAll": 0.7728375101050929
     },
     {
       "k": 10,
-      "tau": 1,
-      "accWiki": 0.7409551374819102,
-      "accAll": 0.7704122877930477
-    },
-    {
-      "k": 30,
-      "tau": 0.02,
-      "accWiki": 0.7380607814761215,
-      "accAll": 0.7687954729183508
-    },
-    {
-      "k": 20,
       "tau": 1,
       "accWiki": 0.7366136034732272,
-      "accAll": 0.7477768795472919
+      "accAll": 0.7679870654810024
     },
     {
-      "k": 10,
+      "k": 30,
       "tau": 0.02,
-      "accWiki": 0.7337192474674384,
-      "accAll": 0.7696038803556993
+      "accWiki": 0.7366136034732272,
+      "accAll": 0.7679870654810024
+    },
+    {
+      "k": 20,
+      "tau": 1,
+      "accWiki": 0.7351664254703328,
+      "accAll": 0.746160064672595
     },
     {
       "k": 20,
       "tau": 0.05,
       "accWiki": 0.7337192474674384,
-      "accAll": 0.7590945836701698
+      "accAll": 0.7574777687954729
     },
     {
       "k": 30,
       "tau": 0.05,
-      "accWiki": 0.7337192474674384,
-      "accAll": 0.7469684721099434
+      "accWiki": 0.7322720694645442,
+      "accAll": 0.746160064672595
+    },
+    {
+      "k": 10,
+      "tau": 0.02,
+      "accWiki": 0.7308248914616498,
+      "accAll": 0.767178658043654
     },
     {
       "k": 30,
       "tau": 1,
-      "accWiki": 0.723589001447178,
-      "accAll": 0.7299919159256265
+      "accWiki": 0.7221418234442837,
+      "accAll": 0.7291835084882781
     },
     {
       "k": 20,
@@ -92,8 +92,8 @@
     {
       "k": 30,
       "tau": 0.01,
-      "accWiki": 0.7163531114327062,
-      "accAll": 0.7493936944219887
+      "accWiki": 0.7192474674384949,
+      "accAll": 0.7510105092966856
     },
     {
       "k": 5,
@@ -104,8 +104,8 @@
     {
       "k": 10,
       "tau": 0.01,
-      "accWiki": 0.7047756874095513,
-      "accAll": 0.7413096200485044
+      "accWiki": 0.7062228654124457,
+      "accAll": 0.7421180274858529
     },
     {
       "k": 5,
@@ -160,7 +160,7 @@
           },
           "western": {
             "korean": 6,
-            "western": 183,
+            "western": 182,
             "chinese": 0,
             "japanese": 2,
             "vietnamese": 0,
@@ -169,12 +169,12 @@
             "indian": 0,
             "snack": 0,
             "cafe": 6,
-            "other": 34
+            "other": 35
           },
           "chinese": {
             "korean": 6,
-            "western": 7,
-            "chinese": 23,
+            "western": 6,
+            "chinese": 24,
             "japanese": 4,
             "vietnamese": 0,
             "mexican": 0,
@@ -297,13 +297,13 @@
           },
           "western": {
             "n": 233,
-            "precision": 0.75,
-            "recall": 0.7854077253218884
+            "precision": 0.7520661157024794,
+            "recall": 0.7811158798283262
           },
           "chinese": {
             "n": 49,
-            "precision": 0.7666666666666667,
-            "recall": 0.46938775510204084
+            "precision": 0.7741935483870968,
+            "recall": 0.4897959183673469
           },
           "japanese": {
             "n": 42,
@@ -342,7 +342,7 @@
           },
           "other": {
             "n": 241,
-            "precision": 0.7440944881889764,
+            "precision": 0.7411764705882353,
             "recall": 0.7842323651452282
           }
         }
@@ -353,11 +353,11 @@
         "maxSim": 0.8
       },
       "atThr": {
-        "accepted": 219,
+        "accepted": 218,
         "correct": 199,
-        "precision": 0.908675799086758,
+        "precision": 0.9128440366972477,
         "coverage": 0.44222222222222224,
-        "acceptRate": 0.31693198263386396
+        "acceptRate": 0.3154848046309696
       },
       "perClassAtThr": {
         "korean": {
@@ -368,8 +368,8 @@
         },
         "western": {
           "n": 233,
-          "predicted": 132,
-          "precision": 0.9015151515151515,
+          "predicted": 131,
+          "precision": 0.9083969465648855,
           "recall": 0.5107296137339056
         },
         "chinese": {
@@ -424,13 +424,13 @@
     },
     "wikiNoDesc": {
       "n": 691,
-      "top1Acc": 0.4196816208393632,
+      "top1Acc": 0.4182344428364689,
       "perClassAtThr": null,
       "atNormalThr": {
         "accepted": 108,
-        "correct": 82,
-        "precision": 0.7592592592592593,
-        "coverage": 0.18222222222222223,
+        "correct": 83,
+        "precision": 0.7685185185185185,
+        "coverage": 0.18444444444444444,
         "acceptRate": 0.15629522431259044
       }
     },
@@ -438,11 +438,11 @@
       "n": 1237,
       "top1Acc": 0.7720291026677445,
       "atThr": {
-        "accepted": 594,
+        "accepted": 593,
         "correct": 540,
-        "precision": 0.9090909090909091,
+        "precision": 0.9106239460370995,
         "coverage": 0.5510204081632653,
-        "acceptRate": 0.4801940177849636
+        "acceptRate": 0.4793856103476152
       }
     }
   },
@@ -478,7 +478,8 @@
   },
   "distribution": {
     "rawBefore": {
-      "korean": 84,
+      "korean": 75,
+      "northkorean": 9,
       "western": 251,
       "chinese": 52,
       "japanese": 47,
@@ -489,7 +490,8 @@
       "other": 385
     },
     "rawAfter": {
-      "korean": 108,
+      "korean": 99,
+      "northkorean": 9,
       "western": 264,
       "chinese": 54,
       "japanese": 49,
@@ -684,18 +686,6 @@
       "nn": "이에케 라멘(japanese,0.899) 돈코츠라멘(japanese,0.895) 라멘(chinese,0.893)"
     },
     {
-      "id": "kr-ojingeo-sundae",
-      "name": "오징어순대",
-      "pred": "korean",
-      "conf": 0.62,
-      "margin": 0.47,
-      "maxSim": 0.908,
-      "noDesc": false,
-      "why": "적용 중 신뢰도 하위",
-      "desc": "돼지의 곱창 대신 오징어의 속에 소를 넣어 찐 음식",
-      "nn": "순댓국(korean,0.908) 파이구판(chinese,0.899) 오징어덮밥(korean,0.898)"
-    },
-    {
       "id": "jp-q11264794",
       "name": "유키우사기",
       "pred": "japanese",
@@ -706,6 +696,18 @@
       "why": "적용 중 신뢰도 하위",
       "desc": "유키우사기는 일본 후쿠오카현 후쿠오카시 미나미구에 위치한 풍월 식품 회사가 제조하는 미야게가시이다.",
       "nn": "로바타야키(japanese,0.828) 우동(japanese,0.827) 나가사끼 짬뽕(korean,0.823)"
+    },
+    {
+      "id": "kr-ojingeo-sundae",
+      "name": "오징어순대",
+      "pred": "korean",
+      "conf": 0.62,
+      "margin": 0.48,
+      "maxSim": 0.908,
+      "noDesc": false,
+      "why": "적용 중 신뢰도 하위",
+      "desc": "돼지의 곱창 대신 오징어의 속에 소를 넣어 찐 음식",
+      "nn": "순댓국(korean,0.908) 파이구판(chinese,0.899) 오징어덮밥(korean,0.898)"
     },
     {
       "id": "we-croquette",

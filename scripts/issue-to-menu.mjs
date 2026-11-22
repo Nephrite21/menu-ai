@@ -41,7 +41,7 @@ export const LABELS = {
 };
 
 const CUISINE_KO = {
-  '한식': 'korean', '양식': 'western', '중식': 'chinese', '일식': 'japanese', '베트남': 'vietnamese',
+  '한식': 'korean', '북한': 'northkorean', '양식': 'western', '중식': 'chinese', '일식': 'japanese', '베트남': 'vietnamese',
   '멕시코': 'mexican', '태국': 'thai', '인도': 'indian', '퓨전': 'fusion', '분식': 'snack',
   '카페': 'cafe', '디저트': 'cafe', '기타': 'other',
 };
