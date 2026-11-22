@@ -39,17 +39,113 @@ function renderNow(items){
   document.body.classList.add('has-results');
   requestAnimationFrame(()=>box.closest('.results-zone')?.scrollIntoView({behavior:'smooth',block:'start'}));
   if(!items||!items.length){box.append(el('div',{className:'empty',textContent:'조건에 맞는 메뉴가 없어요. 조건을 바꿔보세요.'}));return}
+  /* 카드: 이름·배지·점수(우상단 한 곳)·재료·설명. 누르면 상세 창이 열린다(추천 이유 등은 거기서). */
   for(const {menu:m,score,reasons=[]} of items){
-    box.append(el('article',{className:'card'},
+    const open=()=>openDetail(m,{score,reasons});
+    box.append(el('article',{className:'card',tabIndex:0,role:'button',title:'눌러서 자세히 보기',onclick:open,
+        onkeydown:e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}}},
       el('h3',{},m.name,
         el('span',{className:'badge',textContent:CUISINE_KO[m.cuisine]||m.cuisine}),
+        m.brand?el('span',{className:'badge',textContent:m.brand}):'',
         m.cuisineInferred?el('span',{className:'badge',title:'임베딩 유사도로 종류를 추정했어요'+(m.cuisineConfidence?' (신뢰도 '+Math.round(m.cuisineConfidence*100)+'%)':''),textContent:'추정'}):'',
         m.source==='user'?el('span',{className:'badge user',textContent:'내가 추가'}):'',
         el('span',{className:'score',textContent:score!=null?'점수 '+Number(score).toFixed(2):''})),
       el('div',{className:'ings',textContent:'재료: '+(m.ingredients||[]).join(', ')}),
-      m.desc?el('div',{textContent:m.desc}):'',
-      reasons.length?el('ul',{className:'reasons'},reasons.map(r=>el('li',{textContent:r}))):''));
+      m.desc?el('div',{className:'card-desc',textContent:m.desc}):''));
   }
+}
+
+/* ---- 메뉴 상세 창 (카드·목록 행을 누르면 열림) ---- */
+let detailDlg=null;
+const ALLOWED_LINK=/^https:\/\/(ko\.wikipedia\.org|www\.wikidata\.org)\//;
+/* 출처 문자열의 URL 중 위키백과/위키데이터만 링크로 바꾼다(그 밖의 URL 은 글자로만 표시) */
+function linkify(text){
+  const out=[];let last=0;
+  for(const m of String(text).matchAll(/https:\/\/[^\s;)]+/g)){
+    out.push(text.slice(last,m.index));
+    out.push(ALLOWED_LINK.test(m[0])?el('a',{href:m[0],target:'_blank',rel:'noopener noreferrer',textContent:decodeURI(m[0]).replace(/^https:\/\//,'')}):m[0]);
+    last=m.index+m[0].length;
+  }
+  out.push(text.slice(last));return out;
+}
+function sourceNode(m){
+  switch(m.source){
+    case 'curated':return '직접 정리한 메뉴 데이터';
+    case 'franchise':return (m.brand?m.brand+' · ':'')+'메뉴 이름과 일반적인 특징만 정리했어요. 가격·열량 등은 매장 정보를 확인해 주세요.';
+    case 'user':return '내가 추가한 메뉴예요. 이 브라우저에만 저장돼요.';
+    default:return m.attribution?linkify(m.attribution):'위키 데이터';
+  }
+}
+function openDetail(m,extra={}){
+  const {score,reasons=[]}=extra;
+  if(!detailDlg){
+    detailDlg=el('dialog',{id:'detail-modal',className:'detail-modal'});
+    detailDlg.addEventListener('click',e=>{if(e.target===detailDlg)detailDlg.close()}); // 바깥(배경) 클릭으로 닫기
+    document.body.append(detailDlg);
+  }
+  const sec=(title,...kids)=>[el('h3',{textContent:title}),...kids];
+  const tags=(arr)=>el('div',{className:'chips'},(arr||[]).map(t=>el('span',{className:'chip tag',textContent:t})));
+  const why=reasons.filter(r=>!/^질문과의 의미 유사도/.test(r));           // 유사도는 점수 하나로만 표시
+  const sims=(UI.similarProvider?UI.similarProvider(m):[])||[];
+  const kids=[
+    el('div',{className:'dm-head'},
+      el('h2',{className:'dm-title',textContent:m.name}),
+      el('button',{type:'button',className:'dm-close',textContent:'×',title:'닫기','aria-label':'닫기',onclick:()=>detailDlg.close()})),
+    el('div',{className:'dm-badges'},
+      el('span',{className:'badge',textContent:CUISINE_KO[m.cuisine]||m.cuisine}),
+      m.brand?el('span',{className:'badge',textContent:m.brand}):'',
+      m.cuisineInferred?el('span',{className:'badge',textContent:'종류 추정'}):'',
+      m.source==='user'?el('span',{className:'badge user',textContent:'내가 추가'}):'',
+      score!=null?el('span',{className:'score',textContent:'점수 '+Number(score).toFixed(2)}):''),
+    m.desc?el('p',{className:'dm-desc',textContent:m.desc}):'',
+    ...sec('재료',tags(m.ingredients)),
+    ...((m.tags||[]).length?sec('태그',tags(m.tags)):[]),
+    ...(why.length?sec('추천 이유',el('ul',{className:'reasons'},why.map(r=>el('li',{textContent:r})))):[]),
+    ...(sims.length?sec('비슷한 메뉴',el('div',{className:'chips'},sims.map(s=>
+        el('button',{type:'button',className:'chip',textContent:s.menu.name,title:'점수 '+Number(s.score).toFixed(2),onclick:()=>openDetail(s.menu)})))):[]),
+    ...sec('출처',el('p',{className:'dm-src'},sourceNode(m))),
+    ...(m.cuisineInferred?[el('p',{className:'dm-note',textContent:'음식 종류는 비슷한 메뉴들과의 유사도로 추정한 값이에요'+(m.cuisineConfidence?' (신뢰도 '+Math.round(m.cuisineConfidence*100)+'%)':'')+'. 틀렸다면 알려 주세요.'})]:[]),
+  ];
+  detailDlg.replaceChildren(el('div',{className:'dm'},...kids));
+  if(!detailDlg.open)detailDlg.showModal();
+  detailDlg.querySelector('.dm').scrollTop=0;
+}
+
+/* ---- 추천 개수 드롭다운(3/5/10) ---- */
+const COUNTS=[3,5,10];
+let pickCount=(()=>{try{const n=Number(localStorage.getItem('menuai.count'));return COUNTS.includes(n)?n:3}catch{return 3}})();
+function initCountSelect(){
+  const root=$('#count-dd');if(!root)return;
+  root.innerHTML=`<button type="button" class="btn dd-btn" id="count-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="추천 개수">
+      <span id="count-val"></span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <ul class="dd-menu" role="listbox" aria-label="추천 개수" tabindex="-1" hidden></ul>`;
+  const btn=$('#count-btn',root),menu=$('.dd-menu',root),val=$('#count-val',root);
+  let active=COUNTS.indexOf(pickCount);
+  const paint=()=>{
+    val.textContent=pickCount+'개';
+    menu.replaceChildren(...COUNTS.map((n,i)=>el('li',{role:'option',textContent:n+'개씩 추천','aria-selected':String(n===pickCount),
+      onclick:()=>choose(n),onmouseenter:()=>{active=i;mark()}})));
+    mark();
+  };
+  const mark=()=>[...menu.children].forEach((li,i)=>{if(i===active)li.setAttribute('data-active','');else li.removeAttribute('data-active')});
+  const setOpen=(o)=>{menu.hidden=!o;btn.setAttribute('aria-expanded',String(o));if(o){active=COUNTS.indexOf(pickCount);mark();menu.focus()}};
+  const choose=(n)=>{
+    setOpen(false);btn.focus();
+    if(n===pickCount)return;
+    pickCount=n;try{localStorage.setItem('menuai.count',String(n))}catch{}
+    paint();emit('menu:count',{n});
+  };
+  btn.onclick=()=>setOpen(menu.hidden);
+  menu.addEventListener('keydown',e=>{
+    if(e.key==='ArrowDown'){e.preventDefault();active=(active+1)%COUNTS.length;mark()}
+    else if(e.key==='ArrowUp'){e.preventDefault();active=(active-1+COUNTS.length)%COUNTS.length;mark()}
+    else if(e.key==='Enter'||e.key===' '){e.preventDefault();choose(COUNTS[active])}
+    else if(e.key==='Escape'||e.key==='Tab'){setOpen(false);btn.focus()}
+  });
+  document.addEventListener('click',e=>{if(!root.contains(e.target))setOpen(false)});
+  paint();
 }
 function setProgress(p,label){ // p: 0~1, null이면 숨김
   const b=$('#progress-box');if(!b)return;
@@ -118,8 +214,9 @@ function initAddModal(){
   document.querySelectorAll('[data-open-add]').forEach(b=>b.addEventListener('click',()=>openModal()));
 }
 
-const UI={CUISINES,CUISINE_KO,$,el,emit,toast,renderResults,setProgress,initAddModal,setMenus,
+const UI={CUISINES,CUISINE_KO,$,el,emit,toast,renderResults,setProgress,initAddModal,setMenus,openDetail,
+  pickCount:()=>pickCount,similarProvider:null, // similarProvider(menu) → [{menu,score}] 는 app.js 가 채운다
   get menusReady(){return menusP},openAddModal:(p)=>openModal(p)};
 window.MenuUI=UI;
-document.addEventListener('DOMContentLoaded',initAddModal);
+document.addEventListener('DOMContentLoaded',()=>{initAddModal();initCountSelect()});
 })();

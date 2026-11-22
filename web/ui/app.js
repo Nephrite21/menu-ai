@@ -1,7 +1,7 @@
 /* 통합: UI 이벤트(menu:*) ↔ store / embed / recommend.  ES module, 번들러 없음.
    계약은 SPEC.md 의 'UI 이벤트' 절. 검색·리롤은 detail.signal(AbortSignal)을 지켜야 한다. */
 import * as store from '../js/store.js';
-import { initEmbedder, embed, embedMenu } from '../js/embed.js';
+import { initEmbedder, embed, embedMenu, menuVector } from '../js/embed.js';
 import { recommend, rerollPick, parseQuery, loadDictionaries } from '../js/recommend.js';
 
 const UI = window.MenuUI;
@@ -74,9 +74,11 @@ loaded.then(() => ensureEmbedder()).then(() => true, (e) => {
 let last = null; // { ranked, shown: id[] }
 const newSeed = () => Math.random().toString(36).slice(2);
 
+const pickK = () => (UI.pickCount ? UI.pickCount() : CFG.pick);
 function showPicks() {
-  const pool = Math.max(12, last.shown.length + CFG.pick * 2);
-  const picks = rerollPick(last.ranked, { seed: newSeed(), k: CFG.pick, temperature: 0.03, pool, history: last.shown });
+  const k = pickK();
+  const pool = Math.max(12, last.shown.length + k * 2, k * 2);
+  const picks = rerollPick(last.ranked, { seed: newSeed(), k, temperature: 0.03, pool, history: last.shown });
   last.shown.push(...picks.map((p) => p.menu.id));
   UI.renderResults(picks);
 }
@@ -104,6 +106,10 @@ document.addEventListener('menu:search', async (ev) => {
     last = { ranked, shown: [] };
     showPicks();
   } catch (e) { fail(e, signal); }
+});
+
+document.addEventListener('menu:count', () => {   // 3/5/10 변경: 이미 계산해 둔 후보에서 바로 다시 고른다
+  if (last) showPicks();
 });
 
 document.addEventListener('menu:reroll', (ev) => {
@@ -185,3 +191,13 @@ document.addEventListener('menu:suggest-public', (ev) => {
   window.open(`https://github.com/${CFG.repo}/issues/new?${q}`, '_blank', 'noopener');
   UI.toast('GitHub 이슈 작성 화면을 열었어요. 확인란을 체크하고 제출해 주세요.', 6000);
 });
+
+/* ---------- 상세 창의 '비슷한 메뉴' (메뉴 벡터끼리 비교, 모델 불필요) ---------- */
+UI.similarProvider = (m) => {
+  try {
+    const v = menuVector(m);
+    if (!v) return [];
+    return recommend({ queryVec: v, menus, topN: 7, weightScale: CFG.weightScale })
+      .filter((r) => r.menu.id !== m.id).slice(0, 5).map((r) => ({ menu: r.menu, score: r.score }));
+  } catch (e) { console.warn('[app] 비슷한 메뉴 계산 실패', e); return []; }
+};
