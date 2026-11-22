@@ -1,0 +1,27 @@
+{
+  "name": "menusuggestion",
+  "version": "1.0.0",
+  "description": "상황 문장 -> 로컬 임베딩 -> 메뉴 추천 (정적 GitHub Pages)",
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "merge": "node scripts/merge.mjs",
+    "embed": "node scripts/embed.mjs",
+    "build": "node scripts/validate.mjs --quiet && node scripts/merge.mjs --quiet && node scripts/embed.mjs",
+    "test": "node --test \"tests/*.test.mjs\"",
+    "test:data": "node --test tests/store.test.mjs tests/issue-to-menu.test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@huggingface/transformers": "4.3.2"
+  },
+  "private": true,
+  "devDependencies": {
+    "playwright-core": "1.65.0"
+  }
+}

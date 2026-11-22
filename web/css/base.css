@@ -1,0 +1,61 @@
+/* 토큰: 색은 여기서만 바꾼다. 네온 다크 테마 고정(라이트 없음). */
+:root{
+  --bg:#06070d;--surface:rgba(20,22,40,.62);--surface-solid:#14162a;
+  --text:#eef0ff;--muted:#9aa1c8;--border:rgba(150,160,255,.22);
+  --accent:#ff9a4d;--accent-text:#1a1208;--accent2:#8b98ff;
+  --pos:#5ee38b;--pos2:#9af5b8;--neg:#ffc247;--ex:#ff6b7a;
+  --radius:14px;--gap:12px;
+  color-scheme:dark;
+  font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Malgun Gothic",sans-serif;
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;color:var(--text);line-height:1.5;min-height:100vh;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 42%,#1b1e40 0%,rgba(11,12,26,.0) 70%),
+    radial-gradient(ellipse 50% 40% at 85% 10%,rgba(255,154,77,.10),transparent 70%),
+    radial-gradient(ellipse 50% 40% at 10% 90%,rgba(139,152,255,.12),transparent 70%),
+    var(--bg);
+  background-attachment:fixed}
+input,select,textarea,button{font:inherit;color:inherit}
+input[type=text],input[type=search],select,textarea{width:100%;padding:10px 12px;background:rgba(8,9,20,.6);
+  border:1px solid var(--border);border-radius:var(--radius)}
+input::placeholder{color:#6c7299}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--accent2);outline-offset:1px}
+button:focus-visible{outline:2px solid var(--accent2);outline-offset:2px}
+.btn{padding:10px 16px;border-radius:var(--radius);border:1px solid var(--border);background:rgba(255,255,255,.05);cursor:pointer;
+  transition:border-color .15s,background .15s,box-shadow .15s}
+.btn:hover{border-color:var(--accent2);background:rgba(139,152,255,.12)}
+.btn.primary{background:var(--accent);color:var(--accent-text);border-color:var(--accent);font-weight:700;
+  box-shadow:0 0 22px rgba(255,154,77,.35)}
+.btn.primary:hover{background:#ffab6a}
+.btn.small{padding:4px 10px;font-size:.85rem}
+.btn.danger{color:var(--ex)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.muted{color:var(--muted);font-size:.9rem}
+.glass{background:var(--surface);border:1px solid var(--border);border-radius:calc(var(--radius) + 4px);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 10px 40px rgba(0,0,0,.35)}
+h2{font-size:.85rem;margin:0 0 10px;color:var(--muted);font-weight:600;letter-spacing:.04em}
+
+/* 배경 구체 캔버스(두 페이지 공용) */
+#bg-sphere{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none}
+#bg-sphere[data-dim]{opacity:.16}
+.bokeh{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(circle 60px at 14% 22%,rgba(255,170,100,.16),transparent 70%),
+    radial-gradient(circle 90px at 88% 30%,rgba(139,152,255,.16),transparent 70%),
+    radial-gradient(circle 70px at 78% 82%,rgba(255,154,77,.12),transparent 70%),
+    radial-gradient(circle 50px at 22% 76%,rgba(94,227,139,.10),transparent 70%);
+  filter:blur(6px)}
+
+/* 상단바 */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:5;display:flex;align-items:center;justify-content:space-between;
+  padding:14px clamp(16px,4vw,40px);background:linear-gradient(rgba(6,7,13,.85),rgba(6,7,13,0));backdrop-filter:blur(6px)}
+.brand{font-weight:800;font-size:1.15rem;letter-spacing:.02em;color:var(--text);text-decoration:none}
+.brand span{color:var(--accent)}
+.topbar nav{display:flex;gap:6px;align-items:center}
+.topbar nav a,.topbar nav button{color:var(--muted);text-decoration:none;padding:6px 12px;border-radius:99px;background:none;border:0;cursor:pointer;font-size:.92rem}
+.topbar nav a:hover,.topbar nav button:hover{color:var(--text);background:rgba(255,255,255,.06)}
+.topbar nav a[aria-current]{color:var(--accent)}
+
+footer.foot{position:relative;z-index:1;padding:18px clamp(16px,4vw,40px) 22px;color:var(--muted);font-size:.8rem;text-align:center}

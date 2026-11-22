@@ -1,0 +1,22 @@
+[
+  {"q":"비 오는 날 따뜻한 거","rel":["kr-haemul-pajeon","kr-kalguksu","kr-kimchi-jjigae","kr-sundubu-jjigae","kr-eomuktang","jp-udon","ws-mushroom-soup","kr-doenjang-jjigae"]},
+  {"q":"술 마신 다음 날 해장","rel":["kr-haejangguk","kr-kongnamul-gukbap","kr-sundae-gukbap","cn-jjamppong","vn-pho","kr-yukgaejang","kr-dwaeji-gukbap"]},
+  {"q":"혼자 간단하게 먹을 혼밥 메뉴","rel":["kr-gimbap","jp-gyudon","kr-kimchi-bokkeumbap","kr-ramyeon","kr-bibimbap","ws-hamburger","ws-sandwich","jp-udon","kr-dwaeji-gukbap","kr-kongnamul-gukbap"]},
+  {"q":"다이어트 중이라 가벼운 거","rel":["ws-chicken-breast-salad","fs-salmon-poke","ws-oatmeal-bowl","jp-zaru-soba"]},
+  {"q":"늦은 밤 야식","rel":["kr-fried-chicken","kr-jokbal","kr-bossam","kr-ramyeon","kr-tteokbokki","ws-pepperoni-pizza","kr-gopchang"]},
+  {"q":"매운 거 먹고 스트레스 풀고 싶어","rel":["kr-tteokbokki","cn-malatang","cn-jjamppong","kr-dakbokkeumtang","kr-dakgalbi","cn-mapo-tofu","kr-kimchi-jjigae","kr-yukgaejang","kr-sundubu-jjigae","th-tom-yum-goong"]},
+  {"q":"더운 여름날 시원한 음식","rel":["kr-mul-naengmyeon","jp-zaru-soba","cf-patbingsu"]},
+  {"q":"감기 걸려서 몸이 안 좋을 때","rel":["kr-jeonbokjuk","kr-samgyetang","kr-galbitang","kr-kongnamul-gukbap","ws-mushroom-soup"]},
+  {"q":"회식 자리 여럿이 먹기 좋은 메뉴","rel":["kr-samgyeopsal","kr-dakgalbi","kr-dakbokkeumtang","kr-gopchang","kr-bossam","ws-pepperoni-pizza","kr-gamjatang","kr-jokbal","kr-fried-chicken"]},
+  {"q":"기념일 데이트 분위기 있는 저녁","rel":["ws-steak","ws-carbonara","jp-sushi","cf-tiramisu"]},
+  {"q":"추운 겨울 길거리 간식","rel":["kr-hotteok","kr-bungeoppang","kr-eomuktang","kr-tteokbokki"]},
+  {"q":"기운 없을 때 먹는 보양식","rel":["kr-samgyetang","kr-galbitang","kr-jeonbokjuk"]},
+  {"q":"아침에 빨리 먹을 수 있는 거","rel":["ws-sandwich","ws-oatmeal-bowl","kr-gimbap","kr-jeonbokjuk","kr-kongnamul-gukbap"]},
+  {"q":"맥주랑 같이 먹을 안주","rel":["kr-fried-chicken","kr-jokbal","kr-gopchang","ws-pepperoni-pizza","kr-bossam","kr-eomuktang","cn-tangsuyuk"]},
+  {"q":"밥 말고 면 요리 먹고 싶어","rel":["kr-kalguksu","cn-jjajangmyeon","cn-jjamppong","jp-tonkotsu-ramen","jp-udon","vn-pho","th-pad-thai","ws-carbonara","kr-mul-naengmyeon","jp-zaru-soba","kr-ramyeon"]},
+  {"q":"국물 있는 뜨끈한 국밥","rel":["kr-dwaeji-gukbap","kr-kongnamul-gukbap","kr-sundae-gukbap","kr-haejangguk","kr-galbitang","kr-yukgaejang"]},
+  {"q":"느끼한 거 말고 깔끔하고 담백한 음식","rel":["jp-sushi","jp-zaru-soba","vn-pho","kr-galbitang","kr-kongnamul-gukbap","jp-udon"]},
+  {"q":"고기 배 터지게 먹고 싶다","rel":["kr-samgyeopsal","ws-steak","kr-bulgogi","kr-gopchang","kr-jokbal","kr-bossam","kr-fried-chicken","kr-dakgalbi"]},
+  {"q":"이국적인 동남아 음식","rel":["vn-pho","th-pad-thai","th-tom-yum-goong"]},
+  {"q":"달달한 디저트로 당 충전","rel":["cf-tiramisu","cf-patbingsu","cf-hot-chocolate","kr-hotteok","kr-bungeoppang"]}
+]

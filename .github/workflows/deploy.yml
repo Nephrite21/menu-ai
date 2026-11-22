@@ -1,0 +1,97 @@
+# 병합(main push) 시: 의존성 설치 -> 검증 -> 병합(merge) -> 임베딩(embed) -> GitHub Pages 배포 (C 소유)
+#
+# 파이프라인 계약:
+#  - scripts/merge.mjs  : data/menus/*.json + data/raw/*.json -> data/merged.json  (C)
+#  - scripts/embed.mjs  : data/merged.json -> web/menus.json (int8 양자화 벡터 포함)  (D, 이 워크플로는 호출만 한다)
+#    인자 없이 `node scripts/embed.mjs` 로 실행하며 기본 입력 data/merged.json, 기본 출력 web/menus.json 을 쓴다(D 의 스크립트 헤더 기준).
+#  - web/ 디렉터리가 Pages 의 사이트 루트다(web/index.html, web/list.html, web/js, web/css, web/menus.json).
+#
+# 저장소 설정 필요: Settings > Pages > Build and deployment > Source = "GitHub Actions".
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/**'
+      - 'web/**'
+      - 'scripts/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: |
+          set -euo pipefail
+          if [ -f package-lock.json ]; then npm ci --no-audit --no-fund; else npm install --no-audit --no-fund; fi
+
+      # 임베딩 모델 다운로드 캐시와 메뉴별 벡터 캐시(경로는 scripts/embed.mjs 기본값: .cache/hf, .cache/embeddings).
+      # 모델/규칙이 바뀌면 embed.mjs 가 자체 키로 무효화하므로 여기서는 느슨한 키로 복원만 한다.
+      - name: Cache embedding model and vectors
+        uses: actions/cache@v4
+        with:
+          path: |
+            .cache/hf
+            .cache/embeddings
+          key: embed-cache-${{ runner.os }}-${{ hashFiles('package-lock.json', 'web/js/embed.js') }}-${{ github.run_id }}
+          restore-keys: |
+            embed-cache-${{ runner.os }}-${{ hashFiles('package-lock.json', 'web/js/embed.js') }}-
+            embed-cache-${{ runner.os }}-
+
+      - name: Validate menu data
+        run: node scripts/validate.mjs
+
+      - name: Merge menus (curated + raw)
+        run: node scripts/merge.mjs
+
+      - name: Embed menus
+        run: node scripts/embed.mjs
+
+      - name: Check build output
+        run: |
+          set -euo pipefail
+          test -s web/menus.json
+          node -e "const m=JSON.parse(require('fs').readFileSync('web/menus.json','utf8'));const a=Array.isArray(m)?m:m.menus;if(!Array.isArray(a)||a.length<1)throw new Error('web/menus.json 형식 오류');console.log('menus:',a.length)"
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: web
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

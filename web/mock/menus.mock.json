@@ -1,0 +1,505 @@
+[
+ {
+  "id": "kr-kimchi-jjigae",
+  "name": "김치찌개",
+  "cuisine": "korean",
+  "ingredients": [
+   "김치",
+   "돼지고기",
+   "두부"
+  ],
+  "tags": [
+   "국물",
+   "매운",
+   "밥반찬"
+  ],
+  "desc": "얼큰하고 뜨끈한 국물. 해장, 비 오는 날.",
+  "source": "curated"
+ },
+ {
+  "id": "kr-sundubu-jjigae",
+  "name": "순두부찌개",
+  "cuisine": "korean",
+  "ingredients": [
+   "순두부",
+   "해산물",
+   "계란"
+  ],
+  "tags": [
+   "국물",
+   "매운"
+  ],
+  "desc": "부드러운 순두부와 얼큰한 국물. 해장.",
+  "source": "curated"
+ },
+ {
+  "id": "kr-samgyetang",
+  "name": "삼계탕",
+  "cuisine": "korean",
+  "ingredients": [
+   "닭고기",
+   "인삼",
+   "찹쌀"
+  ],
+  "tags": [
+   "국물",
+   "보양"
+  ],
+  "desc": "여름 보양식. 기력 회복.",
+  "source": "curated"
+ },
+ {
+  "id": "kr-bulgogi",
+  "name": "불고기",
+  "cuisine": "korean",
+  "ingredients": [
+   "소고기",
+   "양파",
+   "간장"
+  ],
+  "tags": [
+   "달콤",
+   "밥반찬"
+  ],
+  "desc": "달짝지근한 양념 소고기.",
+  "source": "curated"
+ },
+ {
+  "id": "kr-haejang-guk",
+  "name": "해장국",
+  "cuisine": "korean",
+  "ingredients": [
+   "소고기",
+   "콩나물",
+   "우거지"
+  ],
+  "tags": [
+   "국물",
+   "해장"
+  ],
+  "desc": "숙취에 좋은 얼큰 국물.",
+  "source": "curated"
+ },
+ {
+  "id": "kr-bibimbap",
+  "name": "비빔밥",
+  "cuisine": "korean",
+  "ingredients": [
+   "밥",
+   "나물",
+   "계란",
+   "고추장"
+  ],
+  "tags": [
+   "건강",
+   "한그릇"
+  ],
+  "desc": "채소 듬뿍, 다이어트에도.",
+  "source": "curated"
+ },
+ {
+  "id": "kr-jokbal",
+  "name": "족발",
+  "cuisine": "korean",
+  "ingredients": [
+   "돼지고기"
+  ],
+  "tags": [
+   "야식",
+   "술안주"
+  ],
+  "desc": "쫄깃한 야식 대표.",
+  "source": "curated"
+ },
+ {
+  "id": "kr-dakgalbi",
+  "name": "닭갈비",
+  "cuisine": "korean",
+  "ingredients": [
+   "닭고기",
+   "양배추",
+   "고구마"
+  ],
+  "tags": [
+   "매운",
+   "철판"
+  ],
+  "desc": "매콤한 철판 닭 요리. 혼밥보다 함께.",
+  "source": "curated"
+ },
+ {
+  "id": "we-margherita-pizza",
+  "name": "마르게리타 피자",
+  "cuisine": "western",
+  "ingredients": [
+   "밀가루",
+   "토마토",
+   "치즈"
+  ],
+  "tags": [
+   "야식",
+   "나눠먹기"
+  ],
+  "desc": "토마토와 치즈의 단순한 맛.",
+  "source": "curated"
+ },
+ {
+  "id": "we-carbonara",
+  "name": "까르보나라",
+  "cuisine": "western",
+  "ingredients": [
+   "파스타",
+   "베이컨",
+   "계란",
+   "치즈"
+  ],
+  "tags": [
+   "크림",
+   "면"
+  ],
+  "desc": "고소한 크림 파스타.",
+  "source": "curated"
+ },
+ {
+  "id": "we-caesar-salad",
+  "name": "시저 샐러드",
+  "cuisine": "western",
+  "ingredients": [
+   "닭고기",
+   "상추",
+   "치즈"
+  ],
+  "tags": [
+   "샐러드",
+   "가벼운",
+   "다이어트"
+  ],
+  "desc": "가볍게 먹는 샐러드. 다이어트.",
+  "source": "curated"
+ },
+ {
+  "id": "we-steak",
+  "name": "스테이크",
+  "cuisine": "western",
+  "ingredients": [
+   "소고기",
+   "감자"
+  ],
+  "tags": [
+   "고기",
+   "기념일"
+  ],
+  "desc": "기념일에 어울리는 구이.",
+  "source": "curated"
+ },
+ {
+  "id": "we-hamburger",
+  "name": "햄버거",
+  "cuisine": "western",
+  "ingredients": [
+   "소고기",
+   "빵",
+   "양상추",
+   "치즈"
+  ],
+  "tags": [
+   "패스트푸드",
+   "혼밥"
+  ],
+  "desc": "간편한 한 끼. 혼밥.",
+  "source": "curated"
+ },
+ {
+  "id": "cn-jjajangmyeon",
+  "name": "짜장면",
+  "cuisine": "chinese",
+  "ingredients": [
+   "밀가루",
+   "돼지고기",
+   "춘장",
+   "양파"
+  ],
+  "tags": [
+   "면",
+   "배달"
+  ],
+  "desc": "달달한 춘장 소스 면.",
+  "source": "curated"
+ },
+ {
+  "id": "cn-jjamppong",
+  "name": "짬뽕",
+  "cuisine": "chinese",
+  "ingredients": [
+   "해산물",
+   "밀가루",
+   "고추"
+  ],
+  "tags": [
+   "국물",
+   "매운",
+   "면"
+  ],
+  "desc": "얼큰한 해물 국물. 비 오는 날, 해장.",
+  "source": "curated"
+ },
+ {
+  "id": "cn-tangsuyuk",
+  "name": "탕수육",
+  "cuisine": "chinese",
+  "ingredients": [
+   "돼지고기",
+   "전분"
+  ],
+  "tags": [
+   "튀김",
+   "배달"
+  ],
+  "desc": "바삭한 튀김에 새콤달콤 소스.",
+  "source": "curated"
+ },
+ {
+  "id": "cn-mapo-tofu",
+  "name": "마파두부",
+  "cuisine": "chinese",
+  "ingredients": [
+   "두부",
+   "돼지고기",
+   "고추"
+  ],
+  "tags": [
+   "매운",
+   "밥반찬"
+  ],
+  "desc": "얼얼하고 매운 두부 요리.",
+  "source": "curated"
+ },
+ {
+  "id": "jp-salmon-sushi",
+  "name": "연어초밥",
+  "cuisine": "japanese",
+  "ingredients": [
+   "연어",
+   "밥"
+  ],
+  "tags": [
+   "생선",
+   "깔끔"
+  ],
+  "desc": "신선한 연어 초밥.",
+  "source": "curated"
+ },
+ {
+  "id": "jp-tonkotsu-ramen",
+  "name": "돈코츠 라멘",
+  "cuisine": "japanese",
+  "ingredients": [
+   "돼지고기",
+   "밀가루",
+   "계란"
+  ],
+  "tags": [
+   "국물",
+   "면",
+   "혼밥"
+  ],
+  "desc": "진한 사골 국물. 혼밥.",
+  "source": "curated"
+ },
+ {
+  "id": "jp-udon",
+  "name": "우동",
+  "cuisine": "japanese",
+  "ingredients": [
+   "밀가루",
+   "유부",
+   "파"
+  ],
+  "tags": [
+   "국물",
+   "면",
+   "담백"
+  ],
+  "desc": "담백한 국물. 비 오는 날.",
+  "source": "curated"
+ },
+ {
+  "id": "jp-katsudon",
+  "name": "돈카츠덮밥",
+  "cuisine": "japanese",
+  "ingredients": [
+   "돼지고기",
+   "계란",
+   "밥"
+  ],
+  "tags": [
+   "튀김",
+   "한그릇",
+   "혼밥"
+  ],
+  "desc": "바삭한 돈카츠 한그릇.",
+  "source": "curated"
+ },
+ {
+  "id": "vn-pho",
+  "name": "쌀국수",
+  "cuisine": "vietnamese",
+  "ingredients": [
+   "소고기",
+   "쌀국수",
+   "숙주"
+  ],
+  "tags": [
+   "국물",
+   "면",
+   "해장"
+  ],
+  "desc": "맑고 구수한 국물.",
+  "source": "curated"
+ },
+ {
+  "id": "vn-banh-mi",
+  "name": "반미",
+  "cuisine": "vietnamese",
+  "ingredients": [
+   "돼지고기",
+   "빵",
+   "당근"
+  ],
+  "tags": [
+   "샌드위치",
+   "가벼운"
+  ],
+  "desc": "바삭한 바게트 샌드위치.",
+  "source": "curated"
+ },
+ {
+  "id": "mx-taco",
+  "name": "타코",
+  "cuisine": "mexican",
+  "ingredients": [
+   "소고기",
+   "옥수수",
+   "양파"
+  ],
+  "tags": [
+   "핑거푸드"
+  ],
+  "desc": "또띠아에 싸 먹는 고기.",
+  "source": "curated"
+ },
+ {
+  "id": "mx-burrito",
+  "name": "부리토",
+  "cuisine": "mexican",
+  "ingredients": [
+   "닭고기",
+   "밥",
+   "콩"
+  ],
+  "tags": [
+   "한그릇",
+   "혼밥"
+  ],
+  "desc": "든든한 또띠아 랩.",
+  "source": "curated"
+ },
+ {
+  "id": "th-pad-thai",
+  "name": "팟타이",
+  "cuisine": "thai",
+  "ingredients": [
+   "새우",
+   "쌀국수",
+   "땅콩"
+  ],
+  "tags": [
+   "면",
+   "새콤달콤"
+  ],
+  "desc": "새콤달콤 볶음 쌀국수.",
+  "source": "curated"
+ },
+ {
+  "id": "th-tom-yum",
+  "name": "똠얌꿍",
+  "cuisine": "thai",
+  "ingredients": [
+   "새우",
+   "레몬그라스",
+   "버섯"
+  ],
+  "tags": [
+   "국물",
+   "매운",
+   "새콤"
+  ],
+  "desc": "새콤매콤한 국물.",
+  "source": "curated"
+ },
+ {
+  "id": "in-butter-chicken",
+  "name": "버터치킨커리",
+  "cuisine": "indian",
+  "ingredients": [
+   "닭고기",
+   "토마토",
+   "버터"
+  ],
+  "tags": [
+   "커리",
+   "크림"
+  ],
+  "desc": "부드러운 커리. 난과 함께.",
+  "source": "curated"
+ },
+ {
+  "id": "fu-kimchi-carbonara",
+  "name": "김치 까르보나라",
+  "cuisine": "fusion",
+  "ingredients": [
+   "김치",
+   "파스타",
+   "베이컨"
+  ],
+  "tags": [
+   "면",
+   "크림",
+   "매운"
+  ],
+  "desc": "한식과 양식의 만남.",
+  "source": "curated"
+ },
+ {
+  "id": "sn-tteokbokki",
+  "name": "떡볶이",
+  "cuisine": "snack",
+  "ingredients": [
+   "떡",
+   "어묵",
+   "고추장"
+  ],
+  "tags": [
+   "매운",
+   "분식",
+   "야식"
+  ],
+  "desc": "매콤달콤 분식 대표.",
+  "source": "curated"
+ },
+ {
+  "id": "cf-affogato",
+  "name": "아포가토",
+  "cuisine": "cafe",
+  "ingredients": [
+   "아이스크림",
+   "커피"
+  ],
+  "tags": [
+   "디저트",
+   "달콤"
+  ],
+  "desc": "커피를 끼얹은 디저트.",
+  "source": "curated"
+ }
+]

@@ -1,0 +1,202 @@
+[
+  {
+    "id": "kr-bonjuk-jeonbok",
+    "name": "본죽 전복죽",
+    "cuisine": "korean",
+    "ingredients": ["전복", "쌀", "참기름", "해산물"],
+    "tags": ["프랜차이즈", "본죽", "죽", "부드러운", "고소한", "속 편한", "보양식", "아플 때", "아침", "회복"],
+    "desc": "전복을 넣어 끓인 고소한 죽. 부드럽고 소화가 잘돼 기력이 없을 때 좋다.",
+    "source": "franchise",
+    "brand": "본죽"
+  },
+  {
+    "id": "kr-bonjuk-beef-vegetable",
+    "name": "본죽 소고기야채죽",
+    "cuisine": "korean",
+    "ingredients": ["소고기", "쌀", "당근", "애호박"],
+    "tags": ["프랜차이즈", "본죽", "죽", "부드러운", "담백한", "속 편한", "아플 때", "아침", "든든한", "가벼운"],
+    "desc": "소고기와 채소를 넣어 끓인 죽. 담백하고 속이 편한 한 끼다.",
+    "source": "franchise",
+    "brand": "본죽"
+  },
+  {
+    "id": "kr-bonjuk-sweet-pumpkin",
+    "name": "본죽 단호박죽",
+    "cuisine": "korean",
+    "ingredients": ["단호박", "찹쌀", "설탕"],
+    "tags": ["프랜차이즈", "본죽", "죽", "달콤한", "부드러운", "속 편한", "아침", "간식", "가벼운"],
+    "desc": "달콤한 단호박으로 끓인 부드러운 죽. 아침이나 간식으로 좋다.",
+    "source": "franchise",
+    "brand": "본죽"
+  },
+  {
+    "id": "kr-bonjuk-bullak",
+    "name": "본죽 불낙죽",
+    "cuisine": "korean",
+    "ingredients": ["소고기", "낙지", "해산물", "쌀"],
+    "tags": ["프랜차이즈", "본죽", "죽", "매콤한", "든든한", "쫄깃한", "해산물", "점심", "보양", "기력 회복"],
+    "desc": "불고기와 낙지를 넣어 끓인 든든한 죽. 쫄깃한 낙지가 씹히는 재미가 있다.",
+    "source": "franchise",
+    "brand": "본죽"
+  },
+  {
+    "id": "kr-kimbabcheonguk-yachae-gimbap",
+    "name": "김밥천국 야채김밥",
+    "cuisine": "korean",
+    "ingredients": ["쌀", "김", "시금치", "당근", "단무지"],
+    "tags": ["프랜차이즈", "김밥천국", "분식", "김밥", "간편한", "가벼운", "아삭한", "채소", "점심", "간단한", "저렴한"],
+    "desc": "채소를 가득 넣은 기본 김밥. 간단하게 한 끼 해결하기 좋다.",
+    "source": "franchise",
+    "brand": "김밥천국"
+  },
+  {
+    "id": "kr-kimbabcheonguk-chamchi-gimbap",
+    "name": "김밥천국 참치김밥",
+    "cuisine": "korean",
+    "ingredients": ["쌀", "김", "참치", "마요네즈", "깻잎"],
+    "tags": ["프랜차이즈", "김밥천국", "분식", "김밥", "고소한", "간편한", "든든한", "점심", "간단한", "저렴한"],
+    "desc": "참치와 마요네즈를 넣은 고소한 김밥. 아이도 어른도 좋아한다.",
+    "source": "franchise",
+    "brand": "김밥천국"
+  },
+  {
+    "id": "kr-kimbabcheonguk-jeyuk-deopbap",
+    "name": "김밥천국 제육덮밥",
+    "cuisine": "korean",
+    "ingredients": ["돼지고기", "쌀", "양파", "고추장"],
+    "tags": ["프랜차이즈", "김밥천국", "분식", "덮밥", "매콤한", "든든한", "점심", "혼밥", "빠른", "달짝지근한"],
+    "desc": "매콤달콤한 제육볶음을 밥에 얹은 덮밥. 분식집 단골 메뉴로 든든하다.",
+    "source": "franchise",
+    "brand": "김밥천국"
+  },
+  {
+    "id": "kr-kimbabcheonguk-rabokki",
+    "name": "김밥천국 라볶이",
+    "cuisine": "korean",
+    "ingredients": ["떡", "라면", "어묵", "고추장"],
+    "tags": ["프랜차이즈", "김밥천국", "분식", "라볶이", "매콤한", "쫄깃한", "든든한", "간식", "점심", "스트레스 받을 때"],
+    "desc": "떡볶이와 라면을 함께 먹는 분식. 매콤하고 푸짐하다.",
+    "source": "franchise",
+    "brand": "김밥천국"
+  },
+  {
+    "id": "kr-kimbabcheonguk-donkatsu",
+    "name": "김밥천국 돈가스",
+    "cuisine": "korean",
+    "ingredients": ["돼지고기", "빵가루", "계란", "양배추"],
+    "tags": ["프랜차이즈", "김밥천국", "분식", "돈가스", "바삭한", "든든한", "점심", "아이", "소스", "혼밥"],
+    "desc": "바삭하게 튀긴 돼지고기 돈가스. 소스를 얹어 밥과 함께 먹는 분식집 대표 메뉴다.",
+    "source": "franchise",
+    "brand": "김밥천국"
+  },
+  {
+    "id": "kr-kimbabcheonguk-sundubu",
+    "name": "김밥천국 순두부찌개",
+    "cuisine": "korean",
+    "ingredients": ["순두부", "해산물", "계란", "고추"],
+    "tags": ["프랜차이즈", "김밥천국", "분식", "찌개", "얼큰한", "부드러운", "국물", "점심", "혼밥", "해장"],
+    "desc": "얼큰한 순두부 찌개와 밥이 함께 나오는 한 상. 분식집에서 든든하게 먹기 좋다.",
+    "source": "franchise",
+    "brand": "김밥천국"
+  },
+  {
+    "id": "kr-hansot-chicken-mayo",
+    "name": "한솥도시락 치킨마요",
+    "cuisine": "korean",
+    "ingredients": ["쌀", "닭고기", "마요네즈", "김", "계란"],
+    "tags": ["프랜차이즈", "한솥도시락", "도시락", "덮밥", "고소한", "든든한", "점심", "혼밥", "간편한", "포장"],
+    "desc": "바삭한 치킨과 마요네즈를 밥에 올린 도시락. 고소하고 든든한 한 끼다.",
+    "source": "franchise",
+    "brand": "한솥도시락"
+  },
+  {
+    "id": "kr-hansot-tuna-mayo",
+    "name": "한솥도시락 참치마요",
+    "cuisine": "korean",
+    "ingredients": ["쌀", "참치", "마요네즈", "김", "계란"],
+    "tags": ["프랜차이즈", "한솥도시락", "도시락", "덮밥", "고소한", "부드러운", "점심", "혼밥", "간편한", "포장"],
+    "desc": "참치와 마요네즈를 올린 덮밥 도시락. 부드럽고 고소해 가볍게 먹기 좋다.",
+    "source": "franchise",
+    "brand": "한솥도시락"
+  },
+  {
+    "id": "kr-hansot-jeyuk-deopbap",
+    "name": "한솥도시락 제육덮밥",
+    "cuisine": "korean",
+    "ingredients": ["돼지고기", "쌀", "양파", "고추장"],
+    "tags": ["프랜차이즈", "한솥도시락", "도시락", "덮밥", "매콤한", "든든한", "점심", "혼밥", "간편한", "포장"],
+    "desc": "매콤한 제육볶음을 올린 덮밥 도시락. 밥이 술술 넘어간다.",
+    "source": "franchise",
+    "brand": "한솥도시락"
+  },
+  {
+    "id": "kr-isaac-ham-cheese-toast",
+    "name": "이삭토스트 햄치즈 토스트",
+    "cuisine": "korean",
+    "ingredients": ["식빵", "햄", "치즈", "계란", "양배추"],
+    "tags": ["프랜차이즈", "이삭토스트", "토스트", "아침", "간식", "고소한", "달콤한", "간편한", "출근길", "포장"],
+    "desc": "햄과 치즈, 계란, 양배추를 넣은 길거리 스타일 토스트. 간단한 아침으로 좋다.",
+    "source": "franchise",
+    "brand": "이삭토스트"
+  },
+  {
+    "id": "kr-isaac-bacon-toast",
+    "name": "이삭토스트 베이컨 토스트",
+    "cuisine": "korean",
+    "ingredients": ["식빵", "베이컨", "계란", "치즈", "양배추"],
+    "tags": ["프랜차이즈", "이삭토스트", "토스트", "아침", "간식", "고소한", "짭짤한", "간편한", "출근길", "포장"],
+    "desc": "베이컨을 넣은 토스트. 짭짤하고 고소한 맛으로 든든한 아침이 된다.",
+    "source": "franchise",
+    "brand": "이삭토스트"
+  },
+  {
+    "id": "kr-isaac-bulgogi-toast",
+    "name": "이삭토스트 불고기 토스트",
+    "cuisine": "korean",
+    "ingredients": ["식빵", "소고기", "계란", "양배추"],
+    "tags": ["프랜차이즈", "이삭토스트", "토스트", "아침", "간식", "달콤한", "짭짤한", "간편한", "출근길", "포장"],
+    "desc": "불고기를 넣은 달콤짭짤한 토스트. 아이들도 좋아한다.",
+    "source": "franchise",
+    "brand": "이삭토스트"
+  },
+  {
+    "id": "sn-yeopgi-original-tteokbokki",
+    "name": "엽기떡볶이 오리지널",
+    "cuisine": "snack",
+    "ingredients": ["떡", "어묵", "고추", "계란"],
+    "tags": ["프랜차이즈", "엽기떡볶이", "분식", "떡볶이", "매운", "자극적", "쫄깃한", "배달", "야식", "스트레스 받을 때"],
+    "desc": "매운맛으로 유명한 엽기떡볶이의 기본 메뉴. 맵고 중독성 있어 스트레스 풀 때 찾는다.",
+    "source": "franchise",
+    "brand": "엽기떡볶이"
+  },
+  {
+    "id": "sn-yeopgi-rose-tteokbokki",
+    "name": "엽기떡볶이 로제",
+    "cuisine": "snack",
+    "ingredients": ["떡", "어묵", "생크림", "고추"],
+    "tags": ["프랜차이즈", "엽기떡볶이", "분식", "떡볶이", "로제", "크리미한", "매콤한", "고소한", "배달", "야식"],
+    "desc": "로제 소스로 부드럽게 만든 떡볶이. 매운맛이 순하고 고소하다.",
+    "source": "franchise",
+    "brand": "엽기떡볶이"
+  },
+  {
+    "id": "sn-sinjeon-original-tteokbokki",
+    "name": "신전떡볶이 오리지널",
+    "cuisine": "snack",
+    "ingredients": ["떡", "어묵", "고추장"],
+    "tags": ["프랜차이즈", "신전떡볶이", "분식", "떡볶이", "매콤한", "달콤한", "쫄깃한", "배달", "간식", "야식"],
+    "desc": "매콤달콤한 맛의 떡볶이. 튀김과 함께 즐기기 좋은 분식이다.",
+    "source": "franchise",
+    "brand": "신전떡볶이"
+  },
+  {
+    "id": "sn-sinjeon-gimmari",
+    "name": "신전떡볶이 김말이",
+    "cuisine": "snack",
+    "ingredients": ["당면", "김", "밀가루"],
+    "tags": ["프랜차이즈", "신전떡볶이", "분식", "튀김", "바삭한", "간식", "떡볶이와 함께", "배달", "간단한"],
+    "desc": "떡볶이 국물에 찍어 먹는 바삭한 김말이 튀김. 분식 사이드로 인기다.",
+    "source": "franchise",
+    "brand": "신전떡볶이"
+  }
+]

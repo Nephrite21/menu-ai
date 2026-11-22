@@ -1,0 +1,8 @@
+node_modules/
+.cache/
+.issue-result/
+data/merged.json
+data/raw/.cache/
+web/menus.json
+web/menus.meta.json
+.env

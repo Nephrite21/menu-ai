@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>임베딩 데모</title>
+<style>
+  :root {
+    --bg: #fafaf8; --fg: #1d1d1b; --muted: #6b6b66; --line: #e3e2dc; --card: #ffffff;
+    --accent: #c2410c; --bar: #f0d9cc; --warn: #a16207;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #161615; --fg: #ecebe6; --muted: #9b9a94; --line: #2e2e2b; --card: #1e1e1c; --accent: #fb923c; --bar: #4a2c1c; --warn: #facc15; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.55 system-ui, -apple-system, "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; }
+  main { max-width: 680px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  .sub { color: var(--muted); font-size: 13px; margin: 0 0 20px; }
+  form { display: flex; gap: 8px; }
+  input[type=text] { flex: 1; min-width: 0; padding: 10px 12px; font: inherit; color: var(--fg); background: var(--card); border: 1px solid var(--line); border-radius: 8px; }
+  button { padding: 10px 16px; font: inherit; border: 0; border-radius: 8px; background: var(--accent); color: #fff; cursor: pointer; }
+  button:disabled { opacity: .5; cursor: default; }
+  .progress { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; margin: 14px 0 6px; }
+  .progress > div { height: 100%; width: 0; background: var(--accent); transition: width .2s; }
+  #status { color: var(--muted); font-size: 13px; min-height: 1.5em; font-variant-numeric: tabular-nums; }
+  #status.warn { color: var(--warn); }
+  ol { list-style: none; padding: 0; margin: 18px 0 0; }
+  li { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; margin-bottom: 8px; }
+  .row { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+  .name { font-weight: 600; }
+  .sim { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 13px; white-space: nowrap; }
+  .meter { height: 4px; background: var(--line); border-radius: 2px; margin: 6px 0; }
+  .meter > div { height: 100%; background: var(--bar); border-radius: 2px; }
+  .meta { color: var(--muted); font-size: 13px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .chips button { background: transparent; color: var(--fg); border: 1px solid var(--line); padding: 4px 10px; font-size: 13px; border-radius: 999px; }
+  footer { margin-top: 28px; color: var(--muted); font-size: 12px; }
+  code { font-size: 12px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>임베딩 데모</h1>
+  <p class="sub">상황 문장을 브라우저 안에서 임베딩해 메뉴와의 코사인 유사도 상위 5개를 보여 줍니다. 외부 AI API를 호출하지 않습니다.</p>
+
+  <form id="f">
+    <input id="q" type="text" placeholder="예: 비 오는 날 따뜻한 거" autocomplete="off" disabled>
+    <button id="go" disabled>찾기</button>
+  </form>
+  <div class="chips" id="chips"></div>
+  <div class="progress"><div id="bar"></div></div>
+  <div id="status">준비 중…</div>
+  <ol id="out"></ol>
+
+  <footer>
+    모델 <code id="model">-</code> · 장치 <code id="device">-</code> · 메뉴 출처 <code id="src">-</code><br>
+    <code>?device=wasm</code> 또는 <code>?device=webgpu</code> 로 장치를 고정할 수 있습니다. 첫 방문 때만 모델(약 135MB)을 받고 이후엔 브라우저 캐시를 씁니다.
+  </footer>
+</main>
+
+<script type="module">
+import { initEmbedder, embed, embedBatch, menuToPassage, menuVector, dot, CUISINE_KO, MODEL_ID, MODEL_DTYPE } from './js/embed.js';
+
+// web/menus.json 이 없을 때 쓰는 내장 샘플 (벡터는 브라우저에서 즉석 계산)
+const SAMPLE = [
+  { id: 'kr-kimchi-jjigae', name: '김치찌개', cuisine: 'korean', ingredients: ['김치', '돼지고기', '두부'], tags: ['국물', '매운', '찌개'], desc: '묵은지와 돼지고기를 넣고 끓인 얼큰한 찌개.' },
+  { id: 'kr-haejangguk', name: '해장국', cuisine: 'korean', ingredients: ['소뼈', '선지', '우거지'], tags: ['국물', '뜨끈한'], desc: '술 마신 다음 날 아침에 많이 찾는 국.' },
+  { id: 'kr-haemul-pajeon', name: '해물파전', cuisine: 'korean', ingredients: ['쪽파', '해산물', '밀가루'], tags: ['전', '바삭한', '막걸리안주'], desc: '쪽파와 해물을 넣고 노릇하게 부친 전.' },
+  { id: 'kr-mul-naengmyeon', name: '물냉면', cuisine: 'korean', ingredients: ['메밀면', '육수', '오이'], tags: ['면', '차가운', '시원한'], desc: '살얼음 낀 육수에 메밀면을 말아 먹는 음식.' },
+  { id: 'kr-samgyetang', name: '삼계탕', cuisine: 'korean', ingredients: ['닭고기', '인삼', '찹쌀'], tags: ['국물', '보양식'], desc: '닭 속에 찹쌀과 인삼을 넣고 푹 고아 낸 보양 음식.' },
+  { id: 'kr-fried-chicken', name: '후라이드치킨', cuisine: 'korean', ingredients: ['닭고기'], tags: ['튀김', '배달', '맥주안주'], desc: '바삭하게 튀긴 닭.' },
+  { id: 'kr-tteokbokki', name: '떡볶이', cuisine: 'snack', ingredients: ['떡', '어묵', '고추장'], tags: ['매운', '분식'], desc: '가래떡과 어묵을 고추장 양념에 졸인 분식.' },
+  { id: 'kr-gimbap', name: '김밥', cuisine: 'snack', ingredients: ['밥', '김', '단무지'], tags: ['간편식', '포장'], desc: '들고 다니며 먹기 좋은 김밥.' },
+  { id: 'ws-chicken-breast-salad', name: '닭가슴살 샐러드', cuisine: 'western', ingredients: ['닭고기', '양상추', '토마토'], tags: ['샐러드', '저칼로리', '고단백'], desc: '닭가슴살과 채소에 가벼운 드레싱.' },
+  { id: 'ws-steak', name: '스테이크', cuisine: 'western', ingredients: ['소고기', '버터'], tags: ['구이', '고급', '특별한날'], desc: '두툼한 소고기를 센 불에 구운 요리.' },
+  { id: 'cn-jjamppong', name: '짬뽕', cuisine: 'chinese', ingredients: ['해산물', '고춧가루', '면'], tags: ['면', '국물', '매운'], desc: '해물과 채소를 볶아 매운 육수를 부은 국수.' },
+  { id: 'jp-sushi', name: '초밥', cuisine: 'japanese', ingredients: ['밥', '생선'], tags: ['깔끔한'], desc: '식초로 간한 밥 위에 생선회를 올린 음식.' },
+  { id: 'vn-pho', name: '쌀국수', cuisine: 'vietnamese', ingredients: ['쌀국수', '소고기', '숙주'], tags: ['면', '국물', '담백한'], desc: '소고기 육수에 쌀국수를 넣은 베트남 국수.' },
+  { id: 'cf-patbingsu', name: '팥빙수', cuisine: 'cafe', ingredients: ['얼음', '팥', '우유'], tags: ['디저트', '차가운'], desc: '곱게 간 얼음 위에 단팥을 얹은 빙과.' },
+  { id: 'kr-jeonbokjuk', name: '전복죽', cuisine: 'korean', ingredients: ['전복', '쌀'], tags: ['죽', '부드러운'], desc: '속이 불편할 때 먹기 좋은 부드러운 죽.' },
+];
+const EXAMPLES = ['비 오는 날 따뜻한 거', '술 마신 다음 날 해장', '혼밥 간단하게', '다이어트 중', '늦은 밤 야식', '더운 날 시원한 거'];
+
+const $ = (id) => document.getElementById(id);
+const status = (t, warn = false) => { $('status').textContent = t; $('status').className = warn ? 'warn' : ''; };
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+let menus = [];
+let vecs = [];
+
+async function loadMenus() {
+  try {
+    const r = await fetch('./menus.json', { cache: 'no-cache' });
+    if (!r.ok) throw new Error(r.status);
+    const arr = await r.json();
+    try {
+      const meta = await (await fetch('./menus.meta.json', { cache: 'no-cache' })).json();
+      if (meta.model !== MODEL_ID || meta.dtype !== MODEL_DTYPE) {
+        status(`경고: menus.json 은 ${meta.model}/${meta.dtype} 로 빌드됨 — 현재 ${MODEL_ID}/${MODEL_DTYPE}. 재빌드 필요.`, true);
+      }
+    } catch { /* meta 없음 */ }
+    const withVec = arr.filter((m) => menuVector(m));
+    if (!withVec.length) throw new Error('벡터 없음');
+    return { list: withVec, src: `menus.json (${withVec.length}개)` };
+  } catch {
+    return { list: SAMPLE, src: `내장 샘플 (${SAMPLE.length}개, 즉석 임베딩)` };
+  }
+}
+
+async function main() {
+  const device = new URLSearchParams(location.search).get('device') || 'auto';
+  const t0 = performance.now();
+  const info = await initEmbedder({
+    device,
+    onProgress: (p, i) => {
+      $('bar').style.width = `${(p * 100).toFixed(1)}%`;
+      if (i?.status === 'progress_total') status(`모델 받는 중 ${(i.loaded / 2 ** 20).toFixed(1)} / ${(i.total / 2 ** 20).toFixed(1)}MB`);
+      else if (p >= 0.95 && p < 1) status('모델 초기화 중…');
+    },
+  });
+  $('model').textContent = `${info.model} (${info.dtype})`;
+  $('device').textContent = info.device + (self.crossOriginIsolated ? ' · 멀티스레드' : ' · 단일 스레드');
+  const loaded = await loadMenus();
+  menus = loaded.list;
+  $('src').textContent = loaded.src;
+  if (menus === SAMPLE) {
+    status('샘플 메뉴 임베딩 중…');
+    vecs = await embedBatch(menus.map(menuToPassage), { kind: 'passage' });
+  } else {
+    vecs = menus.map(menuVector);
+  }
+  if (!$('status').classList.contains('warn')) status(`준비 완료 (${((performance.now() - t0) / 1000).toFixed(1)}초)`);
+  $('q').disabled = $('go').disabled = false;
+  $('q').focus();
+  for (const ex of EXAMPLES) {
+    const b = document.createElement('button');
+    b.type = 'button'; b.textContent = ex;
+    b.onclick = () => { $('q').value = ex; search(); };
+    $('chips').append(b);
+  }
+}
+
+async function search() {
+  const text = $('q').value.trim();
+  if (!text) return;
+  const t = performance.now();
+  const qv = await embed(text, { kind: 'query' });
+  const ms = performance.now() - t;
+  const top = vecs.map((v, i) => ({ m: menus[i], s: dot(qv, v) })).sort((a, b) => b.s - a.s).slice(0, 5);
+  status(`쿼리 임베딩 ${ms.toFixed(0)}ms · 비교 ${menus.length}개`);
+  const lo = 0.7, hi = 0.9; // e5 유사도는 0.7~0.9 대에 몰려 있어 막대는 이 구간으로 확대
+  $('out').innerHTML = top.map(({ m, s }) => `
+    <li>
+      <div class="row"><span class="name">${esc(m.name)}</span><span class="sim">${s.toFixed(4)}</span></div>
+      <div class="meter"><div style="width:${Math.max(2, Math.min(100, ((s - lo) / (hi - lo)) * 100)).toFixed(0)}%"></div></div>
+      <div class="meta">${esc(CUISINE_KO[m.cuisine] ?? m.cuisine)} · ${esc((m.tags || []).slice(0, 6).join(', '))}</div>
+    </li>`).join('');
+}
+
+$('f').addEventListener('submit', (e) => { e.preventDefault(); search(); });
+main().catch((e) => { console.error(e); status(`로드 실패: ${e.message || e}`, true); });
+</script>
+</body>
+</html>

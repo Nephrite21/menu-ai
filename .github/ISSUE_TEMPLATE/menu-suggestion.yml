@@ -1,0 +1,82 @@
+# 메뉴 제안 이슈 폼 (C 소유)
+# - 아래 label 값은 scripts/issue-to-menu.mjs 의 LABELS 와 정확히 같아야 한다(폼 본문의 "### 라벨" 헤더로 파싱).
+# - 접수된 이슈는 .github/workflows/issue-to-pr.yml 이 자동 검증하고, 통과하면 검토용 PR 을 만든다.
+name: 메뉴 제안
+description: 추천 목록에 추가하고 싶은 메뉴를 제안해 주세요. (자동 검증 후 검토용 PR 이 만들어집니다)
+title: "[메뉴 제안] "
+labels: ["menu-suggestion"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        제안해 주셔서 감사합니다. 입력한 내용은 **공개 데이터셋**에 들어갈 수 있으니 개인정보(이름, 연락처 등)는 적지 마세요.
+        - URL, HTML, 특수문자(`<` `>` 백틱 `$` 등), 욕설/광고는 자동으로 거절됩니다.
+        - 가격·칼로리처럼 사실 확인이 필요한 정보는 적지 않아도 됩니다.
+        - 프랜차이즈 메뉴는 메뉴 이름과 일반적인 특징만 적어 주세요.
+  - type: input
+    id: name
+    attributes:
+      label: 메뉴 이름
+      description: 30자 이하. 예) 마라떡볶이
+      placeholder: 마라떡볶이
+    validations:
+      required: true
+  - type: dropdown
+    id: cuisine
+    attributes:
+      label: 분류
+      options:
+        - 한식 (korean)
+        - 양식 (western)
+        - 중식 (chinese)
+        - 일식 (japanese)
+        - 베트남 (vietnamese)
+        - 멕시코 (mexican)
+        - 태국 (thai)
+        - 인도 (indian)
+        - 퓨전 (fusion)
+        - 분식 (snack)
+        - 카페·디저트 (cafe)
+        - 기타 (other)
+    validations:
+      required: true
+  - type: input
+    id: ingredients
+    attributes:
+      label: 재료
+      description: 쉼표로 구분, 한국어 표준 명칭 권장(닭고기, 소고기, 돼지고기, 해산물 등). 1개 이상.
+      placeholder: 떡, 어묵, 마라, 대파
+    validations:
+      required: true
+  - type: input
+    id: tags
+    attributes:
+      label: 태그
+      description: 쉼표로 구분, 2개 이상. 맛·식감·상황·시간대 단어를 넣으면 추천이 잘 됩니다. (예 얼큰한, 쫄깃한, 비 오는 날, 야식, 혼밥, 든든한)
+      placeholder: 매운, 얼얼한, 쫄깃한, 야식, 스트레스 받을 때
+    validations:
+      required: true
+  - type: textarea
+    id: desc
+    attributes:
+      label: 설명
+      description: 10자 이상 300자 이하. 어떤 음식인지, 언제 먹으면 좋은지 한두 문장으로 적어 주세요.
+      placeholder: 얼얼한 마라 소스로 맛을 낸 떡볶이. 스트레스 받는 날 야식으로 좋다.
+    validations:
+      required: true
+  - type: input
+    id: brand
+    attributes:
+      label: 브랜드
+      description: 프랜차이즈 메뉴일 때만 브랜드 이름을 적어 주세요. (선택)
+      placeholder: 예) 맘스터치
+    validations:
+      required: false
+  - type: checkboxes
+    id: agree
+    attributes:
+      label: 확인
+      description: 아래 내용을 확인했습니다.
+      options:
+        - label: 제가 직접 작성한 내용이며, 저작권/개인정보 문제가 없고, 공개 데이터셋에 포함되는 것에 동의합니다.
+          required: true

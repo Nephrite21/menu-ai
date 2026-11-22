@@ -1,0 +1,372 @@
+[
+  {
+    "id": "we-momstouch-ssai-burger",
+    "name": "맘스터치 싸이버거",
+    "cuisine": "western",
+    "ingredients": ["빵", "닭고기", "양상추"],
+    "tags": ["프랜차이즈", "맘스터치", "버거", "치킨버거", "패스트푸드", "바삭한", "든든한", "점심", "간편한"],
+    "desc": "맘스터치의 대표 치킨버거. 바삭한 닭고기 패티와 신선한 채소가 들어가 든든하게 먹기 좋다.",
+    "source": "franchise",
+    "brand": "맘스터치"
+  },
+  {
+    "id": "we-momstouch-bul-ssai-burger",
+    "name": "맘스터치 불싸이버거",
+    "cuisine": "western",
+    "ingredients": ["빵", "닭고기", "양상추", "고추"],
+    "tags": ["프랜차이즈", "맘스터치", "버거", "치킨버거", "패스트푸드", "매운", "매콤한", "바삭한", "스트레스 받을 때"],
+    "desc": "맘스터치 싸이버거를 매콤하게 즐기는 메뉴. 바삭한 닭고기 패티와 매운 소스가 어우러진다.",
+    "source": "franchise",
+    "brand": "맘스터치"
+  },
+  {
+    "id": "we-momstouch-white-garlic-burger",
+    "name": "맘스터치 화이트갈릭싸이버거",
+    "cuisine": "western",
+    "ingredients": ["빵", "닭고기", "양상추", "마늘"],
+    "tags": ["프랜차이즈", "맘스터치", "버거", "치킨버거", "패스트푸드", "고소한", "마늘", "바삭한", "점심"],
+    "desc": "마늘 풍미의 화이트 소스를 곁들인 치킨버거. 고소하고 알싸한 마늘 향이 특징이다.",
+    "source": "franchise",
+    "brand": "맘스터치"
+  },
+  {
+    "id": "we-momstouch-ssai-sunsal",
+    "name": "맘스터치 싸이순살",
+    "cuisine": "western",
+    "ingredients": ["닭고기", "밀가루"],
+    "tags": ["프랜차이즈", "맘스터치", "치킨", "순살", "튀김", "바삭한", "간식", "술안주", "야식", "함께 먹는"],
+    "desc": "한입 크기로 즐기는 바삭한 순살 치킨. 간식이나 맥주 안주로 좋다.",
+    "source": "franchise",
+    "brand": "맘스터치"
+  },
+  {
+    "id": "we-momstouch-cajun-potato",
+    "name": "맘스터치 케이준양념감자",
+    "cuisine": "western",
+    "ingredients": ["감자", "향신료"],
+    "tags": ["프랜차이즈", "맘스터치", "감자튀김", "사이드", "짭짤한", "바삭한", "간식", "패스트푸드", "술안주"],
+    "desc": "케이준 양념을 뿌린 감자튀김. 짭짤하고 향긋해 버거와 함께 먹기 좋은 사이드다.",
+    "source": "franchise",
+    "brand": "맘스터치"
+  },
+  {
+    "id": "we-lotteria-hanwoo-bulgogi-burger",
+    "name": "롯데리아 한우불고기버거",
+    "cuisine": "western",
+    "ingredients": ["빵", "소고기", "양상추"],
+    "tags": ["프랜차이즈", "롯데리아", "버거", "불고기버거", "패스트푸드", "달콤한", "짭짤한", "점심", "간편한"],
+    "desc": "롯데리아의 불고기 버거. 달콤짭짤한 불고기 양념 맛이 특징이다.",
+    "source": "franchise",
+    "brand": "롯데리아"
+  },
+  {
+    "id": "we-lotteria-shrimp-burger",
+    "name": "롯데리아 새우버거",
+    "cuisine": "western",
+    "ingredients": ["빵", "새우", "해산물", "양상추"],
+    "tags": ["프랜차이즈", "롯데리아", "버거", "새우버거", "패스트푸드", "바삭한", "고소한", "점심", "간편한"],
+    "desc": "새우 패티가 들어간 롯데리아의 대표 버거 중 하나. 바삭하고 고소하다.",
+    "source": "franchise",
+    "brand": "롯데리아"
+  },
+  {
+    "id": "we-lotteria-mozzarella-in-burger",
+    "name": "롯데리아 모짜렐라 인 더 버거",
+    "cuisine": "western",
+    "ingredients": ["빵", "소고기", "치즈", "양상추"],
+    "tags": ["프랜차이즈", "롯데리아", "버거", "치즈버거", "패스트푸드", "고소한", "늘어나는", "점심", "든든한"],
+    "desc": "모짜렐라 치즈가 들어간 버거. 쭉 늘어나는 치즈와 고기 패티가 든든하다.",
+    "source": "franchise",
+    "brand": "롯데리아"
+  },
+  {
+    "id": "we-lotteria-squid-ring",
+    "name": "롯데리아 오징어링",
+    "cuisine": "western",
+    "ingredients": ["오징어", "해산물", "밀가루"],
+    "tags": ["프랜차이즈", "롯데리아", "튀김", "사이드", "바삭한", "쫄깃한", "간식", "패스트푸드", "술안주"],
+    "desc": "오징어를 링 모양으로 튀긴 사이드 메뉴. 바삭하고 쫄깃하다.",
+    "source": "franchise",
+    "brand": "롯데리아"
+  },
+  {
+    "id": "we-lotteria-seasoned-potato",
+    "name": "롯데리아 양념감자",
+    "cuisine": "western",
+    "ingredients": ["감자", "향신료"],
+    "tags": ["프랜차이즈", "롯데리아", "감자튀김", "사이드", "짭짤한", "바삭한", "간식", "패스트푸드", "간단한"],
+    "desc": "양념 가루를 뿌려 먹는 감자튀김. 짭짤하고 향긋해 버거와 잘 어울린다.",
+    "source": "franchise",
+    "brand": "롯데리아"
+  },
+  {
+    "id": "we-mcdonalds-bigmac",
+    "name": "맥도날드 빅맥",
+    "cuisine": "western",
+    "ingredients": ["빵", "소고기", "양상추", "치즈"],
+    "tags": ["프랜차이즈", "맥도날드", "버거", "패스트푸드", "든든한", "고소한", "점심", "겹겹이", "치즈", "간편한"],
+    "desc": "맥도날드의 대표 버거. 두 장의 패티와 특제 소스가 어우러진 든든한 맛이다.",
+    "source": "franchise",
+    "brand": "맥도날드"
+  },
+  {
+    "id": "we-mcdonalds-mcchicken",
+    "name": "맥도날드 맥치킨",
+    "cuisine": "western",
+    "ingredients": ["빵", "닭고기", "양상추", "마요네즈"],
+    "tags": ["프랜차이즈", "맥도날드", "버거", "치킨버거", "패스트푸드", "바삭한", "부드러운", "점심", "간편한"],
+    "desc": "바삭한 치킨 패티와 마요네즈가 들어간 버거. 담백하고 부담 없다.",
+    "source": "franchise",
+    "brand": "맥도날드"
+  },
+  {
+    "id": "we-mcdonalds-mcspicy-shanghai",
+    "name": "맥도날드 맥스파이시 상하이 버거",
+    "cuisine": "western",
+    "ingredients": ["빵", "닭고기", "양상추", "고추"],
+    "tags": ["프랜차이즈", "맥도날드", "버거", "치킨버거", "패스트푸드", "매운", "매콤한", "바삭한", "점심"],
+    "desc": "매콤하게 양념한 치킨 패티가 들어간 버거. 알싸한 매운맛이 특징이다.",
+    "source": "franchise",
+    "brand": "맥도날드"
+  },
+  {
+    "id": "we-mcdonalds-quarter-pounder-cheese",
+    "name": "맥도날드 쿼터파운더 치즈",
+    "cuisine": "western",
+    "ingredients": ["빵", "소고기", "치즈", "양파", "피클"],
+    "tags": ["프랜차이즈", "맥도날드", "버거", "치즈버거", "패스트푸드", "육즙", "든든한", "점심", "푸짐한"],
+    "desc": "두툼한 소고기 패티에 치즈를 얹은 버거. 육즙과 고기 맛이 진하다.",
+    "source": "franchise",
+    "brand": "맥도날드"
+  },
+  {
+    "id": "we-mcdonalds-1955-burger",
+    "name": "맥도날드 1955 버거",
+    "cuisine": "western",
+    "ingredients": ["빵", "소고기", "베이컨", "치즈"],
+    "tags": ["프랜차이즈", "맥도날드", "버거", "패스트푸드", "진한", "고소한", "든든한", "점심", "푸짐한"],
+    "desc": "맥도날드의 프리미엄 느낌 버거로 알려진 메뉴. 고기 풍미가 진하고 든든하다.",
+    "source": "franchise",
+    "brand": "맥도날드"
+  },
+  {
+    "id": "we-mcdonalds-egg-mcmuffin",
+    "name": "맥도날드 에그 맥머핀",
+    "cuisine": "western",
+    "ingredients": ["빵", "계란", "치즈", "베이컨"],
+    "tags": ["프랜차이즈", "맥도날드", "아침", "맥모닝", "패스트푸드", "간편한", "고소한", "간단한", "샌드위치", "가벼운"],
+    "desc": "머핀 사이에 계란과 치즈를 넣은 아침 메뉴. 간단하게 한 끼 해결하기 좋다.",
+    "source": "franchise",
+    "brand": "맥도날드"
+  },
+  {
+    "id": "we-mcdonalds-mcnuggets",
+    "name": "맥도날드 맥너겟",
+    "cuisine": "western",
+    "ingredients": ["닭고기", "밀가루"],
+    "tags": ["프랜차이즈", "맥도날드", "치킨", "너겟", "패스트푸드", "바삭한", "간식", "아이", "한입", "소스"],
+    "desc": "한입 크기의 바삭한 치킨 너겟. 소스에 찍어 먹는 간식으로 좋다.",
+    "source": "franchise",
+    "brand": "맥도날드"
+  },
+  {
+    "id": "we-mcdonalds-french-fries",
+    "name": "맥도날드 후렌치 후라이",
+    "cuisine": "western",
+    "ingredients": ["감자", "소금"],
+    "tags": ["프랜차이즈", "맥도날드", "감자튀김", "사이드", "짭짤한", "바삭한", "간식", "패스트푸드", "간단한"],
+    "desc": "바삭하고 짭짤한 감자튀김. 버거 세트에 빠지지 않는 사이드다.",
+    "source": "franchise",
+    "brand": "맥도날드"
+  },
+  {
+    "id": "we-mcdonalds-mcflurry",
+    "name": "맥도날드 맥플러리",
+    "cuisine": "western",
+    "ingredients": ["아이스크림", "과자", "초콜릿"],
+    "tags": ["프랜차이즈", "맥도날드", "디저트", "아이스크림", "달콤한", "차가운", "시원한", "더운 날", "간식", "패스트푸드"],
+    "desc": "아이스크림에 과자나 시럽을 섞어 먹는 디저트. 시원하고 달콤하다.",
+    "source": "franchise",
+    "brand": "맥도날드"
+  },
+  {
+    "id": "we-burgerking-whopper",
+    "name": "버거킹 와퍼",
+    "cuisine": "western",
+    "ingredients": ["빵", "소고기", "양상추", "토마토", "양파", "마요네즈"],
+    "tags": ["프랜차이즈", "버거킹", "버거", "패스트푸드", "불맛", "직화", "든든한", "푸짐한", "점심"],
+    "desc": "직화로 구운 소고기 패티와 신선한 채소가 들어간 버거킹의 대표 버거. 불맛과 푸짐함이 특징이다.",
+    "source": "franchise",
+    "brand": "버거킹"
+  },
+  {
+    "id": "we-burgerking-cheese-whopper",
+    "name": "버거킹 치즈와퍼",
+    "cuisine": "western",
+    "ingredients": ["빵", "소고기", "치즈", "양상추", "토마토"],
+    "tags": ["프랜차이즈", "버거킹", "버거", "치즈버거", "패스트푸드", "불맛", "직화", "고소한", "든든한"],
+    "desc": "와퍼에 치즈를 더한 버거. 고소한 치즈가 직화 패티와 잘 어울린다.",
+    "source": "franchise",
+    "brand": "버거킹"
+  },
+  {
+    "id": "we-burgerking-quattro-cheese-whopper",
+    "name": "버거킹 콰트로치즈와퍼",
+    "cuisine": "western",
+    "ingredients": ["빵", "소고기", "치즈", "양상추", "토마토"],
+    "tags": ["프랜차이즈", "버거킹", "버거", "치즈버거", "패스트푸드", "치즈", "진한", "고소한", "든든한", "느끼한"],
+    "desc": "네 가지 치즈를 넣은 와퍼. 치즈 맛을 좋아하는 사람에게 인기다.",
+    "source": "franchise",
+    "brand": "버거킹"
+  },
+  {
+    "id": "we-burgerking-bulgogi-whopper",
+    "name": "버거킹 불고기와퍼",
+    "cuisine": "western",
+    "ingredients": ["빵", "소고기", "양상추", "토마토"],
+    "tags": ["프랜차이즈", "버거킹", "버거", "불고기버거", "패스트푸드", "달콤한", "짭짤한", "직화", "든든한"],
+    "desc": "불고기 소스를 더한 와퍼. 달콤짭짤한 맛과 직화 불맛이 어우러진다.",
+    "source": "franchise",
+    "brand": "버거킹"
+  },
+  {
+    "id": "we-burgerking-onion-rings",
+    "name": "버거킹 어니언링",
+    "cuisine": "western",
+    "ingredients": ["양파", "밀가루"],
+    "tags": ["프랜차이즈", "버거킹", "튀김", "사이드", "바삭한", "달콤한", "간식", "패스트푸드", "술안주"],
+    "desc": "양파를 링 모양으로 튀긴 사이드. 바삭하고 달콤한 양파 맛이 난다.",
+    "source": "franchise",
+    "brand": "버거킹"
+  },
+  {
+    "id": "we-kfc-zinger-burger",
+    "name": "KFC 징거버거",
+    "cuisine": "western",
+    "ingredients": ["빵", "닭고기", "양상추", "마요네즈", "고추"],
+    "tags": ["프랜차이즈", "KFC", "버거", "치킨버거", "패스트푸드", "매운", "바삭한", "매콤한", "점심", "간편한"],
+    "desc": "매콤하게 양념한 바삭한 치킨 패티가 들어간 버거. 알싸한 매운맛이 특징이다.",
+    "source": "franchise",
+    "brand": "KFC"
+  },
+  {
+    "id": "we-kfc-original-chicken",
+    "name": "KFC 오리지널치킨",
+    "cuisine": "western",
+    "ingredients": ["닭고기", "향신료", "밀가루"],
+    "tags": ["프랜차이즈", "KFC", "치킨", "튀김", "패스트푸드", "고소한", "향신료", "바삭한", "함께 먹는", "간식"],
+    "desc": "허브와 향신료로 맛을 낸 KFC의 대표 프라이드 치킨. 겉은 바삭하고 속은 촉촉하다.",
+    "source": "franchise",
+    "brand": "KFC"
+  },
+  {
+    "id": "we-kfc-hot-crispy-chicken",
+    "name": "KFC 핫크리스피치킨",
+    "cuisine": "western",
+    "ingredients": ["닭고기", "고추", "밀가루"],
+    "tags": ["프랜차이즈", "KFC", "치킨", "튀김", "패스트푸드", "매운", "매콤한", "바삭한", "술안주", "함께 먹는"],
+    "desc": "매콤하게 튀긴 바삭한 치킨. 매운 걸 좋아하는 사람에게 좋다.",
+    "source": "franchise",
+    "brand": "KFC"
+  },
+  {
+    "id": "we-kfc-tower-burger",
+    "name": "KFC 타워버거",
+    "cuisine": "western",
+    "ingredients": ["빵", "닭고기", "치즈"],
+    "tags": ["프랜차이즈", "KFC", "버거", "치킨버거", "패스트푸드", "든든한", "바삭한", "푸짐한", "점심"],
+    "desc": "두툼한 치킨 패티가 들어간 든든한 버거. 한 개로도 포만감이 크다.",
+    "source": "franchise",
+    "brand": "KFC"
+  },
+  {
+    "id": "we-kfc-biscuit",
+    "name": "KFC 비스킷",
+    "cuisine": "western",
+    "ingredients": ["밀가루", "버터"],
+    "tags": ["프랜차이즈", "KFC", "빵", "사이드", "고소한", "부드러운", "간식", "패스트푸드", "아침", "달콤한"],
+    "desc": "부드럽고 고소한 비스킷. 치킨과 함께 곁들이거나 잼을 발라 먹는다.",
+    "source": "franchise",
+    "brand": "KFC"
+  },
+  {
+    "id": "we-subway-egg-mayo",
+    "name": "서브웨이 에그마요",
+    "cuisine": "western",
+    "ingredients": ["빵", "계란", "마요네즈", "채소"],
+    "tags": ["프랜차이즈", "서브웨이", "샌드위치", "고소한", "부드러운", "간편한", "가벼운", "아침", "점심", "건강식"],
+    "desc": "부드러운 계란 샐러드가 들어간 샌드위치. 고소하고 담백해 가볍게 먹기 좋다.",
+    "source": "franchise",
+    "brand": "서브웨이"
+  },
+  {
+    "id": "we-subway-italian-bmt",
+    "name": "서브웨이 이탈리안 비엠티",
+    "cuisine": "western",
+    "ingredients": ["빵", "햄", "페퍼로니", "살라미", "채소"],
+    "tags": ["프랜차이즈", "서브웨이", "샌드위치", "짭짤한", "든든한", "고기", "간편한", "점심", "푸짐한"],
+    "desc": "햄과 살라미, 페퍼로니가 들어간 샌드위치. 짭짤한 고기 맛이 진하다.",
+    "source": "franchise",
+    "brand": "서브웨이"
+  },
+  {
+    "id": "we-subway-shrimp",
+    "name": "서브웨이 쉬림프",
+    "cuisine": "western",
+    "ingredients": ["빵", "새우", "해산물", "채소"],
+    "tags": ["프랜차이즈", "서브웨이", "샌드위치", "새우", "담백한", "가벼운", "간편한", "점심", "건강식", "신선한"],
+    "desc": "새우가 들어간 샌드위치. 담백하고 쫄깃한 새우 식감이 좋다.",
+    "source": "franchise",
+    "brand": "서브웨이"
+  },
+  {
+    "id": "we-subway-chicken-teriyaki",
+    "name": "서브웨이 치킨 데리야끼",
+    "cuisine": "western",
+    "ingredients": ["빵", "닭고기", "채소", "데리야끼소스"],
+    "tags": ["프랜차이즈", "서브웨이", "샌드위치", "달콤한", "짭짤한", "간편한", "점심", "든든한", "부드러운"],
+    "desc": "데리야끼 소스로 맛을 낸 닭고기가 들어간 샌드위치. 달콤짭짤해 누구나 좋아한다.",
+    "source": "franchise",
+    "brand": "서브웨이"
+  },
+  {
+    "id": "we-subway-steak-cheese",
+    "name": "서브웨이 스테이크 & 치즈",
+    "cuisine": "western",
+    "ingredients": ["빵", "소고기", "치즈", "채소"],
+    "tags": ["프랜차이즈", "서브웨이", "샌드위치", "고기", "고소한", "든든한", "간편한", "점심", "푸짐한"],
+    "desc": "소고기와 치즈가 들어간 샌드위치. 고소하고 든든한 한 끼다.",
+    "source": "franchise",
+    "brand": "서브웨이"
+  },
+  {
+    "id": "we-subway-tuna",
+    "name": "서브웨이 참치",
+    "cuisine": "western",
+    "ingredients": ["빵", "참치", "마요네즈", "채소"],
+    "tags": ["프랜차이즈", "서브웨이", "샌드위치", "고소한", "부드러운", "간편한", "가벼운", "점심", "아침"],
+    "desc": "참치와 마요네즈가 들어간 샌드위치. 부드럽고 고소해 부담 없다.",
+    "source": "franchise",
+    "brand": "서브웨이"
+  },
+  {
+    "id": "we-shakeshack-shackburger",
+    "name": "쉑쉑 쉑버거",
+    "cuisine": "western",
+    "ingredients": ["빵", "소고기", "치즈", "양상추", "토마토"],
+    "tags": ["프랜차이즈", "쉑쉑", "버거", "패스트푸드", "육즙", "고소한", "점심", "든든한", "치즈"],
+    "desc": "쉑쉑의 대표 치즈버거. 두툼한 소고기 패티와 신선한 채소가 어우러진다.",
+    "source": "franchise",
+    "brand": "쉑쉑"
+  },
+  {
+    "id": "we-shakeshack-crinkle-fries",
+    "name": "쉑쉑 크링클 컷 프라이",
+    "cuisine": "western",
+    "ingredients": ["감자", "소금"],
+    "tags": ["프랜차이즈", "쉑쉑", "감자튀김", "사이드", "바삭한", "짭짤한", "간식", "패스트푸드"],
+    "desc": "물결 모양으로 썰어 튀긴 감자튀김. 바삭하고 짭짤하다.",
+    "source": "franchise",
+    "brand": "쉑쉑"
+  }
+]

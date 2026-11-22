@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>전체 메뉴</title>
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+</head>
+<body class="page-list">
+<canvas id="bg-sphere" data-dim aria-hidden="true"></canvas>
+<div class="bokeh" aria-hidden="true"></div>
+
+<header class="topbar">
+  <a class="brand" href="index.html">Menu<span>AI</span></a>
+  <nav>
+    <a href="index.html">추천</a>
+    <a href="list.html" aria-current="page">전체 메뉴</a>
+    <button type="button" data-open-add>이게 없다고?</button>
+  </nav>
+</header>
+
+<main>
+  <h1 class="page-title">전체 메뉴 <span class="muted" id="count"></span></h1>
+
+  <section class="glass panel filters">
+    <input type="search" id="q" placeholder="메뉴 검색">
+    <select id="f-cuisine"><option value="">모든 종류</option></select>
+    <input type="search" id="f-ing" placeholder="재료 필터 (예: 닭고기)">
+    <select id="f-source"><option value="">출처 전체</option><option value="base">기본</option><option value="user">내가 추가</option></select>
+  </section>
+
+  <div class="row" style="margin-bottom:12px">
+    <button class="btn" id="export" type="button">JSON 내보내기</button>
+    <label class="btn" style="margin:0">JSON 가져오기<input type="file" id="import" accept="application/json" hidden></label>
+  </div>
+
+  <div class="glass table-wrap">
+    <table>
+      <thead><tr><th>이름</th><th>종류</th><th>재료</th><th>설명</th><th>구분</th><th></th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+</main>
+
+<footer class="foot">출처: (데이터 출처·라이선스 표기 자리) · 아이콘: <a href="https://lucide.dev" style="color:inherit">Lucide</a> (ISC)</footer>
+
+<script src="ui/icons.js"></script>
+<script src="ui/sphere.js"></script>
+<script src="ui/ui.js"></script>
+<script src="ui/mock.js"></script>
+<script>
+(function(){
+const {$,el,emit,toast,CUISINES,CUISINE_KO}=window.MenuUI;
+CUISINES.forEach(([v,k])=>$('#f-cuisine').append(el('option',{value:v,textContent:k})));
+
+async function draw(){
+  const menus=await window.MenuUI.menusReady;
+  const q=$('#q').value.trim(),c=$('#f-cuisine').value,i=$('#f-ing').value.trim(),s=$('#f-source').value;
+  const rows=menus.filter(m=>(!q||[m.name,m.desc].join(' ').includes(q))&&(!c||m.cuisine===c)
+    &&(!i||m.ingredients.some(x=>x.includes(i)))&&(!s||(s==='user')===(m.source==='user')));
+  $('#count').textContent=rows.length+'개';
+  $('#rows').replaceChildren(...rows.map(m=>{
+    const user=m.source==='user';
+    return el('tr',{},
+      el('td',{textContent:m.name}),el('td',{textContent:CUISINE_KO[m.cuisine]||m.cuisine}),
+      el('td',{textContent:m.ingredients.join(', ')}),el('td',{textContent:m.desc||''}),
+      el('td',{},el('span',{className:'badge'+(user?' user':''),textContent:user?'내가 추가':'기본'})),
+      el('td',{},user?el('span',{className:'row'},
+        el('button',{className:'btn small',textContent:'수정',onclick:()=>emit('menu:edit',{id:m.id})}),
+        el('button',{className:'btn small danger',textContent:'삭제',onclick:()=>emit('menu:remove',{id:m.id})})):''));
+  }));
+}
+['q','f-cuisine','f-ing','f-source'].forEach(id=>$('#'+id).addEventListener('input',draw));
+window.MenuUI.mockChanged=draw;
+// 자리표시: 실제 연결은 C의 store.js(exportJson/importJson)가 구독
+$('#export').onclick=()=>{emit('menu:export');toast('내보내기 요청 (목업)')};
+$('#import').onchange=e=>{emit('menu:import',{file:e.target.files[0]});toast('가져오기 요청 (목업)')};
+draw();
+})();
+</script>
+</body>
+</html>

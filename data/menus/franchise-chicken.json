@@ -1,0 +1,162 @@
+[
+  {
+    "id": "kr-kyochon-original",
+    "name": "교촌치킨 오리지날",
+    "cuisine": "korean",
+    "ingredients": ["닭고기", "간장", "마늘"],
+    "tags": ["프랜차이즈", "교촌치킨", "치킨", "간장치킨", "바삭한", "달콤한", "짭짤한", "야식", "술안주", "배달"],
+    "desc": "간장 소스를 발라 낸 교촌의 대표 치킨. 짭짤하고 달콤한 윤기 나는 겉면이 특징이다.",
+    "source": "franchise",
+    "brand": "교촌치킨"
+  },
+  {
+    "id": "kr-kyochon-honey-combo",
+    "name": "교촌치킨 허니콤보",
+    "cuisine": "korean",
+    "ingredients": ["닭고기", "간장", "꿀", "마늘"],
+    "tags": ["프랜차이즈", "교촌치킨", "치킨", "간장치킨", "달콤한", "짭짤한", "단짠", "야식", "술안주", "배달"],
+    "desc": "달콤한 꿀 소스를 입힌 간장 치킨의 인기 메뉴. 닭다리와 날개를 함께 즐긴다.",
+    "source": "franchise",
+    "brand": "교촌치킨"
+  },
+  {
+    "id": "kr-kyochon-red-combo",
+    "name": "교촌치킨 레드콤보",
+    "cuisine": "korean",
+    "ingredients": ["닭고기", "고추", "간장", "마늘"],
+    "tags": ["프랜차이즈", "교촌치킨", "치킨", "매운", "매콤한", "달콤한", "야식", "술안주", "배달", "스트레스 받을 때"],
+    "desc": "매콤한 소스를 입힌 간장 치킨의 인기 메뉴. 달콤하면서 알싸하다.",
+    "source": "franchise",
+    "brand": "교촌치킨"
+  },
+  {
+    "id": "kr-kyochon-honey-original",
+    "name": "교촌치킨 허니오리지날",
+    "cuisine": "korean",
+    "ingredients": ["닭고기", "간장", "꿀"],
+    "tags": ["프랜차이즈", "교촌치킨", "치킨", "달콤한", "짭짤한", "단짠", "바삭한", "야식", "술안주", "배달"],
+    "desc": "오리지날 치킨에 꿀 풍미를 더한 메뉴. 달콤하고 짭짤해 호불호가 적다.",
+    "source": "franchise",
+    "brand": "교촌치킨"
+  },
+  {
+    "id": "kr-bbq-golden-olive",
+    "name": "BBQ 황금올리브치킨",
+    "cuisine": "korean",
+    "ingredients": ["닭고기", "올리브유", "밀가루"],
+    "tags": ["프랜차이즈", "BBQ", "치킨", "후라이드", "바삭한", "고소한", "담백한", "야식", "술안주", "배달"],
+    "desc": "올리브유로 튀겨 바삭하고 고소한 BBQ의 대표 후라이드 치킨. 담백하게 즐기기 좋다.",
+    "source": "franchise",
+    "brand": "BBQ"
+  },
+  {
+    "id": "kr-bbq-jamaica-drumstick",
+    "name": "BBQ 자메이카 통다리구이",
+    "cuisine": "korean",
+    "ingredients": ["닭고기", "향신료", "고추"],
+    "tags": ["프랜차이즈", "BBQ", "치킨", "구이", "매콤한", "육즙", "향긋한", "야식", "술안주", "배달"],
+    "desc": "자메이카 스타일 양념으로 구운 통다리 치킨. 매콤하고 육즙이 풍부하다.",
+    "source": "franchise",
+    "brand": "BBQ"
+  },
+  {
+    "id": "kr-bbq-cheezling",
+    "name": "BBQ 치즐링",
+    "cuisine": "korean",
+    "ingredients": ["닭고기", "치즈", "밀가루"],
+    "tags": ["프랜차이즈", "BBQ", "치킨", "치즈", "고소한", "짭짤한", "바삭한", "야식", "술안주", "배달"],
+    "desc": "치즈 시즈닝을 뿌린 바삭한 치킨. 고소하고 짭짤한 치즈 맛이 특징이다.",
+    "source": "franchise",
+    "brand": "BBQ"
+  },
+  {
+    "id": "kr-bbq-golden-olive-hotwing",
+    "name": "BBQ 황금올리브 핫윙",
+    "cuisine": "korean",
+    "ingredients": ["닭고기", "고추", "밀가루"],
+    "tags": ["프랜차이즈", "BBQ", "치킨", "윙", "매운", "매콤한", "바삭한", "야식", "술안주", "배달"],
+    "desc": "매콤하게 튀긴 닭 날개. 한입에 먹기 좋아 맥주와 잘 어울린다.",
+    "source": "franchise",
+    "brand": "BBQ"
+  },
+  {
+    "id": "kr-bhc-puringkle",
+    "name": "bhc 뿌링클",
+    "cuisine": "korean",
+    "ingredients": ["닭고기", "치즈", "밀가루"],
+    "tags": ["프랜차이즈", "bhc", "치킨", "치즈", "시즈닝", "고소한", "바삭한", "새콤한", "야식", "술안주", "배달"],
+    "desc": "치즈 시즈닝을 뿌린 bhc의 인기 치킨. 새콤달콤하고 고소한 맛이 특징이다.",
+    "source": "franchise",
+    "brand": "bhc"
+  },
+  {
+    "id": "kr-bhc-matchoking",
+    "name": "bhc 맛초킹",
+    "cuisine": "korean",
+    "ingredients": ["닭고기", "간장", "마늘", "밀가루"],
+    "tags": ["프랜차이즈", "bhc", "치킨", "양념치킨", "달콤한", "짭짤한", "바삭한", "야식", "술안주", "배달"],
+    "desc": "달콤짭짤한 소스를 입힌 bhc의 치킨. 마늘 향과 단짠 맛이 어우러진다.",
+    "source": "franchise",
+    "brand": "bhc"
+  },
+  {
+    "id": "kr-bhc-gold-king",
+    "name": "bhc 골드킹",
+    "cuisine": "korean",
+    "ingredients": ["닭고기", "밀가루"],
+    "tags": ["프랜차이즈", "bhc", "치킨", "후라이드", "바삭한", "고소한", "담백한", "야식", "술안주", "배달"],
+    "desc": "바삭하게 튀겨 낸 bhc의 후라이드 치킨. 고소하고 깔끔한 맛이다.",
+    "source": "franchise",
+    "brand": "bhc"
+  },
+  {
+    "id": "kr-bhc-fried",
+    "name": "bhc 후라이드",
+    "cuisine": "korean",
+    "ingredients": ["닭고기", "밀가루"],
+    "tags": ["프랜차이즈", "bhc", "치킨", "후라이드", "바삭한", "고소한", "담백한", "야식", "술안주", "배달"],
+    "desc": "기본에 충실한 바삭한 후라이드 치킨. 어떤 안주와도 잘 어울린다.",
+    "source": "franchise",
+    "brand": "bhc"
+  },
+  {
+    "id": "kr-goobne-gochubasaksa",
+    "name": "굽네치킨 고추바사삭",
+    "cuisine": "korean",
+    "ingredients": ["닭고기", "고추", "밀가루"],
+    "tags": ["프랜차이즈", "굽네치킨", "치킨", "매운", "바삭한", "매콤한", "야식", "술안주", "배달", "오븐"],
+    "desc": "매콤하고 바삭한 맛으로 인기 있는 굽네 치킨. 청양고추의 알싸함이 특징이다.",
+    "source": "franchise",
+    "brand": "굽네치킨"
+  },
+  {
+    "id": "kr-goobne-original",
+    "name": "굽네치킨 오리지널",
+    "cuisine": "korean",
+    "ingredients": ["닭고기", "향신료"],
+    "tags": ["프랜차이즈", "굽네치킨", "치킨", "오븐구이", "담백한", "건강식", "다이어트", "야식", "배달", "기름기 적은"],
+    "desc": "오븐에 구워 담백하고 기름기가 적은 굽네의 기본 치킨. 부담 없이 먹기 좋다.",
+    "source": "franchise",
+    "brand": "굽네치킨"
+  },
+  {
+    "id": "kr-goobne-volcano",
+    "name": "굽네치킨 볼케이노",
+    "cuisine": "korean",
+    "ingredients": ["닭고기", "고추"],
+    "tags": ["프랜차이즈", "굽네치킨", "치킨", "오븐구이", "매운", "얼얼한", "매콤한", "야식", "배달", "스트레스 받을 때"],
+    "desc": "매콤한 소스를 얹은 오븐 치킨. 매운맛을 즐기는 사람에게 인기다.",
+    "source": "franchise",
+    "brand": "굽네치킨"
+  },
+  {
+    "id": "kr-goobne-galbi-cheonwang",
+    "name": "굽네치킨 갈비천왕",
+    "cuisine": "korean",
+    "ingredients": ["닭고기", "간장", "마늘"],
+    "tags": ["프랜차이즈", "굽네치킨", "치킨", "오븐구이", "달콤한", "짭짤한", "야식", "배달", "함께 먹는", "갈비맛"],
+    "desc": "갈비 양념 맛을 낸 오븐 치킨. 달콤짭짤한 양념이 밥과도 잘 어울린다.",
+    "source": "franchise",
+    "brand": "굽네치킨"
+  }
+]
