@@ -3,7 +3,7 @@
 import * as store from '../js/store.js';
 import { initEmbedder, embed, embedMenu, menuVector } from '../js/embed.js';
 import { recommend, rerollPick, parseQuery, loadDictionaries } from '../js/recommend.js';
-import { openMapSearch, SERVICES } from '../js/maps.js';
+import { SERVICES, cachedLocation, clearLocationCache, permissionState, getPosition, accuracyText, openMapNow } from '../js/maps.js';
 
 const UI = window.MenuUI;
 const CFG = Object.assign({ repo: '', weightScale: 0.1, topN: 40, pick: 3 }, window.MENU_CONFIG || {});
@@ -203,13 +203,43 @@ UI.similarProvider = (m) => {
   } catch (e) { console.warn('[app] 비슷한 메뉴 계산 실패', e); return []; }
 };
 
-/* ---------- 내 주변에서 찾기: 카카오맵/네이버지도/구글지도 (위치 요청 → 지도 검색 주소를 새 창으로 연다) ---------- */
+/* ---------- 내 주변에서 찾기: 카카오맵/네이버지도/구글지도 ----------
+   위치 권한 안내는 요청한 창에 뜬다. 지도 창을 먼저 열면 안내가 뒤에 가려 보이지 않으므로,
+   위치는 이 창(상세 창)에서 먼저 확인하고 상태를 화면에 보여 준 뒤 지도 창을 연다. */
 const WHY = { denied: '위치 권한을 허용하지 않아서', unavailable: '위치를 알 수 없어서', timeout: '위치 확인이 너무 오래 걸려서', unsupported: '이 브라우저에서는 위치를 쓸 수 없어서' };
-UI.openMap = async (service, query, radiusM) => {
+let skipLocation = false; // 위치를 쓸 수 없다고 확인된 뒤에는 다음 클릭부터 기다리지 않고 위치 없이 연다
+
+/** 위치만 확인한다(지도 창은 열지 않음). onStatus(text, kind: wait|ok|warn) 로 진행을 알린다. */
+async function checkLocation(onStatus = () => {}) {
+  const hit = cachedLocation();
+  if (hit) { onStatus(accuracyText(hit), 'ok'); return hit; }
+  if ((await permissionState()) === 'denied') {
+    skipLocation = true; onStatus('위치 권한이 거절돼 있어요. 주소창의 자물쇠(사이트 설정)에서 허용하면 내 주변을 찾을 수 있어요. 지금은 위치 없이 검색해요.', 'warn'); return null;
+  }
+  onStatus('위치 확인 중… 주소창 근처에 뜨는 위치 권한 요청에서 “허용”을 눌러 주세요.', 'wait');
   try {
-    const r = await openMapSearch(service, { query, radiusM });
+    const loc = await getPosition();
+    skipLocation = false; onStatus(accuracyText(loc), 'ok'); return loc;
+  } catch (e) {
+    skipLocation = true;
+    onStatus(`${WHY[e.code] || '위치를 쓸 수 없어서'} 위치 없이 검색해요. 지도에서 내 위치 버튼을 눌러 주세요.`, 'warn'); return null;
+  }
+}
+UI.checkLocation = (onStatus) => checkLocation(onStatus);
+UI.resetLocation = () => { clearLocationCache(); skipLocation = false; };
+
+UI.openMap = async (service, query, radiusM, { onStatus = () => {} } = {}) => {
+  try {
     const name = (SERVICES[service] || {}).label || '지도';
-    if (r.blocked) UI.toast('팝업이 차단됐어요. 이 사이트의 팝업을 허용하고 다시 눌러 주세요.', 5000);
-    else if (!r.located) UI.toast(`${WHY[r.reason] || '위치 없이'} ${name}을(를) 위치 없이 열었어요. 지도에서 내 위치 버튼을 눌러 주세요.`, 6000);
+    let loc = cachedLocation();
+    const waited = !loc && !skipLocation;               // 위치를 새로 확인하느라 시간이 걸렸는가(= 클릭 직후가 아님)
+    if (waited) loc = await checkLocation(onStatus);
+    const r = openMapNow(service, { query, radiusM, loc });
+    if (r.blocked) {
+      onStatus(loc ? '위치를 확인했어요. 브라우저가 팝업을 막아서, 지도 버튼을 한 번 더 누르면 바로 열려요.' : '팝업이 차단됐어요. 이 사이트의 팝업을 허용하고 다시 눌러 주세요.', 'warn');
+      UI.toast(`${name} 창을 열지 못했어요. 한 번 더 눌러 주세요.`, 5000);
+    } else if (!loc) {
+      UI.toast(`${name}을(를) 위치 없이 열었어요. 지도에서 내 위치 버튼을 눌러 주세요.`, 5000);
+    }
   } catch (e) { UI.toast('지도를 열지 못했어요: ' + msgOf(e), 5000); }
 };

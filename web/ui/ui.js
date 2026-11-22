@@ -87,16 +87,21 @@ function mapSection(m){
   const input=el('input',{type:'text',value:franchise?m.brand:m.name,maxLength:40,'aria-label':'지도에서 찾을 검색어'});
   const sel=el('select',{'aria-label':'검색 반경',onchange:()=>{radius=Number(sel.value);try{localStorage.setItem('menuai.radius',String(radius))}catch{}}},
     RADII.map(r=>el('option',{value:String(r),textContent:'반경 '+radiusLabel(r),selected:r===radius})));
+  const status=el('p',{className:'map-status',textContent:'내 위치: 아직 확인 전이에요. “내 위치 확인”이나 지도 버튼을 누르면 이 창에서 위치 권한을 물어봐요.'});
+  const onStatus=(text,kind)=>{status.textContent=text;status.dataset.kind=kind||''};
+  const checkBtn=el('button',{type:'button',className:'btn small',textContent:'내 위치 확인',onclick:()=>{
+      if(UI.resetLocation)UI.resetLocation();UI.checkLocation(onStatus)}});
   const btns=MAP_SERVICES.map(([id,label,color])=>el('button',{type:'button',className:'btn map-btn',onclick:()=>{
       const q=input.value.trim();if(!q){toast('찾을 검색어를 입력해 주세요');input.focus();return}
-      UI.openMap(id,q,radius)},},
+      UI.openMap(id,q,radius,{onStatus})},},
     el('i',{className:'map-dot',style:'background:'+color}),label));
   return [el('h3',{textContent:'내 주변에서 찾기'}),
     el('div',{className:'map-box'},
       el('div',{className:'map-row'},input,sel),
+      el('div',{className:'map-row map-loc'},status,checkBtn),
       el('div',{className:'map-row map-btns'},btns),
       el('p',{className:'map-note',textContent:(franchise?'프랜차이즈 메뉴라 브랜드 이름으로 매장을 찾아요. ':'')
-        +'누르면 브라우저가 위치 권한을 물어봐요. 위치는 지도 링크에만 쓰고 이 사이트는 저장하거나 보내지 않아요. '
+        +'위치는 지도 링크에만 쓰고 이 사이트는 저장하거나 보내지 않아요(5분간 이 탭의 메모리에만 기억). '
         +'반경은 지도가 처음 보여 줄 범위를 맞추는 값이라 정확한 거리 제한은 아니고, 카카오맵은 반경을 지정할 수 없어 기본 범위로 열려요. 허용하지 않으면 위치 없이 검색해요.'}))];
 }
 
